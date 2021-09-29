@@ -11,7 +11,7 @@
     <h3>${fail}</h3>
     <form action="controller" method="get">
         <input type="hidden" name="command" value="CODE"/>
-        <input class="input_text1" type="text" name="code" width="100px" placeholder=" Code" value=""/>
+        <input class="input_text1" type="text" name="code" width="100px" placeholder=" Code" minlength="5" required pattern="[0-9A-Z]{5}"/>
         <input class="button2" type="submit" value="Enter"/><br>
     </form>
 

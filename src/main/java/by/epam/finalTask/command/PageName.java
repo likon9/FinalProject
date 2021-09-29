@@ -16,6 +16,10 @@ public enum PageName {
     USER_LIST("pages/admin/user_list.jsp"),
     BLOCK_USER("pages/admin/block_user.jsp"),
     SELECT_BY_PARAMETER("pages/admin/select_by_parameter.jsp"),
+    ADD_TARIFF_PLAN("pages/admin/add_tariff_plan.jsp"),
+    TARIFF_PLAN_MANAGEMENT("pages/admin/tariff_plan_management.jsp"),
+    UPDATE_SELECT_TARIFF_PLAN("pages/admin/update_select_tariff_plan.jsp"),
+
     ERROR("pages/error.jsp");
 
     private String path;

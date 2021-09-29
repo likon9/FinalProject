@@ -1,5 +1,4 @@
-package by.epam.finalTask.command.impl.user;
-
+package by.epam.finalTask.command.impl.admin;
 
 import by.epam.finalTask.command.Command;
 import by.epam.finalTask.command.CommandException;
@@ -14,10 +13,9 @@ import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
-import static by.epam.finalTask.command.PageName.ERROR;
-import static by.epam.finalTask.command.PageName.TARIFF;
+import static by.epam.finalTask.command.PageName.*;
 
-public class TariffCommand implements Command {
+public class TariffPlanManagementCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router router;
@@ -29,7 +27,7 @@ public class TariffCommand implements Command {
         try {
             tariffPlanList = tariffPlanService.findAllTariffPlan();
             request.setAttribute("list", tariffPlanList);
-            router = new Router(TARIFF.getPath());
+            router = new Router(TARIFF_PLAN_MANAGEMENT.getPath());
         } catch (ServiceException e) {
             e.printStackTrace();
             router = new Router(ERROR.getPath());

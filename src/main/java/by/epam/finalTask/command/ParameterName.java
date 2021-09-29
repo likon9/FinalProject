@@ -8,6 +8,11 @@ public class ParameterName {
     public static final String NAME = "name";
     public static final String SURNAME = "surname";
     public static final String PHONE = "phone";
+    public static final String ID_TARIFF_PLAN = "idTariffPlan";
+    public static final String NAME_TARIFF_PLAN = "nameTariffPlan";
+    public static final String PRICE = "price";
+    public static final String INTERNET_CONNECTION_SPEED = "internetConnectionSpeed";
+    public static final String ATTRIBUTE = "attribute";
     public static final String SELECT = "select";
     public static final String ALL_USERS = "allUsers";
     public static final String ACTIVE_USERS = "activeUsers";

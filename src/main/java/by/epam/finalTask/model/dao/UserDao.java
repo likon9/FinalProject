@@ -24,6 +24,15 @@ public class UserDao {
     private static final Logger logger = LogManager.getLogger();
 
     private static UserDao instance;
+
+    public UserDao(){}
+
+    public static UserDao getInstance(){
+        if (instance == null) {
+            instance = new UserDao();
+        }
+        return instance;
+    }
     //CREATE REGEX
     private static final String CREATE_USER = """
             INSERT INTO users (user_id, email, login, password, name, surname,
@@ -96,21 +105,12 @@ public class UserDao {
 
     //UPDATE REGEX
     private static final String UPDATE_EMAIL = "UPDATE users SET email=? WHERE user_id=?";
-    private static final String UPDATE_PASSWORD = "UPDATE users SET password=? WHERE user_id=?";
+   // private static final String UPDATE_PASSWORD = "UPDATE users SET password=? WHERE user_id=?";
     private static final String UPDATE_NAME = "UPDATE users SET name=? WHERE user_id=?";
     private static final String UPDATE_SURNAME = "UPDATE users SET surname=? WHERE user_id=?";
     private static final String UPDATE_PHONE = "UPDATE users SET phone=? WHERE user_id=?";
     private static final String UPDATE_BALANCE = "UPDATE users SET balance=? WHERE user_id=?";
     private static final String UPDATE_STATUS = "UPDATE users SET status_id=? WHERE user_id=?";
-
-    public UserDao(){}
-
-    public static UserDao getInstance(){
-        if (instance == null) {
-            instance = new UserDao();
-        }
-        return instance;
-    }
 
     public static boolean addUser(Map<String, String> parameters) throws DaoException {
         boolean result = false;
@@ -239,7 +239,6 @@ public class UserDao {
              PreparedStatement statement = connection.prepareStatement(FIND_USER)) {
             statement.setString(1, login);
             statement.setString(2, password);
-            System.out.println(login+password);
             try (ResultSet resultSet = statement.executeQuery()){
                 Optional<User> resultUser = Optional.empty();
                 if (resultSet.next()) {

@@ -5,9 +5,7 @@ import by.epam.finalTask.model.dao.ContractDao;
 public class Main {
 
    public static void main(String[] args) throws Exception {
-       ContractDao contractDao = new ContractDao();
-       Long id = 4560411802945436838l;
-       System.out.println(contractDao.findContractByUserId(id));
+
       // TariffPlanDao tariffPlanDao = new TariffPlanDao();
      //  List<TariffPlan> tariffPlanList = tariffPlanDao.findAll();
     //  System.out.println(tariffPlanList);

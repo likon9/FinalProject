@@ -3,6 +3,7 @@ package by.epam.finalTask.command.impl;
 import by.epam.finalTask.command.Command;
 import by.epam.finalTask.command.CommandException;
 import by.epam.finalTask.command.ParameterName;
+import by.epam.finalTask.command.Router;
 import by.epam.finalTask.model.service.impl.UserServiceImpl;
 import by.epam.finalTask.util.IdGenerate;
 import com.google.protobuf.ServiceException;
@@ -20,8 +21,8 @@ import static by.epam.finalTask.model.dao.ColumnName.*;
 
 public class RegistrationCommand implements Command {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
-        String page;
+    public Router execute(HttpServletRequest request) throws CommandException {
+        Router router;
 
         Map<String, String> newUser = new HashMap<>();
 
@@ -38,16 +39,14 @@ public class RegistrationCommand implements Command {
             UserServiceImpl userService = new UserServiceImpl();
             userService.addUser(newUser);
             request.setAttribute("res", "The account has been successfully created. Use your login and password to enter the system");
-            page = REGISTRATION.getPath();
+            router = new Router(REGISTRATION.getPath());
         }
-        catch (NumberFormatException e){
-            page = ERROR.getPath();
-        } catch (ServiceException e) {
-            page = ERROR.getPath();
+        catch (ServiceException e) {
+            router = new Router(ERROR.getPath());
             e.printStackTrace();
         }
 
-        return page;
+        return router;
     }
 }
 

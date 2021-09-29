@@ -10,7 +10,6 @@
             background: #222222}
         #sidebar, #content { position: absolute; }
         #sidebar, #content { overflow: auto; padding: 10px; }
-
         #sidebar {
             width: 100px;
             top: 100px; /* Расстояние от верхнего края */
@@ -26,18 +25,23 @@
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
         }
-
     </style>
 </head>
 <body>
-
     <div id="sidebar">
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="USER_MANAGEMENT"/>
             <input type="submit" value="select user"/>
         </form>
+        <form  action="controller" method="get">
+            <input type="hidden" name="command" value="GO_TO_ADD_TARIFF_PLAN"/>
+            <input type="submit" value="add tariff"/>
+        </form>
+        <form  action="controller" method="get">
+            <input type="hidden" name="command" value="TARIFF_PLAN_MANAGEMENT"/>
+            <input type="submit" value="update tariff"/>
+        </form>
     </div>
-
     <div id="content">
         <form action="controller" method="get">
             <input type="hidden" name="command" value="USER_SELECT"/>
@@ -52,27 +56,27 @@
         </form>
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="SELECT_BY_ID"/>
-            <input type="text" name="user_id" placeholder="user id"/>
+            <input type="text" name="user_id" placeholder="user id" minlength="19" required pattern="[0-9]{19}"/>
             <input type="submit" value="Select by id"/>
         </form>
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="SELECT_BY_LOGIN"/>
-            <input type="text" name="login" placeholder="login"/>
+            <input type="text" name="login" placeholder="login" minlength="6" required pattern="[0-9A-Za-z]{6-24}"/>
             <input type="submit" value="Select by login"/>
         </form>
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="SELECT_BY_NAME"/>
-            <input type="text" name="name" placeholder="name"/>
+            <input type="text" name="name" placeholder="name" minlength="6" required pattern="[0-9A-Za-z]{6-24}" />
             <input type="submit" value="Select by name"/>
         </form>
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="SELECT_BY_SURNAME"/>
-            <input type="text" name="surname" placeholder="surname"/>
+            <input type="text" name="surname" placeholder="surname" minlength="6" required pattern="[0-9A-Za-z]{6-24}" />
             <input type="submit" value="Select by surname"/>
         </form>
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="SELECT_BY_PHONE"/>
-            <input type="text" name="phone" placeholder="phone"/>
+            <input type="text" name="phone" placeholder="phone" minlength="9" required pattern="[0-9]{9}" />
             <input type="submit" value="Select by phone"/>
         </form>
         <table class="tab1">
@@ -101,11 +105,8 @@
         ${answer}
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="BLOCK_USER"/>
-            <input type="text" name="user_id" placeholder="user id"/>
+            <input type="text" name="user_id" placeholder="user id" minlength="19" required pattern="[0-9]{19} />
             <input type="submit" value="Block user"/></form>
     </div>
-
-
-
 </body>
 </html>

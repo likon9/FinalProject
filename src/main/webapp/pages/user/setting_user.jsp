@@ -64,21 +64,21 @@
                 <td>
                 <form  action="controller" method="get">
                     <input type="hidden" name="command" value="UPDATE_NAME"/>
-                  <input type="text" name="name"/><br>
+                  <input type="text" name="name" minlength="3" required pattern="[A-Za-z]{3-24}"/><br>
                     <input type="submit" value="update name"/>
                 </form>
                 </td>
                 <td>
                 <form  action="controller" method="get">
                     <input type="hidden" name="command" value="UPDATE_SURNAME"/>
-                   <input type="text" name="surname"/><br>
+                   <input type="text" name="surname" minlength="3" required pattern="[A-Za-z]{3-24}"/><br>
                     <input type="submit" value="update surname"/>
                 </form>
                 </td>
                 <td>
                 <form  action="controller" method="get">
                     <input type="hidden" name="command" value="UPDATE_PHONE"/>
-                    <input type="textl" name="phone"/><br>
+                    <input type="textl" name="phone" minlength="9" required pattern="[0-9]{9}"/><br>
                     <input type="submit" value="update phone"/>
                 </form>
                 </td>

@@ -1,7 +1,9 @@
 package by.epam.finalTask.command.impl;
 
 import by.epam.finalTask.command.Command;
+
 import by.epam.finalTask.command.ParameterName;
+import by.epam.finalTask.command.Router;
 import by.epam.finalTask.command.SessionAttribute;
 import by.epam.finalTask.model.entity.User;
 import by.epam.finalTask.model.service.impl.UserServiceImpl;
@@ -11,23 +13,27 @@ import com.google.protobuf.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import java.lang.reflect.Parameter;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static by.epam.finalTask.command.PageName.*;
+import static by.epam.finalTask.command.PageName.CODE;
+import static by.epam.finalTask.command.PageName.LOGIN;
+import static by.epam.finalTask.command.ParameterName.*;
 import static by.epam.finalTask.model.entity.UserRole.ADMIN;
 import static by.epam.finalTask.model.entity.UserStatus.*;
 
 public class LoginCommand implements Command {
+
     @Override
-    public String execute(HttpServletRequest request) {
-        String page = null;
+    public Router execute(HttpServletRequest request) {
+        Router router = null;
         String login = request.getParameter(ParameterName.LOGIN);
         String password = request.getParameter(ParameterName.PASSWORD);
         HttpSession session = request.getSession();
         UserServiceImpl userService = new UserServiceImpl();
         try {
-            System.out.println("1");
            if(userService.findUser(login, password))
 
            {
@@ -35,8 +41,7 @@ public class LoginCommand implements Command {
                User sessionUser = user.get();
                if(String.valueOf(sessionUser.getUserRole()).equals(String.valueOf(ADMIN)))
                {
-                   page = HOME_ADMIN.getPath();
-                   System.out.println("2");
+                   router = new Router(HOME_ADMIN.getPath());
                }
                else if (String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(ACTIVE)))
                {
@@ -45,35 +50,30 @@ public class LoginCommand implements Command {
                    String code = gen.nextString();
                    MailSender.sendMail(email,code);
                    session.setAttribute(SessionAttribute.SESSION_CODE, code);
-                   page = CODE.getPath();
-                   System.out.println("3");
+                   router = new Router(CODE.getPath());
                }
                else if(String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(BLOCKED)))
                {
                    request.setAttribute("fail", "Failed to sign in. Your account has been blocked.");
-                   page = LOGIN.getPath();
-                   System.out.println("4");
+                   router = new Router(LOGIN.getPath());
                }
                else if(String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(DELETED)))
                {
                    request.setAttribute("fail", "Failed to sign in. Your account has been deleted.");
-                   page = LOGIN.getPath();
-                   System.out.println("5");
+                   router = new Router(LOGIN.getPath());
                }
                session.setAttribute(SessionAttribute.SESSION_USER, sessionUser);
            }
            else {
                request.setAttribute("fail", "Failed to sign in. <br> Please make sure that you've entered your login and password correctly.");
-               page = LOGIN.getPath();
-                System.out.println("6");
+               router = new Router(LOGIN.getPath());
            }
 
-
         } catch (ServiceException e) {
-            page = ERROR.getPath();
+            router = new Router(ERROR.getPath());
             e.printStackTrace();
         }
-        return page;
+        return router;
 
     }
 }

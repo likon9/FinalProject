@@ -1,10 +1,12 @@
 package by.epam.finalTask.command;
 
+import by.epam.finalTask.command.impl.ChangeLanguageCommand;
 import by.epam.finalTask.command.impl.LoginCommand;
 import by.epam.finalTask.command.impl.RegistrationCommand;
-import by.epam.finalTask.command.impl.Test1Page;
-import by.epam.finalTask.command.impl.TestPage;
 import by.epam.finalTask.command.impl.admin.*;
+import by.epam.finalTask.command.impl.admin.userManagement.*;
+import by.epam.finalTask.command.impl.page.GoToAddTariffPlanCommand;
+import by.epam.finalTask.command.impl.page.GoToFirstPage;
 import by.epam.finalTask.command.impl.page.GoToLoginCommand;
 import by.epam.finalTask.command.impl.page.GoToRegistrationCommand;
 import by.epam.finalTask.command.impl.user.*;
@@ -14,8 +16,7 @@ public enum CommandType {
     LOGIN(new LoginCommand()),
     GO_TO_LOGIN(new GoToLoginCommand()),
     REGISTRATION(new RegistrationCommand()),
-    TEST(new TestPage()),
-    TEST1(new Test1Page()),
+    GO_TO_REGISTRATION(new GoToRegistrationCommand()),
     CODE(new CodeCommand()),
     HOME(new HomeCommand()),
     TARIFF(new TariffCommand()),
@@ -33,7 +34,15 @@ public enum CommandType {
     SELECT_BY_NAME(new SelectByUserNameCommand()),
     SELECT_BY_SURNAME(new SelectByUserSurnameCommand()),
     SELECT_BY_PHONE(new SelectByUserPhoneCommand()),
-    GO_TO_REGISTRATION(new GoToRegistrationCommand());
+    GO_TO_ADD_TARIFF_PLAN(new GoToAddTariffPlanCommand()),
+    TARIFF_PLAN_MANAGEMENT(new TariffPlanManagementCommand()),
+    UPDATE_TARIFF_PLAN(new UpdateTariffPlanCommand()),
+    SELECT_BY_PRICE(new SelectByPriceCommand()),
+    SELECT_BY_INTERNET_CONNECTION_SPEED(new SelectByInternetConnectionSpeedCommand()),
+    CHANGE_LANGUAGE_COMMAND(new ChangeLanguageCommand()),
+    FIRST_PAGE(new GoToFirstPage()),
+    ADD_TARIFF_PLAN(new AddTariffPlanCommand());
+
 
     Command command;
 

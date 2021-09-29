@@ -1,9 +1,6 @@
 package by.epam.finalTask.command.impl.admin;
 
-import by.epam.finalTask.command.Command;
-import by.epam.finalTask.command.CommandException;
-import by.epam.finalTask.command.ParameterName;
-import by.epam.finalTask.command.SessionAttribute;
+import by.epam.finalTask.command.*;
 import by.epam.finalTask.model.entity.User;
 import by.epam.finalTask.model.entity.UserStatus;
 import by.epam.finalTask.model.service.impl.UserServiceImpl;
@@ -18,8 +15,8 @@ import static by.epam.finalTask.command.ParameterName.*;
 
 public class UserSelectCommand implements Command {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
-        String page = null;
+    public Router execute(HttpServletRequest request) throws CommandException {
+        Router router = null;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
         session.setAttribute(SessionAttribute.SESSION_USER,user);
@@ -33,6 +30,8 @@ public class UserSelectCommand implements Command {
             } catch (ServiceException e) {
                 e.printStackTrace();
             }
+            request.setAttribute("list", userList);
+            router = new Router(USER_LIST.getPath());
         }
         else if(request.getParameter(ParameterName.SELECT).equals(ACTIVE_USERS))
         {
@@ -41,6 +40,8 @@ public class UserSelectCommand implements Command {
             } catch (ServiceException e) {
                 e.printStackTrace();
             }
+            request.setAttribute("list", userList);
+            router = new Router(USER_LIST.getPath());
         }
         else if(request.getParameter(ParameterName.SELECT).equals(BLOCKED_USERS))
         {
@@ -49,6 +50,8 @@ public class UserSelectCommand implements Command {
             } catch (ServiceException e) {
                 e.printStackTrace();
             }
+            request.setAttribute("list", userList);
+            router = new Router(USER_LIST.getPath());
         }
         else if(request.getParameter(ParameterName.SELECT).equals(DELETED_USERS))
         {
@@ -57,10 +60,9 @@ public class UserSelectCommand implements Command {
             } catch (ServiceException e) {
                 e.printStackTrace();
             }
+            request.setAttribute("list", userList);
+            router = new Router(USER_LIST.getPath());
         }
-        request.setAttribute("list", userList);
-        page = USER_LIST.getPath();
-
-        return page;
+        return router;
     }
 }

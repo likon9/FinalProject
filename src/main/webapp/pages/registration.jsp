@@ -10,11 +10,11 @@
     <form action="controller" method="get">
         <input class="input_text" type="hidden" name="command" value="REGISTRATION"/>
         <input class="input_text"type="email" name="email" placeholder="Email"/><br>
-        <input class="input_text"type="text" name="login" placeholder="Login"/><br>
-        <input class="input_text"type="password" name="password" placeholder="Password"/><br>
-        <input class="input_text"type="text" name="name" placeholder="Name"/><br>
-        <input class="input_text"type="text" name="surname" placeholder="Surname"/><br>
-        <input class="input_text"type="text" name="phone" placeholder="Phone"/><br>
+        <input class="input_text"type="text" name="login" placeholder="Login" minlength="6" required pattern="[0-9A-Za-z]{6,24}"/><br>
+        <input class="input_text"type="password" name="password" placeholder="Password" minlength="6" required pattern="[0-9A-Za-z]{6,24}"/><br>
+        <input class="input_text"type="text" name="name" placeholder="Name" minlength="3" required pattern="[A-Za-z]{3,24}"/><br>
+        <input class="input_text"type="text" name="surname" placeholder="Surname" minlength="3" required pattern="[A-Za-z]{3,24}"/><br>
+        <input class="input_text"type="text" name="phone" placeholder="Phone" length="9" required pattern="[0-9]{9}"/><br>
         <input class="button" type="submit" value="Registration"/><br>
     </form>
     <h3>${res}</h3>

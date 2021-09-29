@@ -31,23 +31,31 @@
 </head>
 <body>
 
-    <div id="sidebar">
-        <form  action="controller" method="get">
-            <input type="hidden" name="command" value="USER_MANAGEMENT"/>
-            <input type="submit" value="select user"/>
-        </form>
-        <form  action="controller" method="get">
-            <input type="hidden" name="command" value="GO_TO_ADD_TARIFF_PLAN"/>
-            <input type="submit" value="add tariff"/>
-        </form>
-        <form  action="controller" method="get">
-            <input type="hidden" name="command" value="TARIFF_PLAN_MANAGEMENT"/>
-            <input type="submit" value="update tariff"/>
-        </form>
-    </div>
+<div id="sidebar">
+    <form  action="controller" method="get">
+        <input type="hidden" name="command" value="USER_MANAGEMENT"/>
+        <input type="submit" value="select user"/>
+    </form>
+    <form  action="controller" method="get">
+        <input type="hidden" name="command" value="GO_TO_ADD_TARIFF_PLAN"/>
+        <input type="submit" value="add tariff"/>
+    </form>
+    <form  action="controller" method="get">
+        <input type="hidden" name="command" value="TARIFF_PLAN_MANAGEMENT"/>
+        <input type="submit" value="update tariff"/>
+    </form>
+</div>
 
-    <div id="content">
-    </div>
+<div id="content">
+    ${res}
+    <form action="controller" method="get">
+        <input type="hidden" name="command" value="ADD_TARIFF_PLAN"/>
+        <input type="text" name="nameTariffPlan" placeholder="Name tariff" required pattern="[0-9A-Za-z]{1-50}"/><br>
+        <input type="text" name="price" placeholder="Price" required pattern="[0-9.]{1-10}"/><br>
+        <input type="text" name="internetConnectionSpeed" placeholder="Internet speed" required pattern="[0-9]{1-5}"/><br>
+        <input class="button" type="submit" value="Registration"/><br>
+    </form>
+</div>
 
 </body>
 </html>
