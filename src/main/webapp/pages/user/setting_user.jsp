@@ -1,4 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${sessionScope.locale}" scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle scope="session" basename="language"/>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
@@ -27,24 +32,24 @@
     </style>
 </head>
 <body>
-<div class="form1">
     <div id="sidebar">
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="TARIFF"/>
-            <input type="submit" value="Tariffs"/></form>
+            <input type="submit" value="<fmt:message key="menu.user.button.tariff.tariffs"/>"/></form>
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="CONNECT_TARIFF"/>
             <input type="submit" value="connect tariff"/>
         </form>
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="USER_CONTRACT"/>
-            <input type="submit" value="check my tariff plans"/>
+            <input type="submit" value="<fmt:message key="menu.user.button.contract.myContracts"/>"/>
         </form>
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="HOME"/>
-            <input type="submit" value="home page"/>
+            <input type="submit" value="<fmt:message key="menu.user.button.home"/>"/>
         </form>
     </div>
+
     <div id="content">
         <table>
         <tr>

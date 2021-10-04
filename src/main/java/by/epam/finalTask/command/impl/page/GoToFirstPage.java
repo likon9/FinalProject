@@ -15,7 +15,6 @@ public class GoToFirstPage implements Command {
             session.setAttribute(SessionAttribute.LOCALE, ENGLISH);
         }
         router = new Router(PageName.LOGIN.getPath());
-        System.out.println("0"+session.getAttribute(SessionAttribute.LOCALE));
         return router;
         }
     }

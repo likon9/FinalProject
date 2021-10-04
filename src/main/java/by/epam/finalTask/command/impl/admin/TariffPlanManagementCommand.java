@@ -24,7 +24,7 @@ public class TariffPlanManagementCommand implements Command {
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         TariffPlanServiceImpl tariffPlanService = new TariffPlanServiceImpl();
         List<TariffPlan> tariffPlanList = null;
-        try {
+        try{
             tariffPlanList = tariffPlanService.findAllTariffPlan();
             request.setAttribute("list", tariffPlanList);
             router = new Router(TARIFF_PLAN_MANAGEMENT.getPath());

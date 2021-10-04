@@ -6,7 +6,6 @@ import java.sql.Timestamp;
 public class Contract {
     private Long contractId;
     private Timestamp connectionDate;
-    private Timestamp disconnectionDate;
     private Long userId;
     private Long tariffPlanId;
     private String tariffPlanName;
@@ -18,7 +17,6 @@ public class Contract {
 
     public Contract(Long contractId,
                     Timestamp connectionDate,
-                    Timestamp disconnectionDate,
                     Long userId,
                     Long tariffPlanId,
                     String tariffPlanName,
@@ -27,7 +25,6 @@ public class Contract {
                     ContractStatus contractStatus) {
         this.contractId = contractId;
         this.connectionDate = connectionDate;
-        this.disconnectionDate = disconnectionDate;
         this.userId = userId;
         this.tariffPlanId = tariffPlanId;
         this.tariffPlanName = tariffPlanName;
@@ -50,14 +47,6 @@ public class Contract {
 
     public void setConnectionDate(Timestamp connectionDate) {
         this.connectionDate = connectionDate;
-    }
-
-    public Timestamp getDisconnectionDate() {
-        return disconnectionDate;
-    }
-
-    public void setDisconnectionDate(Timestamp disconnectionDate) {
-        this.disconnectionDate = disconnectionDate;
     }
 
     public Long getUserId() {

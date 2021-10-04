@@ -1,13 +1,12 @@
 package by.epam.finalTask.command.impl.admin;
 
-import by.epam.finalTask.command.Command;
-import by.epam.finalTask.command.CommandException;
-import by.epam.finalTask.command.ParameterName;
-import by.epam.finalTask.command.Router;
+import by.epam.finalTask.command.*;
+import by.epam.finalTask.model.entity.User;
 import by.epam.finalTask.model.service.impl.TariffPlanServiceImpl;
 import by.epam.finalTask.util.IdGenerate;
 import com.google.protobuf.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +23,10 @@ public class AddTariffPlanCommand implements Command {
         newTariffPlan.put(NAME_TARIFF_PLAN, request.getParameter(ParameterName.NAME_TARIFF_PLAN));
         newTariffPlan.put(PRICE, request.getParameter(ParameterName.PRICE));
         newTariffPlan.put(INTERNET_CONNECTION_SPEED, request.getParameter(ParameterName.INTERNET_CONNECTION_SPEED));
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
+        session.setAttribute(SessionAttribute.SESSION_USER,user);
+
         try{
             TariffPlanServiceImpl tariffPlanService = new TariffPlanServiceImpl();
             tariffPlanService.addTariffPlan(newTariffPlan);

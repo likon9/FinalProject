@@ -105,7 +105,7 @@
         ${answer}
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="BLOCK_USER"/>
-            <input type="text" name="user_id" placeholder="user id" minlength="19" required pattern="[0-9]{19} />
+            <input type="text" name="user_id" placeholder="user id" minlength="19" required pattern="[0-9]{19}" />
             <input type="submit" value="Block user"/></form>
     </div>
 </body>

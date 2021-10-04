@@ -1,5 +1,10 @@
 package by.epam.finalTask.command;
 
+import by.epam.finalTask.model.entity.ContractStatus;
+
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
 public class ParameterName {
 
     public static final String EMAIL = "email";
@@ -18,8 +23,8 @@ public class ParameterName {
     public static final String ACTIVE_USERS = "activeUsers";
     public static final String BLOCKED_USERS = "blockedUsers";
     public static final String DELETED_USERS = "deletedUsers";
-
-
-
+    public static final String CONTRACT_ID = "idContract";
+    public static final String CONNECTION_DATE = "connectionDate";
+    public static final String CONTRACT_STATUS = "contractStatus";
     public static final String CODE = "code";
 }

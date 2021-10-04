@@ -8,24 +8,32 @@ import by.epam.finalTask.model.service.impl.ContractServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import java.util.List;
+import static by.epam.finalTask.command.PageName.DISCONNECT_TARIFF;
 
-public class UserContractCommand implements Command {
+public class DisconnectTariffCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
         session.setAttribute(SessionAttribute.SESSION_USER,user);
+
+
         ContractServiceImpl contractService = new ContractServiceImpl();
+        Contract contract = null;
         try {
-            List<Contract> contractList = contractService.findEffectiveContractByUserId(user.getUserId());
-            request.setAttribute("list", contractList);
-            router = new Router(PageName.USER_CONTRACT.getPath());
+            contract = contractService.findByContractId(Long.parseLong(request.getParameter(ParameterName.CONTRACT_ID))).get();
         } catch (ServiceException e) {
             e.printStackTrace();
-            router = new Router(PageName.ERROR.getPath());
         }
+        request.setAttribute(ParameterName.CONTRACT_ID, contract.getContractId());
+        request.setAttribute(ParameterName.NAME_TARIFF_PLAN, contract.getTariffPlanName());
+        request.setAttribute(ParameterName.PRICE, contract.getTariffPlanPrice());
+        request.setAttribute(ParameterName.INTERNET_CONNECTION_SPEED, contract.getTariffPlanSpeed());
+        request.setAttribute(ParameterName.CONNECTION_DATE, contract.getConnectionDate());
+
+
+
+        Router router = new Router(DISCONNECT_TARIFF.getPath());
         return router;
     }
 }

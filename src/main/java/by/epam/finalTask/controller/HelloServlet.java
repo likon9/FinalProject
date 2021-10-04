@@ -34,6 +34,7 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {
         String commandStr = request.getParameter("command");
         Command command = CommandType.takeCommand(commandStr);
+        System.out.println(commandStr);
         Router router = null;
         try {
             router = command.execute(request);

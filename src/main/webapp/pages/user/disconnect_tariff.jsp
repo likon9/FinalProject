@@ -9,7 +9,7 @@
     <title></title>
     <style type="text/css">
         body { margin: 20px;
-        background: #222222}
+            background: #222222}
         #sidebar, #content { position: absolute; }
         #sidebar, #content { overflow: auto; padding: 10px; }
 
@@ -32,14 +32,10 @@
     </style>
 </head>
 <body>
-
 <div id="sidebar">
     <form  action="controller" method="get">
         <input type="hidden" name="command" value="TARIFF"/>
-        <input type="submit" value="<fmt:message key="menu.user.button.tariff.tariffs"/>"/></form>
-    <form  action="controller" method="get">
-        <input type="hidden" name="command" value="CONNECT_TARIFF"/>
-        <input type="submit" value="connect tariff"/>
+        <input type="submit" value="<fmt:message key="menu.user.button.tariff.tariffs"/>"/>
     </form>
     <form  action="controller" method="get">
         <input type="hidden" name="command" value="USER_CONTRACT"/>
@@ -49,18 +45,22 @@
         <input type="hidden" name="command" value="HOME"/>
         <input type="submit" value="<fmt:message key="menu.user.button.home"/>"/>
     </form>
+
+
 </div>
 <div id="content">
+
+    <p>name:${nameTariffPlan}</p>
+    <p>price:${price}</p>
+    <p>speed:${internetConnectionSpeed}</p>
+    <p>date:${connectionDate}</p>
     <form  action="controller" method="get">
-        <input type="hidden" name="command" value="SETTING_USER"/>
-        <input type="submit" value="setting"/>
+        <input type="hidden" name="command" value="DISCONNECT_TARIFF_TRUE"/>
+        <input type="hidden" name="idTariffPlan" value="${idContract}"/><br>
+        <input type="submit" value="connect"/>
     </form>
-    <p>${message}</p>
-    <h2>login:${login}</h2>
-    <h2>email:${email}</h2>
-    <h2>name:${name}</h2>
-    <h2>surname:${surname}</h2>
-    <h2>phone: +375${phone}</h2>
+
+
 </div>
 </body>
 </html>

@@ -32,11 +32,11 @@
     </style>
 </head>
 <body>
-
     <div id="sidebar">
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="TARIFF"/>
-            <input type="submit" value="<fmt:message key="menu.user.button.tariff.tariffs"/>"/></form>
+            <input type="submit" value="<fmt:message key="menu.user.button.tariff.tariffs"/>"/>
+        </form>
         <form  action="controller" method="get">
             <input type="hidden" name="command" value="USER_CONTRACT"/>
             <input type="submit" value="<fmt:message key="menu.user.button.contract.myContracts"/>"/>
@@ -46,30 +46,25 @@
             <input type="submit" value="<fmt:message key="menu.user.button.home"/>"/>
         </form>
 
-    </div>
-    <div id="content">
-        <table class="tab1">
-            <tr> <td>name tariff plan</td>
-                <td>price</td>
-                <td>internet connection speed</td>
-                <td>date of connection</td>
-                <td>status</td>
-                <td></td></tr>
-            <c:forEach items="${list}" var="contract" varStatus="count">
-                <tr> <td>${contract.tariffPlanName}</td>
-                    <td>${contract.tariffPlanPrice}</td>
-                    <td>${contract.tariffPlanSpeed}</td>
-                    <td>${contract.connectionDate}</td>
-                    <td>${contract.contractStatus}</td>
-                    <td> <form  action="controller" method="get">
-                        <input type="hidden" name="command" value="DISCONNECT_TARIFF"/>
-                        <input type="hidden" name="idContract" value="${contract.contractId}"/><br>
-                        <input type="submit" value="disconnect"/>
-                    </form></td></tr>
-            </c:forEach>
-        </table>
 
     </div>
+    <div id="content">
+    <p>login:${login}</p>
+    <p>email:${email}</p>
+    <p>name:${name}</p>
+    <p>surname:${surname}</p>
+    <p>phone: +375${phone}</p></br></br>
+
+    <p>Tariff plan:${nameTariffPlan}</p>
+    <p>price:${price}</p>
+    <p>speed:${internetConnectionSpeed}</p>
+        <form  action="controller" method="get">
+            <input type="hidden" name="command" value="CONNECT_TARIFF"/>
+            <input type="hidden" name="idTariffPlan" value="${idTariffPlan}"/><br>
+            <input type="submit" value="connect"/>
+        </form>
+
+
 </div>
 </body>
 </html>

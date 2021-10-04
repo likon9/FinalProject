@@ -23,7 +23,6 @@ public class ContractBuilder {
     public Contract build() {
         Contract contract = new Contract(contractId,
                 connectionDate,
-                disconnectionDate,
                 userId,
                 tariffPlanId,
                 tariffPlanName,

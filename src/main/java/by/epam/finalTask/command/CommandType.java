@@ -40,6 +40,9 @@ public enum CommandType {
     SELECT_BY_PRICE(new SelectByPriceCommand()),
     SELECT_BY_INTERNET_CONNECTION_SPEED(new SelectByInternetConnectionSpeedCommand()),
     CHANGE_LANGUAGE_COMMAND(new ChangeLanguageCommand()),
+    NEW_CONTRACT(new NewContractCommand()),
+    CONNECT_TARIFF(new ConnectTariffCommand()),
+    DISCONNECT_TARIFF(new DisconnectTariffCommand()),
     FIRST_PAGE(new GoToFirstPage()),
     ADD_TARIFF_PLAN(new AddTariffPlanCommand());
 
@@ -47,6 +50,8 @@ public enum CommandType {
     Command command;
 
     CommandType(Command command) {
+
+        System.out.println(command);
         this.command = command;
     }
 

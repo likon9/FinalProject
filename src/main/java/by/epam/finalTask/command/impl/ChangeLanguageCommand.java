@@ -16,13 +16,11 @@ public class ChangeLanguageCommand implements Command {
     public Router execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String language = session.getAttribute(SessionAttribute.LOCALE).toString();
-        System.out.println("1"+language);
         if (language.equals(ENGLISH)) {
             session.setAttribute(SessionAttribute.LOCALE, RUSSIAN);
         } else {
             session.setAttribute(SessionAttribute.LOCALE, ENGLISH);
         }
-        System.out.println("2"+language);
         Router router = new Router(PageName.LOGIN.getPath());
         return router;
     }
