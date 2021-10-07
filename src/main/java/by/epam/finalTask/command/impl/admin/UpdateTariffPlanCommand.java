@@ -22,7 +22,7 @@ public class UpdateTariffPlanCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
         session.setAttribute(SessionAttribute.SESSION_USER,user);
-        Long id  = Long.valueOf(request.getParameter(ParameterName.ID_TARIFF_PLAN));
+        Long id  = Long.valueOf(request.getParameter(ParameterName.TARIFF_PLAN_ID));
         String select = request.getParameter(ParameterName.SELECT);
         String attribute = request.getParameter(ParameterName.ATTRIBUTE);
 

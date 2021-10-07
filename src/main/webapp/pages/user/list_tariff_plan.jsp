@@ -5,74 +5,97 @@
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle scope="session" basename="language"/>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <style type="text/css">
+        .table{
+            margin-top: 50px;
+            width: 900px;
+        }
+        tr
+        {
+            height: 10px;
+        }
+
         body { margin: 20px;
-            background: #222222}
+            background: whitesmoke}
         #sidebar, #content { position: absolute; }
         #sidebar, #content { overflow: auto; padding: 10px; }
-
-        #sidebar {
-            width: 100px;
-            top: 100px; /* Расстояние от верхнего края */
-            bottom: 100px; /* Расстояние снизу  */
-            left: 100px;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
         #content {
             top: 100px; /* Расстояние от верхнего края */
             left: 270px; /* Расстояние от левого края */
-            bottom: 100px; right: 100px;
+            right: 270px;
+            bottom: 100px;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
         }
-
     </style>
 </head>
 <body>
-<div class="form1">
-    <div id="sidebar">
-        <form  action="controller" method="get">
-            <input type="hidden" name="command" value="TARIFF"/>
-            <input type="submit" value="<fmt:message key="menu.user.button.tariff.tariffs"/>"/></form>
-        <form  action="controller" method="get">
-            <input type="hidden" name="command" value="CONNECT_TARIFF"/>
-            <input type="submit" value="connect tariff"/>
-        </form>
-        <form  action="controller" method="get">
-            <input type="hidden" name="command" value="USER_CONTRACT"/>
-            <input type="submit" value="<fmt:message key="menu.user.button.contract.myContracts"/>"/>
-        </form>
-        <form  action="controller" method="get">
-            <input type="hidden" name="command" value="HOME"/>
-            <input type="submit" value="<fmt:message key="menu.user.button.home"/>"/>
-        </form>
-    </div>
-    <div id="content">
 
-        <table class="tab1">
-            <tr> <td>id</td>
-                <td>name</td>
-                <td>price</td>
-                <td>speed</td>
-                <td></td>
-            <td></td></tr>
-            <c:forEach items="${list}" var="tariffPlan" varStatus="count">
-                <tr> <td>${tariffPlan.tariffPlanId}</td>
-                    <td>${tariffPlan.nameTariffPlan}</td>
-                    <td>${tariffPlan.price}</td>
-                    <td>${tariffPlan.internetConnectionSpeed}</td>
-                    <td> <form  action="controller" method="get">
-                        <input type="hidden" name="command" value="NEW_CONTRACT"/>
-                        <input type="hidden" name="idTariffPlan" value="${tariffPlan.tariffPlanId}"/><br>
-                        <input type="submit" value="enter"/>
-                    </form></td></tr>
-            </c:forEach>
-        </table>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-xl">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="d-flex">
+                    <form  action="controller" method="get">
+                        <input type="hidden" name="command" value="TARIFF"/>
+                        <input class="btn btn-light" type="submit" value="<fmt:message key="menu.user.button.tariff.tariffs"/>"/>
+                    </form>
+                </li>
+                <li class="d-flex">
+                    <form  action="controller" method="get">
+                        <input type="hidden" name="command" value="USER_CONTRACT"/>
+                        <input class="btn btn-light" type="submit" value="<fmt:message key="menu.user.button.contract.myContracts"/>"/>
+                    </form>
+                </li>
+                <li class="d-flex">
+                    <form  action="controller" method="get">
+                        <input type="hidden" name="command" value="HOME"/>
+                        <input class="btn btn-light" type="submit" value="<fmt:message key="menu.user.button.home"/>"/>
+                    </form>
+                </li>
+            </ul>
 
+            <form class="d-flex" action="controller" method="get">
+                <input type="hidden" name="command" value="EXIT_USER"/>
+                <input class="btn btn-outline-success" type="submit" value="exit"/>
+            </form>
+        </div>
     </div>
+</nav>
+<div id="content">
+    <center>
+    <table width="500px" class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Prise</th>
+            <th scope="col">Speed</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${list}" var="tariffPlan" varStatus="count">
+            <tr>
+                <td>${tariffPlan.nameTariffPlan}</td>
+                <td>${tariffPlan.price}RUB</td>
+                <td>${tariffPlan.internetConnectionSpeed}Mb/s</td>
+                <td> <form  action="controller" method="get">
+                    <input type="hidden" name="command" value="NEW_CONTRACT"/>
+                    <input type="hidden" name="tariffPlanId" value="${tariffPlan.tariffPlanId}"/><br>
+                    <input type="submit" value="enter"/>
+                </form></td></tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    </center>
+
 </div>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>
 </html>

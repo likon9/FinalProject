@@ -8,30 +8,36 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <style type="text/css">
+        .btn-primary{
+            width: 150px;
+            height: 40px;
+        }
         .c1{
             margin-left: 100px;
             margin-top: 50px;
         }
         .c2{
+            margin-left: 100px;
             margin-top: 50px;
-            margin-left: 300px;
         }
-        .table{
-        margin-top: 20px;
-        width: 600px;
-    }
-        .form-control{
-        width: 300px;
-    }
+
         body { margin: 20px;
             background: whitesmoke}
         #sidebar, #content { position: absolute; }
         #sidebar, #content { overflow: auto; padding: 10px; }
         #content {
+            height: 400px;
             top: 100px; /* Расстояние от верхнего края */
             left: 270px; /* Расстояние от левого края */
             right: 270px;
-            bottom: 100px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        #sidebar{
+            top: 400px; /* Расстояние от верхнего края */
+            left: 270px; /* Расстояние от левого края */
+            right: 270px;
+            bottom: 50px;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
         }
@@ -75,60 +81,72 @@
         </div>
     </div>
 </nav>
-<div id="content">
-<center><h2>Update tariff plan</h2></center>
-<br>
+<div id="content"><center>
+    <h2>Contracts</h2>
+</center>
+    <form class="c2" action="controller" method="get">
+        <input type="hidden" name="command" value="CONTRACT_SELECT"/>
+        <select name="select">
+            <option value="allContracts">Select all contracts</option>
+            <option value="connectedContracts">Select connect contracts</option>
+            <option value="disconnectedContracts">select disconnect contracts</option>
+            <br/>
+        </select>
+        <input class="btn btn-primary" type="submit" value="select"/>
+    </form>
     <div class="c1">
         <form  style="display:inline;" action="controller" method="get">
-            <input type="hidden" name="command" value="SELECT_BY_NAME_TARIFF_PLAN"/>
-            <input  type="text"  name="nameTariffPlan" required pattern="[0-9]{1-10}"/>
-            <input  class="btn btn-primary" type="submit" value="Select by name"/>
+            <input type="hidden" name="command" value="FIND_CONTRACTS_FROM_PARAMETER"/>
+            <input type="hidden" name="field" value="contractId" />
+            <input type="text" name="parameter" placeholder="contract id" minlength="19" required pattern="[0-9]{19}"/>
+            <input class="btn btn-primary" type="submit" value="Select by contract id"/>
         </form>
-        <form  style="display:inline;" action="controller" method="get">
-            <input type="hidden" name="command" value="SELECT_BY_PRICE"/>
-            <input type="text" name="price" required pattern="[0-9]{1-10}"/>
-            <input  class="btn btn-primary" type="submit" value="Select by price"/>
-        </form>
-        <form  style="display:inline;" action="controller" method="get">
-            <input type="hidden" name="command" value="SELECT_BY_INTERNET_CONNECTION_SPEED"/>
-            <input type="text" cname="internetConnectionSpeed" required pattern="[0-9]{1-10}"/>
-            <input  class="btn btn-primary" type="submit" value="Select by speed"/>
-        </form>
+
+            <form  style="display:inline;" action="controller" method="get">
+                <input type="hidden" name="command" value="FIND_CONTRACTS_FROM_PARAMETER"/>
+                <input type="hidden" name="field" value="tariffPlanId" />
+                <input type="text" name="parameter" placeholder="tariff plan id" minlength="19" required pattern="[0-9]{19}"/>
+                <input class="btn btn-primary" type="submit" value="Select by tariff plan id"/>
+            </form>
+
+            <form  style="display:inline;" action="controller" method="get">
+                <input type="hidden" name="command" value="FIND_CONTRACTS_FROM_PARAMETER"/>
+                <input type="hidden" name="field" value="userId" />
+                <input type="text" name="parameter" placeholder="user id" minlength="19" required pattern="[0-9]{19}"/>
+                <input class="btn btn-primary" type="submit" value="Select by user id"/>
+            </form>
+
+
     </div>
+</div>
+<div id="sidebar">
 
-
-
-    <div class="c2">
-        <form class="row g-1" action="controller" method="get">
-                <div class="col-auto">
-                <input type="hidden" name="command" value="UPDATE_TARIFF_PLAN"/>
-                <input type="text" name="idTariffPlan"  required pattern="[0-9]{19}" placeholder="id" />
-                <select name="select">
-                    <option value="nameTariffPlan">Name tariff</option>
-                    <option value="price">price</option>
-                    <option value="internetConnectionSpeed">Internet Speed</option>
-                </select>
-                <input type="text" name="attribute"  minlength="2" required pattern="[0-9A-Za-z]{2-50}"/>
-                <input type="submit" class="btn btn-success"  value="Update this tariff plan"/>
-            </div>
-        </form>
-    </div>
-    <center>${res}
     <table class="table">
-        <tr> <td>id tariff plan</td>
-            <td>name tariff plan</td>
-            <td>price</td>
-            <td>internet speed</td>
-        <c:forEach items="${list}" var="tariffPlan" varStatus="count">
-            <tr> <td>${tariffPlan.tariffPlanId}</td>
-                <td>${tariffPlan.nameTariffPlan}</td>
-                <td>${tariffPlan.price}</td>
-                <td>${tariffPlan.internetConnectionSpeed}</td>
+        <tr>
+            <th>id contract</th>
+            <th>connection date</th>
+            <th>id user</th>
+            <th>id tariff plan</th>
+            <th>tariff plan name</th>
+            <th>tariff plan price</th>
+            <th>tariff plan speed</th>
+            <th>status</th>
+        </tr>
+        <c:forEach items="${list}" var="contract" varStatus="count">
+            <tr>
+                <td>${contract.contractId}</td>
+                <td>${contract.connectionDate}</td>
+                <td>${contract.userId}</td>
+                <td>${contract.tariffPlanId}</td>
+                <td>${contract.tariffPlanName}</td>
+                <td>${contract.tariffPlanPrice}</td>
+                <td>${contract.tariffPlanSpeed}</td>
+                <td>${contract.contractStatus}</td>
+
+
             </tr>
         </c:forEach>
     </table>
-        <br>
-    </center>
 </div>
 </body>
 </html>

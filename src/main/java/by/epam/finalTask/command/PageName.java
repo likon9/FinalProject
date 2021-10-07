@@ -15,13 +15,16 @@ public enum PageName {
     USER_CONTRACT("pages/user/user_contract.jsp"),
     CONNECT_TARIFF("pages/user/connect_tariff.jsp"),
     DISCONNECT_TARIFF("pages/user/disconnect_tariff.jsp"),
+    DELETE_USER("pages/user/delete_user.jsp"),
     HOME_ADMIN("pages/admin/home_admin.jsp"),
     USER_LIST("pages/admin/user_list.jsp"),
     BLOCK_USER("pages/admin/block_user.jsp"),
     SELECT_BY_PARAMETER("pages/admin/select_by_parameter.jsp"),
     ADD_TARIFF_PLAN("pages/admin/add_tariff_plan.jsp"),
+    CONTRACT_MANAGEMENT("pages/admin/contract_management.jsp"),
     TARIFF_PLAN_MANAGEMENT("pages/admin/tariff_plan_management.jsp"),
     UPDATE_SELECT_TARIFF_PLAN("pages/admin/update_select_tariff_plan.jsp"),
+
 
     ERROR("pages/error.jsp");
 

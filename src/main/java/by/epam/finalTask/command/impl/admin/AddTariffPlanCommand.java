@@ -20,6 +20,7 @@ public class AddTariffPlanCommand implements Command {
         Router router;
         Map<String, String> newTariffPlan = new HashMap<>();
         newTariffPlan.put(TARIFF_PLAN_ID, String.valueOf(IdGenerate.generateId()));
+        System.out.println("123"+request.getParameter(ParameterName.NAME_TARIFF_PLAN+request.getParameter(ParameterName.PRICE)));
         newTariffPlan.put(NAME_TARIFF_PLAN, request.getParameter(ParameterName.NAME_TARIFF_PLAN));
         newTariffPlan.put(PRICE, request.getParameter(ParameterName.PRICE));
         newTariffPlan.put(INTERNET_CONNECTION_SPEED, request.getParameter(ParameterName.INTERNET_CONNECTION_SPEED));

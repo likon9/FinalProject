@@ -30,7 +30,7 @@ public interface UserService {
 
     Optional<User> findByLogin(String login) throws ServiceException;
 
-    List<User> findBEmail(String email) throws ServiceException;
+    List<User> findByEmail(String email) throws ServiceException;
 
     List<User> findByName(String name) throws ServiceException;
 

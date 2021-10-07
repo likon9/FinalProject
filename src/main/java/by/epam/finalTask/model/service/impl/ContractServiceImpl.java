@@ -30,6 +30,21 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    public boolean updateStatusContract(Map<String, String> parameters, Long contractId) throws ServiceException {
+        boolean result = true;
+        if(result) {
+            ContractDao contractDao = ContractDao.getInstance();
+
+            try {
+                result = contractDao.updateStatusContract(parameters, contractId);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return result;
+    }
+
+    @Override
     public Optional<Contract> findByContractId(Long contractId) throws ServiceException {
         ContractDao contractDao = ContractDao.getInstance();
         try {
@@ -45,6 +60,62 @@ public class ContractServiceImpl implements ContractService {
         ContractDao contractDao = ContractDao.getInstance();
         try {
             List<Contract> contract = contractDao.findEffectiveContractByUserId(userId);
+            return contract;
+        } catch (DaoException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Contract> findAllContractByUserId(Long userId) throws ServiceException {
+        ContractDao contractDao = ContractDao.getInstance();
+        try {
+            List<Contract> contract = contractDao.findAllContractByUserId(userId);
+            return contract;
+        } catch (DaoException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Contract> findByStatus(String status) throws ServiceException {
+        ContractDao contractDao = ContractDao.getInstance();
+        System.out.println(12);
+        try {
+            List<Contract> contract = contractDao.findByStatus(status);
+            return contract;
+        } catch (DaoException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Contract> findByTariffPlanId(Long tariffPlanId) throws ServiceException {
+        ContractDao contractDao = ContractDao.getInstance();
+        try {
+            List<Contract> contract = contractDao.findByTariffPlanId(tariffPlanId);
+            return contract;
+        } catch (DaoException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Contract> findByTariffPlanName(String tariffPlanName) throws ServiceException {
+        ContractDao contractDao = ContractDao.getInstance();
+        try {
+            List<Contract> contract = contractDao.findByTariffPlanName(tariffPlanName);
+            return contract;
+        } catch (DaoException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Contract> findAll() throws ServiceException {
+        ContractDao contractDao = ContractDao.getInstance();
+        try {
+            List<Contract> contract = contractDao.findAll();
             return contract;
         } catch (DaoException e){
             throw new ServiceException(e);

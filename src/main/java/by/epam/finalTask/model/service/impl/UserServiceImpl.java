@@ -157,7 +157,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findBEmail(String email) throws ServiceException {
+    public List<User> findByEmail(String email) throws ServiceException {
         UserDao userDao = UserDao.getInstance();
         try {
             List<User> user = userDao.findByEmail(email);

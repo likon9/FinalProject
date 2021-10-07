@@ -1,9 +1,6 @@
 package by.epam.finalTask.command.impl.admin.userManagement;
 
-import by.epam.finalTask.command.Command;
-import by.epam.finalTask.command.CommandException;
-import by.epam.finalTask.command.Router;
-import by.epam.finalTask.command.SessionAttribute;
+import by.epam.finalTask.command.*;
 import by.epam.finalTask.model.entity.User;
 import by.epam.finalTask.model.service.impl.UserServiceImpl;
 import com.google.protobuf.ServiceException;
@@ -24,7 +21,7 @@ public class SelectByUserIdCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
         session.setAttribute(SessionAttribute.SESSION_USER,user);
-        Long id = Long.valueOf(request.getParameter("user_id"));
+        Long id = Long.valueOf(request.getParameter(ParameterName.USER_ID));
         UserServiceImpl userService = new UserServiceImpl();
         Optional<User> userOptional= null;
         try {

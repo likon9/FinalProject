@@ -5,6 +5,7 @@ import by.epam.finalTask.model.builder.ContractBuilder;
 import by.epam.finalTask.model.entity.Contract;
 import by.epam.finalTask.model.entity.ContractStatus;
 import by.epam.finalTask.model.entity.User;
+import by.epam.finalTask.model.entity.UserRole;
 import by.epam.finalTask.pool.ConnectionPool;
 import by.epam.finalTask.util.IdGenerate;
 import org.apache.logging.log4j.LogManager;
@@ -52,6 +53,62 @@ public class ContractDao {
             JOIN tariff_plans ON contracts.tariff_plans_tariff_plan_id = tariff_plans.tariff_plan_id
             JOIN contract_statuses ON contracts.contract_statusid   = contract_statuses.contract_status_id
             WHERE users_user_id=? AND contract_statusid =?""";
+    private static final String FIND_ALL_CONTRACT_BY_USER_ID = """
+            SELECT contract_id, connection_date, users_user_id, tariff_plans_tariff_plan_id,contract_statusid,tariff_plans.name_tariff_plan,
+            tariff_plans.price,tariff_plans.internet_connection_speed, contract_statuses.contract_status 
+            FROM contracts
+            JOIN users ON contracts.users_user_id   = users.user_id
+            JOIN tariff_plans ON contracts.tariff_plans_tariff_plan_id = tariff_plans.tariff_plan_id
+            JOIN contract_statuses ON contracts.contract_statusid   = contract_statuses.contract_status_id
+            WHERE users_user_id=?""";
+    private static final String FIND_BY_STATUS = """
+            SELECT contract_id, connection_date, users_user_id, tariff_plans_tariff_plan_id,contract_statusid,tariff_plans.name_tariff_plan,
+            tariff_plans.price,tariff_plans.internet_connection_speed, contract_statuses.contract_status 
+            FROM contracts
+            JOIN users ON contracts.users_user_id   = users.user_id
+            JOIN tariff_plans ON contracts.tariff_plans_tariff_plan_id = tariff_plans.tariff_plan_id
+            JOIN contract_statuses ON contracts.contract_statusid   = contract_statuses.contract_status_id
+            WHERE contract_statuses.contract_status =?""";
+    private static final String FIND_BY_TARIFF_PLAN_ID = """
+            SELECT contract_id, connection_date, users_user_id, tariff_plans_tariff_plan_id,contract_statusid,tariff_plans.name_tariff_plan,
+            tariff_plans.price,tariff_plans.internet_connection_speed, contract_statuses.contract_status 
+            FROM contracts
+            JOIN users ON contracts.users_user_id   = users.user_id
+            JOIN tariff_plans ON contracts.tariff_plans_tariff_plan_id = tariff_plans.tariff_plan_id
+            JOIN contract_statuses ON contracts.contract_statusid   = contract_statuses.contract_status_id
+            WHERE  tariff_plans_tariff_plan_id =?""";
+    private static final String FIND_BY_TARIFF_PLAN_NAME = """
+            SELECT contract_id, connection_date, users_user_id, tariff_plans_tariff_plan_id,contract_statusid,tariff_plans.name_tariff_plan,
+            tariff_plans.price,tariff_plans.internet_connection_speed, contract_statuses.contract_status 
+            FROM contracts
+            JOIN users ON contracts.users_user_id   = users.user_id
+            JOIN tariff_plans ON contracts.tariff_plans_tariff_plan_id = tariff_plans.tariff_plan_id
+            JOIN contract_statuses ON contracts.contract_statusid   = contract_statuses.contract_status_id
+            WHERE tariff_plans.name_tariff_plan =?""";
+    private static final String FIND_ALL_CONTRACTS = """
+            SELECT contract_id, connection_date, users_user_id, tariff_plans_tariff_plan_id,contract_statusid,tariff_plans.name_tariff_plan,
+            tariff_plans.price,tariff_plans.internet_connection_speed, contract_statuses.contract_status 
+            FROM contracts
+            JOIN users ON contracts.users_user_id   = users.user_id
+            JOIN tariff_plans ON contracts.tariff_plans_tariff_plan_id = tariff_plans.tariff_plan_id
+            JOIN contract_statuses ON contracts.contract_statusid   = contract_statuses.contract_status_id""";
+
+    private static final String UPDATE_STATUS = "UPDATE contracts SET contract_statusid=? WHERE contract_id=?";
+
+    public boolean updateStatusContract(Map<String, String> parameters, Long contractId) throws DaoException {
+        boolean result = false;
+        try(Connection connection = ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(UPDATE_STATUS)){
+
+            statement.setLong(1, 2);
+            statement.setLong(2, contractId);
+            result = statement.executeUpdate()>0;
+        } catch (SQLException e){
+            logger.error("Error during updating status of contract with id = " + contractId, e);
+            throw new DaoException("Error during updating status of contract with id = " + contractId, e);
+        }
+        return result;
+    }
 
 
     public boolean addContract(Map<String, String> parameters) throws DaoException {
@@ -71,7 +128,6 @@ public class ContractDao {
         }
         return result;
     }
-
 
     public Optional<Contract> findByContractId(Long contractId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -99,6 +155,36 @@ public class ContractDao {
         }
     }
 
+    public List<Contract> findAllContractByUserId(Long userId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL_CONTRACT_BY_USER_ID)) {
+
+            statement.setLong(1, userId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return createContract(resultSet);
+            }
+        } catch (SQLException e) {
+            logger.error("Error during searching contract by user id.", e);
+            throw new DaoException("Error during searching contract by user id.", e);
+        }
+    }
+
+    public List<Contract> findByStatus(String status) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_STATUS)) {
+
+            statement.setString(1, status);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return createContract(resultSet);
+            }
+        } catch (SQLException e) {
+            logger.error("Error during searching contract by status.", e);
+            throw new DaoException("Error during searching contract by status.", e);
+        }
+    }
+
     public List<Contract> findEffectiveContractByUserId(Long userId) throws DaoException {
             try (Connection connection = ConnectionPool.getInstance().getConnection();
                  PreparedStatement statement = connection.prepareStatement(FIND_BY_USER_ID)) {
@@ -115,11 +201,53 @@ public class ContractDao {
             }
         }
 
+    public List<Contract> findByTariffPlanId(Long tariffPlanId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_TARIFF_PLAN_ID)) {
+
+            statement.setLong(1, tariffPlanId);
+
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return createContract(resultSet);
+            }
+        } catch (SQLException e) {
+            logger.error("Error during searching contract by tariff plan id.", e);
+            throw new DaoException("Error during searching contract by tariff plan id.", e);
+        }
+    }
+
+    public List<Contract> findByTariffPlanName(String tariffPlanName) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_TARIFF_PLAN_NAME)) {
+
+            statement.setString(1, tariffPlanName);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return createContract(resultSet);
+            }
+        } catch (SQLException e) {
+            logger.error("Error during searching contract by tariff plan name.", e);
+            throw new DaoException("Error during searching contract by tariff plan name.", e);
+        }
+    }
+
+    public List<Contract> findAll() throws DaoException {
+
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL_CONTRACTS)) {
+            try (ResultSet resultSet = statement.executeQuery()){
+                return createContract(resultSet);
+            }
+        } catch (SQLException e) {
+            logger.error("Error during searching for all contracts.", e);
+            throw new DaoException("Error during searching for all contracts.", e);
+        }
+    }
+
     private List<Contract> createContract(ResultSet resultSet) throws SQLException, DaoException {
         List<Contract> contractList = new ArrayList<>();
-
         while (resultSet.next()) {
-
             ContractBuilder contractBuilder = new ContractBuilder();
             contractBuilder.setContractId(resultSet.getLong(CONTRACT_ID));
             contractBuilder.setConnectionDate(resultSet.getTimestamp(CONNECTION_DATE));

@@ -22,7 +22,7 @@ public class NewContractCommand implements Command {
         TariffPlanServiceImpl tariffPlanService = new TariffPlanServiceImpl();
         TariffPlan tariffPlan = null;
         try {
-           tariffPlan = tariffPlanService.findByIdTariffPlan(Long.parseLong(request.getParameter(ParameterName.ID_TARIFF_PLAN))).get();
+           tariffPlan = tariffPlanService.findByIdTariffPlan(Long.parseLong(request.getParameter(ParameterName.TARIFF_PLAN_ID))).get();
         } catch (ServiceException e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class NewContractCommand implements Command {
         request.setAttribute(ParameterName.NAME_TARIFF_PLAN, tariffPlan.getNameTariffPlan());
         request.setAttribute(ParameterName.PRICE, tariffPlan.getPrice());
         request.setAttribute(ParameterName.INTERNET_CONNECTION_SPEED,tariffPlan.getInternetConnectionSpeed());
-        request.setAttribute(ParameterName.ID_TARIFF_PLAN,tariffPlan.getTariffPlanId());
+        request.setAttribute(ParameterName.TARIFF_PLAN_ID,tariffPlan.getTariffPlanId());
 
 
 
