@@ -91,7 +91,7 @@
         </form>
         <form  style="display:inline;" action="controller" method="get">
             <input type="hidden" name="command" value="SELECT_BY_INTERNET_CONNECTION_SPEED"/>
-            <input type="text" cname="internetConnectionSpeed" required pattern="[0-9]{1-10}"/>
+            <input type="text" name="internetConnectionSpeed" required pattern="[0-9]{1-10}"/>
             <input  class="btn btn-primary" type="submit" value="Select by speed"/>
         </form>
     </div>
@@ -102,7 +102,7 @@
         <form class="row g-1" action="controller" method="get">
                 <div class="col-auto">
                 <input type="hidden" name="command" value="UPDATE_TARIFF_PLAN"/>
-                <input type="text" name="idTariffPlan"  required pattern="[0-9]{19}" placeholder="id" />
+                <input type="text" name="tariffPlanId"  required pattern="[0-9]{19}" placeholder="id" />
                 <select name="select">
                     <option value="nameTariffPlan">Name tariff</option>
                     <option value="price">price</option>
