@@ -1,62 +1,63 @@
 package by.epam.task.controller;
 
-import by.epam.task.command.*;
+import by.epam.task.controller.command.*;
 import by.epam.task.exception.CommandException;
+import by.epam.task.model.pool.ConnectionPool;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static by.epam.task.command.PageName.ERROR;
+import static by.epam.task.controller.command.PageName.ERROR_404;
+import static by.epam.task.controller.command.ParameterName.COMMAND;
 
-@WebServlet(name = "ProjectServlet", value = "/controller")
+@WebServlet("/controller")
 public class ProjectServlet extends HttpServlet {
-
-    private static final Logger logger = LogManager.getLogger();
+        private static final Logger logger = LogManager.getLogger();
+        private final CommandProvider provider = CommandProvider.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request,response);
-    }
-
+                throws ServletException, IOException {
+            processRequest(request, response);
+        }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request,response);
-    }
-
-
-    private void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String commandStr = request.getParameter("command");
-        Command command = CommandType.takeCommand(commandStr);
-        System.out.println(commandStr);
-        Router router = null;
-        try {
-            router = command.execute(request);
-        } catch (CommandException e) {
-            e.printStackTrace();
-            router = new Router(ERROR);
+                throws ServletException, IOException {
+            processRequest(request, response);
         }
-        switch (router.getType()) {
-            case REDIRECT:
-                response.sendRedirect(router.getPage());
-                break;
-            case FORWARD:
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher(router.getPage());
-                requestDispatcher.forward(request, response);
-                break;
-            default:
-                logger.error("Error in router type: ", router.getType());
-                response.sendRedirect(ERROR);
+
+        private void processRequest(HttpServletRequest request, HttpServletResponse response)
+                throws IOException, ServletException {
+            logger.log(Level.INFO, "method processRequest()");
+            String commandName = request.getParameter(COMMAND);
+            Command command = provider.getCommand(commandName);
+            Router router = null;
+            try {
+                router = command.execute(request);
+            } catch (CommandException e) {
+                e.printStackTrace();
+            }
+            switch (router.getType()) {
+                case REDIRECT -> response.sendRedirect(router.getPagePath());
+                case FORWARD -> request.getRequestDispatcher(router.getPagePath()).forward(request, response);
+                default -> {
+                    logger.log(Level.ERROR, "unknown router type: {}", router.getType());
+                    response.sendRedirect(ERROR_404);
+                }
+            }
         }
+
+    @Override
+    public void destroy() {
+        ConnectionPool.getInstance().destroyPool();
     }
 
 }

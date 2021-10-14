@@ -5,12 +5,12 @@ import by.epam.task.model.entity.ContractStatus;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class ContractBuilder {
 
     private Long contractId;
-    private Timestamp connectionDate;
-    private Timestamp disconnectionDate;
+    private LocalDate connectionDate;
     private Long userId;
     private Long tariffPlanId;
     private String tariffPlanName;
@@ -32,7 +32,6 @@ public class ContractBuilder {
 
         this.contractId = null;
         this.connectionDate = null;
-        this.disconnectionDate = null;
         this.userId = null;
         this.tariffPlanId = null;
         this.tariffPlanName = null;
@@ -50,20 +49,12 @@ public class ContractBuilder {
         this.contractId = contractId;
     }
 
-    public Timestamp getConnectionDate() {
+    public LocalDate getConnectionDate() {
         return connectionDate;
     }
 
-    public void setConnectionDate(Timestamp connectionDate) {
+    public void setConnectionDate(LocalDate connectionDate) {
         this.connectionDate = connectionDate;
-    }
-
-    public Timestamp getDisconnectionDate() {
-        return disconnectionDate;
-    }
-
-    public void setDisconnectionDate(Timestamp disconnectionDate) {
-        this.disconnectionDate = disconnectionDate;
     }
 
     public Long getUserId() {

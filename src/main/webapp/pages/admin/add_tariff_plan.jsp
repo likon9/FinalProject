@@ -1,10 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="language" value="${sessionScope.locale}" scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle scope="session" basename="language"/>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <title><fmt:message key="new.tariff.title"/></title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <style type="text/css">
@@ -40,56 +42,56 @@
                 <li class="d-flex">
                     <form  action="controller" method="get">
                         <input type="hidden" name="command" value="USER_MANAGEMENT"/>
-                        <input class="btn btn-light" type="submit" value="Select user"/>
+                        <input class="btn btn-light" type="submit" value="<fmt:message key="menu.admin.button.management.user"/>"/>
                     </form>
                 </li>
                 <li class="d-flex">
                     <form  action="controller" method="get">
                         <input type="hidden" name="command" value="GO_TO_ADD_TARIFF_PLAN"/>
-                        <input class="btn btn-light" type="submit" value="Add tariff"/>
+                        <input class="btn btn-light" type="submit" value="<fmt:message key="menu.admin.button.add.tariff"/>"/>
                     </form>
                 </li>
                 <li class="d-flex">
                     <form  action="controller" method="get">
                         <input type="hidden" name="command" value="TARIFF_PLAN_MANAGEMENT"/>
-                        <input class="btn btn-light" type="submit" value="Update tariff"/>
+                        <input class="btn btn-light" type="submit" value="<fmt:message key="menu.admin.button.management.tariff"/>"/>
                     </form>
                 </li>
                 <li class="d-flex">
                     <form  action="controller" method="get">
                         <input type="hidden" name="command" value="GO_TO_CONTRACT_MANAGEMENT"/>
-                        <input class="btn btn-light" type="submit" value="Contract management"/>
+                        <input class="btn btn-light" type="submit" value="<fmt:message key="menu.admin.button.management.contract"/>"/>
                     </form>
                 </li>
             </ul>
             <form class="d-flex" action="controller" method="get">
                 <input type="hidden" name="command" value="EXIT_USER"/>
-                <input class="btn btn-outline-success" type="submit" value="exit"/>
+                <input class="btn btn-outline-success" type="submit" value="<fmt:message key="menu.admin.button.exit"/>"/>
             </form>
-
         </div>
     </div>
 </nav>
+
 <div id="content">
     <center>
-        <h2>Add tariff</h2>
+        <h2><fmt:message key="new.tariff.inscription"/></h2>
     </center>
 <div class="c1">
     <form action="controller" method="get">
         <input type="hidden" name="command" value="ADD_TARIFF_PLAN"/>
             <div class="mb-3">
-                <label class="form-label">Name tariff</label>
-                 <input type="text"  class="form-control" name="nameTariffPlan" required pattern="[0-9A-Za-z]{1-50}"/>
+                <label class="form-label"><fmt:message key="new.tariff.name"/></label>
+                 <input type="text"  class="form-control" name="nameTariffPlan" required pattern="[0-9A-Za-zА-Яа-я]{3-50}"/>
             </div>
             <div class="mb-3">
-                <label class="form-label">Price</label>
+                <label class="form-label"><fmt:message key="new.tariff.price"/></label>
                 <input type="text"  class="form-control" name="price" minlength="1" maxlength="5" required pattern="[0-9]{1-5}"/>
             </div>
         <div class="mb-3">
-            <label class="form-label">Internet speed</label>
+            <label class="form-label"><fmt:message key="new.tariff.speed"/></label>
             <input type="text" class="form-control" name="internetConnectionSpeed" minlength="1" required pattern="[0-9]{1-5}"/>
         </div>
-        <input  class="btn btn-primary" class="button" type="submit" value="Add"/><br>
+        <input  class="btn btn-primary" class="button" type="submit" value="<fmt:message key="new.tariff.add"/>"/><br>
     </form>
 </div>
    <center>

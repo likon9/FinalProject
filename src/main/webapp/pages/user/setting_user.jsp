@@ -6,7 +6,7 @@
 <fmt:setBundle scope="session" basename="language"/>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title><fmt:message key="setting.title"/></title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <style type="text/css">
@@ -63,25 +63,25 @@
 
             <form class="d-flex" action="controller" method="get">
                 <input type="hidden" name="command" value="EXIT_USER"/>
-                <input class="btn btn-outline-success" type="submit" value="exit"/>
+                <input class="btn btn-outline-success" type="submit" value="<fmt:message key="menu.user.button.exit"/>"/>
             </form>
         </div>
     </div>
 </nav>
 <div id="content">
     <center>
-    <h2>Update user</h2>
+    <h2><fmt:message key="setting.inscription"/></h2>
     <table class="table">
         <tr>
             <td>
-               Email now: ${email}
+                <fmt:message key="setting.email.now"/>: ${email}
             </td>
             <td>
                 <form class="form-label" action="controller" method="get">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="email"/>
                     <input type="email" class="form-control"  name="parameter" required pattern="[A-Za-z]{3-40}"/>
-                    <input type="submit" value="update email"/>
+                    <input type="submit" value="<fmt:message key="setting.email.update"/>"/>
                     <div class="form-text">
                     </div>
                 </form>
@@ -89,14 +89,14 @@
         </tr>
         <tr>
             <td>
-                Name now: ${name}
+                <fmt:message key="setting.name.now"/>: ${name}
             </td>
             <td>
                 <form class="form-label" action="controller" method="get">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="name"/>
                     <input type="text" class="form-control"  name="parameter" minlength="3"  required pattern="[A-Za-z]{3-40}"/>
-                    <input type="submit" value="update name"/>
+                    <input type="submit" value=" <fmt:message key="setting.name.update"/>"/>
                     <div class="form-text">
                     </div>
                 </form>
@@ -104,14 +104,14 @@
         </tr>
         <tr>
             <td>
-                Surname now: ${surname}
+                <fmt:message key="setting.surname.now"/>: ${surname}
             </td>
             <td>
                 <form class="form-label" action="controller" method="get">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="surname"/>
                     <input type="text" class="form-control"  name="parameter" minlength="3"  required pattern="[A-Za-z]{3-40}"/>
-                    <input type="submit" value="update surname"/>
+                    <input type="submit" value="<fmt:message key="setting.surname.update"/>"/>
                     <div class="form-text">
                     </div>
                 </form>
@@ -119,14 +119,14 @@
         </tr>
         <tr>
             <td>
-                Phone now: +375${phone}
+                <fmt:message key="setting.phone.now"/>: +375${phone}
             </td>
             <td>
                 <form class="form-label" action="controller" method="get">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="phone"/>
                     <input type="text" class="form-control"  name="parameter" minlength="9"  required pattern="[0-9]{9-9}"/>
-                    <input type="submit" value="update phone"/>
+                    <input type="submit" value="<fmt:message key="setting.phone.update"/>"/>
                     <div class="form-text">
                     </div>
                 </form>
@@ -137,7 +137,7 @@
 
     <form  action="controller" method="get">
         <input type="hidden" name="command" value="GO_TO_DELETE_USER"/>
-        <input type="submit" value="delete"/>
+        <input type="submit" value="<fmt:message key="setting.delete"/>"/>
     </form>
 </div>
 

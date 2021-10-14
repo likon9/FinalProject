@@ -2,10 +2,11 @@ package by.epam.task.model.entity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class Contract {
     private Long contractId;
-    private Timestamp connectionDate;
+    private LocalDate connectionDate;
     private Long userId;
     private Long tariffPlanId;
     private String tariffPlanName;
@@ -16,7 +17,7 @@ public class Contract {
     }
 
     public Contract(Long contractId,
-                    Timestamp connectionDate,
+                    LocalDate connectionDate,
                     Long userId,
                     Long tariffPlanId,
                     String tariffPlanName,
@@ -41,11 +42,11 @@ public class Contract {
         this.contractId = contractId;
     }
 
-    public Timestamp getConnectionDate() {
+    public LocalDate getConnectionDate() {
         return connectionDate;
     }
 
-    public void setConnectionDate(Timestamp connectionDate) {
+    public void setConnectionDate(LocalDate connectionDate) {
         this.connectionDate = connectionDate;
     }
 

@@ -2,6 +2,8 @@ package by.epam.task.model.entity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class User {
 
@@ -11,9 +13,9 @@ public class User {
     private String password;
     private String name;
     private String surname;
-    private int phone;
+    private String phone;
     private BigDecimal balance;
-    private Timestamp registrationDate;
+    private LocalDate registrationDate;
     private UserStatus userStatus;
     private UserRole userRole;
 
@@ -27,9 +29,9 @@ public class User {
                 String password,
                 String name,
                 String surname,
-                int phone,
+                String phone,
                 BigDecimal balance,
-                Timestamp registrationDate,
+                LocalDate registrationDate,
                 UserStatus userStatus,
                 UserRole userRole
                )
@@ -95,11 +97,11 @@ public class User {
         this.surname = surname;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -111,11 +113,11 @@ public class User {
         this.balance = balance;
     }
 
-    public Timestamp getRegistrationDate() {
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Timestamp registrationDate) {
+    public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
     }
 

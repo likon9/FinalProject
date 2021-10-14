@@ -6,7 +6,7 @@
 <fmt:setBundle scope="session" basename="language"/>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title><fmt:message key="connect.tariff.title"/></title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <style type="text/css">
@@ -65,7 +65,7 @@
 
             <form class="d-flex" action="controller" method="get">
                 <input type="hidden" name="command" value="EXIT_USER"/>
-                <input class="btn btn-outline-success" type="submit" value="exit"/>
+                <input class="btn btn-outline-success" type="submit" value="<fmt:message key="menu.user.button.exit"/>"/>
             </form>
         </div>
     </div>
@@ -73,13 +73,13 @@
 
 <div id="content">
     <center>
-        <h2>New contract
+        <h2><fmt:message key="connect.tariff.inscription"/>
         </h2>
     </center>
     <table class="table">
         <tr>
             <td>
-                Login:
+                <fmt:message key="connect.tariff.login"/>:
             </td>
             <td>
                 ${login}
@@ -87,7 +87,7 @@
         </tr>
         <tr>
             <td>
-                Email:
+                <fmt:message key="connect.tariff.email"/>:
             </td>
             <td>
                 ${email}
@@ -95,7 +95,7 @@
         </tr>
         <tr>
             <td>
-                Name:
+                <fmt:message key="connect.tariff.name"/>:
             </td>
             <td>
                 ${name}
@@ -103,7 +103,7 @@
         </tr>
         <tr>
             <td>
-                Surname:
+                <fmt:message key="connect.tariff.surname"/>:
             </td>
             <td>
                 ${surname}
@@ -111,7 +111,7 @@
         </tr>
         <tr>
             <td>
-                Phone:
+                <fmt:message key="connect.tariff.phone"/>:
             </td>
             <td>
                 +375${phone}
@@ -119,7 +119,7 @@
         </tr>
         <tr>
             <td>
-                Tariff plan:
+                <fmt:message key="connect.tariff.plan"/>:
             </td>
             <td>
                 ${nameTariffPlan}
@@ -127,7 +127,7 @@
         </tr>
         <tr>
             <td>
-                Price:
+                <fmt:message key="connect.tariff.price"/>:
             </td>
             <td>
                 ${price}
@@ -135,7 +135,7 @@
         </tr>
         <tr>
             <td>
-                Connection speed:
+                <fmt:message key="connect.tariff.speed"/>:
             </td>
             <td>
                 ${internetConnectionSpeed}
@@ -146,7 +146,7 @@
     <form action="controller" method="get">
         <input type="hidden" name="command" value="CONNECT_TARIFF"/>
         <input type="hidden" name="tariffPlanId" value="${tariffPlanId}"/><br>
-        <input class="btn btn-primary" type="submit" value="Connect"/>
+        <input class="btn btn-primary" type="submit" value=" <fmt:message key="connect.tariff.connect"/>"/>
     </form>
 </div>
 

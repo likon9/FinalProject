@@ -2,6 +2,16 @@ body {
     background: whitesmoke;
 }
 
+select
+{
+    width: 50px;
+    margin-top: 20px;
+    height: 35px;
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
 .form1 {
     margin-left: 550px;
     margin-right:50px;
@@ -18,12 +28,8 @@ body {
 
 .input_text
 {
+    width: 300px;
     margin-top: 20px;
-    margin-left: 170px;
-    margin-right: 170px;
-    text-align: left;
-    align-items: center;
-    width: 50%;
     height: 35px;
     font-size: 15px;
     padding: 5px;
@@ -44,6 +50,16 @@ body {
     border-radius: 10px;
 }
 
+.input_text2
+{
+    width: 240px;
+    margin-top: 20px;
+    height: 35px;
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
 .button{
     margin-top: 20px;
     background: #203da2;
@@ -55,7 +71,7 @@ body {
     display: inline-block;
     font-size: 16px;
     border-radius: 10px;
-    margin-left: 170px;
+    margin-left: 225px;
 }
 
 h1{
@@ -115,6 +131,7 @@ h5{
 }
 
 h6{
+
     margin-top: 150px;
     align-items: center;
     font-style: revert;
@@ -151,7 +168,6 @@ h6{
     display: inline-block;
     font-size: 16px;
     border-radius: 10px;
-    margin-left: 270px;
 }
 table{
     margin-left: 15%;

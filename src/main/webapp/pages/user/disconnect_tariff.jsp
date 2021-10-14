@@ -6,7 +6,7 @@
 <fmt:setBundle scope="session" basename="language"/>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title><fmt:message key="disconnect.tariff.title"/></title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <style type="text/css">
@@ -63,23 +63,20 @@
 
             <form class="d-flex" action="controller" method="get">
                 <input type="hidden" name="command" value="EXIT_USER"/>
-                <input class="btn btn-outline-success" type="submit" value="exit"/>
+                <input class="btn btn-outline-success" type="submit" value="<fmt:message key="menu.user.button.exit"/>"/>
             </form>
         </div>
     </div>
 </nav>
 <div id="content">
     <center>
-        <h2>Disconnect contract
+        <h2><fmt:message key="disconnect.tariff.inscription"/>
         </h2>
-
-
     <table class="table">
         <tr>
-
         <tr>
             <td>
-                Tariff plan:
+                <fmt:message key="disconnect.tariff.plan"/>:
             </td>
             <td>
                 ${nameTariffPlan}
@@ -87,23 +84,23 @@
         </tr>
         <tr>
             <td>
-                Price:
+                <fmt:message key="disconnect.tariff.price"/>:
             </td>
             <td>
-                ${price}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Connection speed:
-            </td>
-            <td>
-                ${internetConnectionSpeed}
+                ${price}BYN
             </td>
         </tr>
         <tr>
             <td>
-                Connection date:
+                <fmt:message key="disconnect.tariff.speed"/>:
+            </td>
+            <td>
+                ${internetConnectionSpeed}Mb/s
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <fmt:message key="disconnect.tariff.connect.date"/>:
             </td>
             <td>
                 ${connectionDate}
@@ -115,7 +112,7 @@
     <form action="controller" method="get">
         <input type="hidden" name="command" value="NULLIFICATION_CONTRACT"/>
         <input type="hidden" name="contractId" value="${contractId}"/><br>
-        <input class="btn btn-primary" type="submit" value="Disconnect"/>
+        <input class="btn btn-primary" type="submit" value=" <fmt:message key="disconnect.tariff.disconnect"/>"/>
     </form>
 
 </div>

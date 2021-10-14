@@ -6,17 +6,16 @@
 <fmt:setBundle scope="session" basename="language"/>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title><fmt:message key="home.title"/></title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <style type="text/css">
-
         .column {
-            margin-left: 480px;
-            width: 500px;
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
-            column-count: 3;
+            margin-left: 500px;
+            width: 400px;
+            -webkit-column-count: 2;
+            -moz-column-count: 2;
+            column-count: 2;
             -webkit-column-gap: 30px;
             -moz-column-gap: 30px;
             column-gap: 30px;
@@ -24,7 +23,7 @@
             -moz-column-rule: 1px solid #ccc;
             column-rule: 1px solid #ccc;
         }
-        body { margin: 20px;
+            body { margin: 20px;
             background: whitesmoke}
         #sidebar, #content { position: absolute; }
         #sidebar, #content { overflow: auto; padding: 10px; }
@@ -63,10 +62,9 @@
                     </form>
                 </li>
             </ul>
-
             <form class="d-flex" action="controller" method="get">
                 <input type="hidden" name="command" value="EXIT_USER"/>
-                <input class="btn btn-outline-success" type="submit" value="exit"/>
+                <input class="btn btn-outline-success" type="submit" value="<fmt:message key="menu.user.button.exit"/>"/>
             </form>
         </div>
     </div>
@@ -75,15 +73,26 @@
     <form action="controller" method="get" >
         <input type="hidden" name="command" value="SETTING_USER"/>
         <input class="rounded float-end" type="image" width="30px" src="picture/pngwing.png" name="submit">
-
     </form>
     <text class="fs-4" >
-    <p class="fst-italic" >Your profile:</p>
+    <p class="fst-italic" > <fmt:message key="home.inscription"/></p>
     </text>
     <div class="column">
         <text class="fs-6">
-        <p >Login:</br>Email</br>Name</br>Surname</br>Phone</p>
-        <p >${login}</br> ${email}</br>${name}</br>${surname}</br>+375-${phone}</p>
+        <p >
+            <fmt:message key="home.login"/><br>
+            <fmt:message key="home.email"/><br>
+            <fmt:message key="home.name"/><br>
+            <fmt:message key="home.surname"/><br>
+            <fmt:message key="home.phone"/><br>
+            <fmt:message key="home.balance"/>
+        </p>
+        <p >${login}<br> ${email}<br>${name}<br>${surname}<br>+375-${phone}<br>${balance}BYN
+            <form  action="controller" method="get">
+                <input type="hidden" name="command" value="GO_TO_TOP_UP_BALANCE"/>
+                <input class="btn btn-outline-success" type="submit" value=" <fmt:message key="home.balance.up"/>"/>
+            </form>
+            </p>
         </text>
 </div>
     <br>

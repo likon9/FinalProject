@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -96,7 +97,6 @@ public class ContractDaoImpl implements ContractDao {
         boolean result = false;
         try(Connection connection = ConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(UPDATE_STATUS)){
-
             statement.setLong(1, 2);
             statement.setLong(2, contractId);
             result = statement.executeUpdate()>0;
@@ -116,7 +116,6 @@ public class ContractDaoImpl implements ContractDao {
             statement.setLong(3, Long.parseLong(parameters.get(CONTRACT_USER_ID)));
             statement.setLong(4, Long.parseLong(parameters.get(CONTRACT_TARIFF_PLAN_ID)));
             statement.setLong(5, 1);
-
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             logger.error("Error during adding contract.", e);
@@ -134,7 +133,7 @@ public class ContractDaoImpl implements ContractDao {
                 if (resultSet.next()) {
                     ContractBuilder contractBuilder = new ContractBuilder();
                     contractBuilder.setContractId(resultSet.getLong(CONTRACT_ID));
-                    contractBuilder.setConnectionDate(resultSet.getTimestamp(CONNECTION_DATE));
+                    contractBuilder.setConnectionDate(LocalDate.parse(resultSet.getString(CONNECTION_DATE)));
                     contractBuilder.setUserId(resultSet.getLong(CONTRACT_USER_ID));
                     contractBuilder.setTariffPlanId(resultSet.getLong(CONTRACT_TARIFF_PLAN_ID));
                     contractBuilder.setTariffPlanName(resultSet.getString(NAME_TARIFF_PLAN));
@@ -154,9 +153,7 @@ public class ContractDaoImpl implements ContractDao {
     public List<Contract> findAllContractByUserId(Long userId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_CONTRACT_BY_USER_ID)) {
-
             statement.setLong(1, userId);
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 return createContract(resultSet);
             }
@@ -169,9 +166,7 @@ public class ContractDaoImpl implements ContractDao {
     public List<Contract> findByStatus(String status) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_STATUS)) {
-
             statement.setString(1, status);
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 return createContract(resultSet);
             }
@@ -184,10 +179,8 @@ public class ContractDaoImpl implements ContractDao {
     public List<Contract> findEffectiveContractByUserId(Long userId) throws DaoException {
             try (Connection connection = ConnectionPool.getInstance().getConnection();
                  PreparedStatement statement = connection.prepareStatement(FIND_BY_USER_ID)) {
-
                 statement.setLong(1, userId);
                 statement.setLong(2, 1);
-
                 try (ResultSet resultSet = statement.executeQuery()) {
                     return createContract(resultSet);
                 }
@@ -200,10 +193,7 @@ public class ContractDaoImpl implements ContractDao {
     public List<Contract> findByTariffPlanId(Long tariffPlanId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_TARIFF_PLAN_ID)) {
-
             statement.setLong(1, tariffPlanId);
-
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 return createContract(resultSet);
             }
@@ -216,9 +206,7 @@ public class ContractDaoImpl implements ContractDao {
     public List<Contract> findByTariffPlanName(String tariffPlanName) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_TARIFF_PLAN_NAME)) {
-
             statement.setString(1, tariffPlanName);
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 return createContract(resultSet);
             }
@@ -246,7 +234,7 @@ public class ContractDaoImpl implements ContractDao {
         while (resultSet.next()) {
             ContractBuilder contractBuilder = new ContractBuilder();
             contractBuilder.setContractId(resultSet.getLong(CONTRACT_ID));
-            contractBuilder.setConnectionDate(resultSet.getTimestamp(CONNECTION_DATE));
+            contractBuilder.setConnectionDate(LocalDate.parse(resultSet.getString(CONNECTION_DATE)));
             contractBuilder.setUserId(resultSet.getLong(CONTRACT_USER_ID));
             contractBuilder.setTariffPlanId(resultSet.getLong(CONTRACT_TARIFF_PLAN_ID));
             contractBuilder.setTariffPlanName(resultSet.getString(NAME_TARIFF_PLAN));
@@ -257,6 +245,5 @@ public class ContractDaoImpl implements ContractDao {
         }
         return contractList;
     }
-
     }
 

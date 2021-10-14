@@ -1,19 +1,19 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="language" value="${sessionScope.locale}" scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle scope="session" basename="language"/>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <title><fmt:message key="contract.manager.title"/></title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <style type="text/css">
         .btn-primary{
-            width: 150px;
             height: 40px;
         }
         .c1{
-            margin-left: 100px;
             margin-top: 50px;
         }
         .c2{
@@ -52,85 +52,86 @@
                 <li class="d-flex">
                     <form  action="controller" method="get">
                         <input type="hidden" name="command" value="USER_MANAGEMENT"/>
-                        <input class="btn btn-light" type="submit" value="Select user"/>
+                        <input class="btn btn-light" type="submit" value="<fmt:message key="menu.admin.button.management.user"/>"/>
                     </form>
                 </li>
                 <li class="d-flex">
                     <form  action="controller" method="get">
                         <input type="hidden" name="command" value="GO_TO_ADD_TARIFF_PLAN"/>
-                        <input class="btn btn-light" type="submit" value="Add tariff"/>
+                        <input class="btn btn-light" type="submit" value="<fmt:message key="menu.admin.button.add.tariff"/>"/>
                     </form>
                 </li>
                 <li class="d-flex">
                     <form  action="controller" method="get">
                         <input type="hidden" name="command" value="TARIFF_PLAN_MANAGEMENT"/>
-                        <input class="btn btn-light" type="submit" value="Update tariff"/>
+                        <input class="btn btn-light" type="submit" value="<fmt:message key="menu.admin.button.management.tariff"/>"/>
                     </form>
                 </li>
                 <li class="d-flex">
                     <form  action="controller" method="get">
                         <input type="hidden" name="command" value="GO_TO_CONTRACT_MANAGEMENT"/>
-                        <input class="btn btn-light" type="submit" value="Contract management"/>
+                        <input class="btn btn-light" type="submit" value="<fmt:message key="menu.admin.button.management.contract"/>"/>
                     </form>
                 </li>
             </ul>
             <form class="d-flex" action="controller" method="get">
                 <input type="hidden" name="command" value="EXIT_USER"/>
-                <input class="btn btn-outline-success" type="submit" value="exit"/>
+                <input class="btn btn-outline-success" type="submit" value="<fmt:message key="menu.admin.button.exit"/>"/>
             </form>
         </div>
     </div>
 </nav>
+
 <div id="content"><center>
-    <h2>Contracts</h2>
+    <h2><fmt:message key="contract.manager.inscription"/></h2>
 </center>
     <form class="c2" action="controller" method="get">
         <input type="hidden" name="command" value="CONTRACT_SELECT"/>
         <select name="select">
-            <option value="allContracts">Select all contracts</option>
-            <option value="connectedContracts">Select connect contracts</option>
-            <option value="disconnectedContracts">select disconnect contracts</option>
+            <option value="allContracts"><fmt:message key="contract.manager.select.all"/></option>
+            <option value="connectedContracts"><fmt:message key="contract.manager.select.connected"/></option>
+            <option value="disconnectedContracts"><fmt:message key="contract.manager.select.disconnected"/></option>
             <br/>
         </select>
-        <input class="btn btn-primary" type="submit" value="select"/>
+        <input class="btn btn-primary" type="submit" value="<fmt:message key="contract.manager.select.select"/>"/>
     </form>
+    <center>
     <div class="c1">
         <form  style="display:inline;" action="controller" method="get">
             <input type="hidden" name="command" value="FIND_CONTRACTS_FROM_PARAMETER"/>
             <input type="hidden" name="field" value="contractId" />
-            <input type="text" name="parameter" placeholder="contract id" minlength="19" required pattern="[0-9]{19}"/>
-            <input class="btn btn-primary" type="submit" value="Select by contract id"/>
+            <input type="text" name="parameter" placeholder="<fmt:message key="contract.manager.select.contract.id"/>" minlength="19" required pattern="[0-9]{19}"/>
+            <input class="btn btn-primary" type="submit" value="<fmt:message key="contract.manager.select.select.contract.id"/>"/>
         </form>
 
             <form  style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="FIND_CONTRACTS_FROM_PARAMETER"/>
                 <input type="hidden" name="field" value="tariffPlanId" />
-                <input type="text" name="parameter" placeholder="tariff plan id" minlength="19" required pattern="[0-9]{19}"/>
-                <input class="btn btn-primary" type="submit" value="Select by tariff plan id"/>
+                <input type="text" name="parameter" placeholder="<fmt:message key="contract.manager.select.tariff.id"/>" minlength="19" required pattern="[0-9]{19}"/>
+                <input class="btn btn-primary" type="submit" value="<fmt:message key="contract.manager.select.select.tariff.id"/>"/>
             </form>
 
             <form  style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="FIND_CONTRACTS_FROM_PARAMETER"/>
                 <input type="hidden" name="field" value="userId" />
-                <input type="text" name="parameter" placeholder="user id" minlength="19" required pattern="[0-9]{19}"/>
-                <input class="btn btn-primary" type="submit" value="Select by user id"/>
+                <input type="text" name="parameter" placeholder="<fmt:message key="contract.manager.select.user.id"/>" minlength="19" required pattern="[0-9]{19}"/>
+                <input class="btn btn-primary" type="submit" value="<fmt:message key="contract.manager.select.select.user.id"/>"/>
             </form>
-
-
     </div>
+    </center>
 </div>
 <div id="sidebar">
 
     <table class="table">
         <tr>
-            <th>id contract</th>
-            <th>connection date</th>
-            <th>id user</th>
-            <th>id tariff plan</th>
-            <th>tariff plan name</th>
-            <th>tariff plan price</th>
-            <th>tariff plan speed</th>
-            <th>status</th>
+            <th><fmt:message key="contract.manager.table.id.contract"/></th>
+            <th><fmt:message key="contract.manager.table.date"/></th>
+            <th><fmt:message key="contract.manager.table.id.user"/></th>
+            <th><fmt:message key="contract.manager.table.id.tariff"/></th>
+            <th><fmt:message key="contract.manager.table.name"/></th>
+            <th><fmt:message key="contract.manager.table.price"/></th>
+            <th><fmt:message key="contract.manager.table.speed"/></th>
+            <th><fmt:message key="contract.manager.table.status"/></th>
         </tr>
         <c:forEach items="${list}" var="contract" varStatus="count">
             <tr>

@@ -6,6 +6,8 @@ import by.epam.task.model.entity.UserStatus;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class UserBuilder {
 
@@ -16,9 +18,9 @@ public class UserBuilder {
     private String password;
     private String name;
     private String surname;
-    private int phone;
+    private String phone;
     private BigDecimal balance;
-    private Timestamp registrationDate;
+    private LocalDate registrationDate;
     private UserStatus userStatus;
     private UserRole userRole;
 
@@ -43,7 +45,7 @@ public class UserBuilder {
         this.password = null;
         this.name = null;
         this.surname = null;
-        this.phone = 0;
+        this.phone = null;
         this.balance = null;
         this.registrationDate = null;
         this.userStatus = null;
@@ -99,11 +101,11 @@ public class UserBuilder {
         this.surname = surname;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -115,11 +117,11 @@ public class UserBuilder {
         this.balance = balance;
     }
 
-    public Timestamp getRegistrationDate() {
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Timestamp registrationDate) {
+    public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
     }
 

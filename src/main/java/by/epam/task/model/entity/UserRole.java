@@ -2,5 +2,6 @@ package by.epam.task.model.entity;
 
 public enum UserRole {
     USER,
-    ADMIN
+    ADMIN,
+    VISITOR
 }

@@ -6,7 +6,7 @@
 <fmt:setBundle scope="session" basename="language"/>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title><fmt:message key="tariff.plan.title"/></title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <style type="text/css">
@@ -14,11 +14,9 @@
             margin-top: 50px;
             width: 900px;
         }
-        tr
-        {
+        tr {
             height: 10px;
         }
-
         body { margin: 20px;
             background: whitesmoke}
         #sidebar, #content { position: absolute; }
@@ -58,10 +56,9 @@
                     </form>
                 </li>
             </ul>
-
             <form class="d-flex" action="controller" method="get">
                 <input type="hidden" name="command" value="EXIT_USER"/>
-                <input class="btn btn-outline-success" type="submit" value="exit"/>
+                <input class="btn btn-outline-success" type="submit" value="<fmt:message key="menu.user.button.exit"/>"/>
             </form>
         </div>
     </div>
@@ -71,9 +68,9 @@
     <table width="500px" class="table">
         <thead>
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Prise</th>
-            <th scope="col">Speed</th>
+            <th scope="col"><fmt:message key="tariff.plan.name"/></th>
+            <th scope="col"><fmt:message key="tariff.plan.price"/></th>
+            <th scope="col"><fmt:message key="tariff.plan.speed"/></th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -86,7 +83,7 @@
                 <td> <form  action="controller" method="get">
                     <input type="hidden" name="command" value="NEW_CONTRACT"/>
                     <input type="hidden" name="tariffPlanId" value="${tariffPlan.tariffPlanId}"/><br>
-                    <input type="submit" value="enter"/>
+                    <input type="submit" value="<fmt:message key="tariff.plan.connect"/>"/>
                 </form></td></tr>
         </c:forEach>
         </tbody>

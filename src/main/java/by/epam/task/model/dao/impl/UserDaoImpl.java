@@ -12,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -123,12 +125,11 @@ public class UserDaoImpl implements UserDao{
             statement.setString(4, parameters.get(PASSWORD));
             statement.setString(5, parameters.get(NAME));
             statement.setString(6, parameters.get(SURNAME));
-            statement.setInt(7, Integer.parseInt(parameters.get(PHONE)));
+            statement.setString(7, (parameters.get(PHONE)));
             statement.setBigDecimal(8, BigDecimal.valueOf(0.0));
             statement.setTimestamp(9, Timestamp.valueOf(parameters.get(REGISTRATION_DATE)));
             statement.setLong(10, 1);
             statement.setLong(11, 1);
-            System.out.println(result);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             logger.error("Error during adding user.", e);
@@ -250,13 +251,12 @@ public class UserDaoImpl implements UserDao{
                     userBuilder.setPassword(resultSet.getString(PASSWORD));
                     userBuilder.setName(resultSet.getString(NAME));
                     userBuilder.setSurname(resultSet.getString(SURNAME));
-                    userBuilder.setPhone(resultSet.getInt(PHONE));
+                    userBuilder.setPhone(resultSet.getString(PHONE));
                     userBuilder.setBalance(resultSet.getBigDecimal(BALANCE));
-                    userBuilder.setRegistrationDate(resultSet.getTimestamp(REGISTRATION_DATE));
+                    userBuilder.setRegistrationDate(LocalDate.parse(resultSet.getString(REGISTRATION_DATE)));
                     userBuilder.setUserStatus(UserStatus.valueOf(resultSet.getString(USER_STATUS)));
                     userBuilder.setUserRole(UserRole.valueOf(resultSet.getString(USER_ROLE)));
                     resultUser = Optional.of(userBuilder.build());
-                    System.out.println();
                     return true;
                 }
                 else return false;
@@ -280,9 +280,9 @@ public class UserDaoImpl implements UserDao{
                     userBuilder.setLogin(resultSet.getString(LOGIN));
                     userBuilder.setName(resultSet.getString(NAME));
                     userBuilder.setSurname(resultSet.getString(SURNAME));
-                    userBuilder.setPhone(resultSet.getInt(PHONE));
+                    userBuilder.setPhone(resultSet.getString(PHONE));
                     userBuilder.setBalance(resultSet.getBigDecimal(BALANCE));
-                    userBuilder.setRegistrationDate(resultSet.getTimestamp(REGISTRATION_DATE));
+                    userBuilder.setRegistrationDate(LocalDate.parse(resultSet.getString(REGISTRATION_DATE)));
                     userBuilder.setUserStatus(UserStatus.valueOf(resultSet.getString(USER_STATUS)));
                     userBuilder.setUserRole(UserRole.valueOf(resultSet.getString(USER_ROLE)));
                     resultUser = Optional.of(userBuilder.build());
@@ -308,9 +308,9 @@ public class UserDaoImpl implements UserDao{
                     userBuilder.setLogin(resultSet.getString(LOGIN));
                     userBuilder.setName(resultSet.getString(NAME));
                     userBuilder.setSurname(resultSet.getString(SURNAME));
-                    userBuilder.setPhone(resultSet.getInt(PHONE));
+                    userBuilder.setPhone(resultSet.getString(PHONE));
                     userBuilder.setBalance(resultSet.getBigDecimal(BALANCE));
-                    userBuilder.setRegistrationDate(resultSet.getTimestamp(REGISTRATION_DATE));
+                    userBuilder.setRegistrationDate(LocalDate.parse(resultSet.getString(REGISTRATION_DATE)));
                     userBuilder.setUserStatus(UserStatus.valueOf(resultSet.getString(USER_STATUS)));
                     userBuilder.setUserRole(UserRole.valueOf(resultSet.getString(USER_ROLE)));
                     resultUser = Optional.of(userBuilder.build());
@@ -412,9 +412,9 @@ public class UserDaoImpl implements UserDao{
             userBuilder.setPassword(resultSet.getString(PASSWORD));
             userBuilder.setName(resultSet.getString(NAME));
             userBuilder.setSurname(resultSet.getString(SURNAME));
-            userBuilder.setPhone(resultSet.getInt(PHONE));
+            userBuilder.setPhone(resultSet.getString(PHONE));
             userBuilder.setBalance(resultSet.getBigDecimal(BALANCE));
-            userBuilder.setRegistrationDate(resultSet.getTimestamp(REGISTRATION_DATE));
+            userBuilder.setRegistrationDate(LocalDate.parse(resultSet.getString(REGISTRATION_DATE)));
             userBuilder.setUserStatus(UserStatus.valueOf(resultSet.getString(USER_STATUS)));
             userBuilder.setUserRole(UserRole.valueOf(resultSet.getString(USER_ROLE)));
          userList.add(userBuilder.build());

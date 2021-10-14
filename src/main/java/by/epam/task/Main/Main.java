@@ -3,6 +3,7 @@ package by.epam.task.Main;
 public class Main {
 
    public static void main(String[] args) throws Exception {
+       System.out.println(1);
 
       // TariffPlanDao tariffPlanDao = new TariffPlanDao();
      //  List<TariffPlan> tariffPlanList = tariffPlanDao.findAll();
