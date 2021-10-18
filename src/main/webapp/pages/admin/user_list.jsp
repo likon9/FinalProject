@@ -28,15 +28,15 @@
         #content {
             height: 500px;
             top: 100px; /* Расстояние от верхнего края */
-            left: 270px; /* Расстояние от левого края */
-            right: 270px;
+            left: 170px; /* Расстояние от левого края */
+            right: 170px;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
         }
         #sidebar{
-            top: 470px; /* Расстояние от верхнего края */
-            left: 270px; /* Расстояние от левого края */
-            right: 270px;
+            top: 480px; /* Расстояние от верхнего края */
+            left: 170px; /* Расстояние от левого края */
+            right: 170px;
             bottom: 50px;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
@@ -101,40 +101,61 @@
         <div class="c1">
             <form  style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="SELECT_BY_ID"/>
-                <input type="text" name="userId" placeholder="<fmt:message key="user.management.id"/>" minlength="19" required pattern="[0-9]{19}"/>
+                <input type="text" name="userId" placeholder="<fmt:message key="user.management.id"/>"
+                       required pattern="[0-9]{1,19}"/>
                 <input class="btn btn-primary" type="submit" value="<fmt:message key="user.management.select.id"/>"/>
             </form>
             <form  style="display:inline;"  action="controller" method="get">
                 <input type="hidden" name="command" value="SELECT_BY_EMAIL"/>
-                <input type="email" name="email" placeholder="<fmt:message key="user.management.email"/>" minlength="6" required pattern="[0-9A-Za-z]{6-24}"/>
+                <input type="email" name="email" placeholder="<fmt:message key="user.management.email"/>" required/>
                 <input class="btn btn-primary" type="submit" value="<fmt:message key="user.management.select.email"/>"/>
             </form>
                 <form  style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="SELECT_BY_LOGIN"/>
-                <input type="text" name="login" placeholder="<fmt:message key="user.management.login"/>" minlength="6" required pattern="[0-9A-Za-z]{6-24}"/>
+                <input type="text" name="login" placeholder="<fmt:message key="user.management.login"/>"
+                       minlength="6" required pattern="[a-zA-Z0-9]{6,24}"/>
                 <input class="btn btn-primary" type="submit" value="<fmt:message key="user.management.select.login"/>"/>
             </form>
         </div>
         <div class="c1">
             <form style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="SELECT_BY_NAME"/>
-                <input type="text" name="name" placeholder="<fmt:message key="user.management.name"/>" minlength="6" required pattern="[0-9A-Za-z]{6-24}" />
+                <input type="text" name="name" placeholder="<fmt:message key="user.management.name"/>"
+                       minlength="3" required pattern="[a-zA-Z]*|[ЁёА-я]*{3,24}"/>
             <input class="btn btn-primary" type="submit" value="<fmt:message key="user.management.select.name"/>"/>
             </form>
             <form style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="SELECT_BY_SURNAME"/>
-                <input type="text" name="surname" placeholder="<fmt:message key="user.management.surname"/>" minlength="6" required pattern="[0-9A-Za-z]{6-24}" />
+                <input type="text" name="surname" placeholder="<fmt:message key="user.management.surname"/>"
+                       minlength="3" required pattern="[a-zA-Z]*|[ЁёА-я]*{3,24}"/>
                 <input class="btn btn-primary" type="submit" value="<fmt:message key="user.management.select.surname"/>"/>
             </form>
             <form style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="SELECT_BY_PHONE"/>
-                <input type="text" name="phone" placeholder="<fmt:message key="user.management.phone"/>" minlength="9" required pattern="[0-9]{9}" />
+                <input type="text" name="phone" placeholder="<fmt:message key="user.management.phone"/>"
+                       maxlength="9"  required pattern="[0-9]{9}"/>
                 <input class="btn btn-primary" type="submit" value="<fmt:message key="user.management.select.phone"/>"/>
             </form>
         </div>
 </center>
         <br>
-        <center><h3>${answer}</h3></center><br>
+        <center>
+            <h3>
+                <c:if test="${resBlockUser}">
+                  user:  ${userId} <fmt:message key="message.admin.block.user"/>
+                </c:if>
+                <c:if test="${resNewDiscountTrue}">
+                    user:  ${userId} <fmt:message key="message.admin.new.discount"/>
+                </c:if>
+                <c:if test="${resNewDiscounFalse}">
+                    user:  ${userId} <fmt:message key="message.admin.new.discount.false"/>
+                </c:if>
+                <c:if test="${resWriteTrue}">
+                    user: ${userId} <fmt:message key="message.admin.write.of.account"/>
+                </c:if>
+            </h3>
+        </center>
+        <br>
     </div>
         <div id="sidebar">
             <table class="table">
@@ -148,6 +169,8 @@
                     <th><fmt:message key="user.management.table.balance"/></th>
                     <th><fmt:message key="user.management.table.date"/></th>
                     <th><fmt:message key="user.management.table.status"/></th>
+                    <th><fmt:message key="user.management.table.discount"/></th>
+                    <th></th>
                     <th></th>
                 </tr>
             <c:forEach items="${list}" var="user" varStatus="count">
@@ -160,11 +183,32 @@
                     <td>${user.balance}</td>
                     <td>${user.registrationDate}</td>
                     <td>${user.userStatus}</td>
+                    <td>${100*user.discount}%</td>
+                    <td>
+                        <form  action="controller" method="get">
+                            <input type="hidden" name="command" value="NEW_USER_DISCOUNT"/>
+                            <select name="select">
+                                <option value="0.1">10%</option>
+                                <option value="0.2">20%</option>
+                                <option value="0.3">30%</option>
+                                <br/>
+                            </select>
+                            <input type="hidden" name="userId" placeholder="user id" value="${user.userId}" />
+                            <input class="btn btn-light" type="submit" value="<fmt:message key="user.management.table.discount.update"/>"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form  action="controller" method="get">
+                            <input type="hidden" name="command" value="WRITE_OF_ACCOUNT"/>
+                            <input type="hidden" name="userId" placeholder="user id" value="${user.userId}" />
+                            <input class="btn btn-light" type="submit" value="<fmt:message key="user.management.table.write.of"/>"/>
+                        </form>
+                    </td>
                     <td>
                         <form  action="controller" method="get">
                             <input type="hidden" name="command" value="BLOCK_USER"/>
-                            <input type="hidden" name="user_id" placeholder="user id" minlength="19" value="${user.userId}" />
-                            <input type="submit" value="<fmt:message key="user.management.block.user"/>"/>
+                            <input type="hidden" name="userId" placeholder="user id" minlength="19" value="${user.userId}" />
+                            <input class="btn btn-light" type="submit" value="<fmt:message key="user.management.block.user"/>"/>
                         </form>
                     </td>
                 </tr>

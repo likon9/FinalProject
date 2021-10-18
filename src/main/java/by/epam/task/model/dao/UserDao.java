@@ -29,6 +29,8 @@ public interface UserDao {
 
     boolean updateBalance(Map<String, String> parameters, Long userId) throws DaoException;
 
+    boolean updateDiscount(Map<String, String> parameters, Long userId) throws DaoException;
+
     boolean updateStatus(Map<String, String> parameters, Long userId) throws DaoException;
 
     boolean findUser(String login, String password) throws DaoException;

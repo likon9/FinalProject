@@ -7,7 +7,6 @@ import by.epam.task.model.dao.ColumnName;
 import by.epam.task.model.entity.User;
 import by.epam.task.model.entity.UserRole;
 import by.epam.task.model.service.impl.ContractServiceImpl;
-import by.epam.task.util.IdGenerate;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -29,14 +28,10 @@ public class ConnectTariffCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.ADMIN))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.ADMIN)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         ContractServiceImpl contractService = new ContractServiceImpl();
         Map<String, String> parameters = new HashMap<>();
-        parameters.put(ColumnName.CONTRACT_ID, String.valueOf(IdGenerate.generateId()));
         parameters.put(ColumnName.CONNECTION_DATE, String.valueOf(Timestamp.from(Instant.now())));
         parameters.put(ColumnName.CONTRACT_USER_ID, String.valueOf(user.getUserId()));
         parameters.put(ColumnName.CONTRACT_TARIFF_PLAN_ID, (request.getParameter(ParameterName.TARIFF_PLAN_ID)));
@@ -47,12 +42,14 @@ public class ConnectTariffCommand implements Command {
             request.setAttribute(ParameterName.NAME, user.getName());
             request.setAttribute(ParameterName.SURNAME, user.getSurname());
             request.setAttribute(ParameterName.PHONE, user.getPhone());
+            request.setAttribute(ParameterName.BALANCE, user.getBalance());
+            request.setAttribute(ParameterName.DISCOUNT, user.getDiscount());
             session.setAttribute(SessionAttribute.SESSION_USER,user);
-            request.setAttribute(ParameterName.MESSAGE,"Contract successfully concluded");
+            request.setAttribute(ParameterName.RES_CONNECT_TARIFF, true);
             logger.info("The contract was successfully connected.");
             router = new Router(HOME);
         } catch (ServiceException e) {
-            logger.error("The contract wasn't successfully connected.");
+            logger.error("The contract wasn't successfully connected." + e);
             router = new Router(ERROR_500);
         }
         return router;

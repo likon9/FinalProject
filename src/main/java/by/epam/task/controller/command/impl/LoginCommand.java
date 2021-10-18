@@ -6,7 +6,7 @@ import by.epam.task.model.entity.User;
 import by.epam.task.model.service.impl.UserServiceImpl;
 import by.epam.task.util.CodeGenerator;
 import by.epam.task.util.MailSender;
-import com.google.protobuf.ServiceException;
+import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -38,8 +38,7 @@ public class LoginCommand implements Command {
                if(String.valueOf(sessionUser.getUserRole()).equals(String.valueOf(ADMIN))) {
                    logger.info("Successful admin authorization..");
                    router = new Router(HOME_ADMIN);
-               }
-               else if (String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(ACTIVE))) {
+               } else if (String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(ACTIVE))) {
                    String email = sessionUser.getEmail();
                    CodeGenerator gen = new CodeGenerator(ThreadLocalRandom.current());
                    String code = gen.nextString();
@@ -47,23 +46,20 @@ public class LoginCommand implements Command {
                    session.setAttribute(SessionAttribute.SESSION_CODE, code);
                    logger.info("Successful user authorization..");
                    router = new Router(CODE);
-               }
-               else if(String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(BLOCKED))) {
-                   request.setAttribute(ParameterName.FAIL, "Failed to sign in. Your account has been blocked.");
+               } else if(String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(BLOCKED))) {
+                   request.setAttribute(ParameterName.RES_USER_BLOCK, true);
                    logger.info("This user is blocked.");
                    router = new Router(LOGIN);
-               }
-               else if(String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(DELETED))) {
+               } else if(String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(DELETED))) {
                    System.out.println(sessionUser.getLogin());
                    request.setAttribute(ParameterName.LOGIN, sessionUser.getLogin());
                    logger.info("This user is deleted.");
                    router = new Router(USER_RECOVERY);
                }
                session.setAttribute(SessionAttribute.SESSION_USER, sessionUser);
-           }
-           else {
+           } else {
                logger.error("User with this login and password was not found.");
-               request.setAttribute(ParameterName.FAIL, "Failed to sign in. <br> Please make sure that you've entered your login and password correctly.");
+               request.setAttribute(ParameterName.RES_USER_NOT_FOUND, true);
                router = new Router(LOGIN);
            }
         } catch (ServiceException e) {

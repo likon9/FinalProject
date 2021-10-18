@@ -1,7 +1,7 @@
 package by.epam.task.model.service;
 
+import by.epam.task.exception.ServiceException;
 import by.epam.task.model.entity.TariffPlan;
-import com.google.protobuf.ServiceException;
 
 import java.math.BigDecimal;
 import java.util.List;

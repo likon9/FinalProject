@@ -6,7 +6,7 @@ import by.epam.task.model.entity.User;
 import by.epam.task.model.entity.UserRole;
 import by.epam.task.model.entity.UserStatus;
 import by.epam.task.model.service.impl.UserServiceImpl;
-import com.google.protobuf.ServiceException;
+import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -26,10 +26,7 @@ public class UserSelectCommand implements Command {
         Router router = null;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.USER))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         UserServiceImpl userService = new UserServiceImpl();
         List<User> userList = null;
@@ -41,7 +38,7 @@ public class UserSelectCommand implements Command {
                     logger.info("Successfully in viewing all users");
                     router = new Router(USER_LIST);
                 } catch (ServiceException e) {
-                    logger.error("Error in viewing all users");
+                    logger.error("Error in viewing all users" + e);
                     router = new Router(ERROR_500);
                 }
                 break;
@@ -52,7 +49,7 @@ public class UserSelectCommand implements Command {
                     logger.info("Successfully in viewing active users");
                     router = new Router(USER_LIST);
                 } catch (ServiceException e) {
-                    logger.info("Error in viewing active users");
+                    logger.error("Error in viewing active users" + e);
                     router = new Router(ERROR_500);
                 }
                 break;
@@ -63,7 +60,7 @@ public class UserSelectCommand implements Command {
                     logger.info("Successfully in viewing block users");
                     router = new Router(USER_LIST);
                 } catch (ServiceException e) {
-                    logger.error("Error in viewing block users");
+                    logger.error("Error in viewing block users" + e);
                     router = new Router(ERROR_500);
                 }
                 break;
@@ -74,7 +71,7 @@ public class UserSelectCommand implements Command {
                     logger.info("Successfully in viewing deleted users");
                     router = new Router(USER_LIST);
                 } catch (ServiceException e) {
-                    logger.error("Error in viewing deleted users");
+                    logger.error("Error in viewing deleted users" + e);
                     router = new Router(ERROR_500);
                 }
                 break;

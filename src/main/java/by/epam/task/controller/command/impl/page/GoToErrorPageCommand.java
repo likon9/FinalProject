@@ -12,7 +12,6 @@ import org.apache.logging.log4j.Logger;
 public class GoToErrorPageCommand implements Command {
 	private static final Logger logger = LogManager.getLogger();
 
-
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		logger.log(Level.INFO, "method execute()");

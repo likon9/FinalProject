@@ -43,5 +43,7 @@ public enum CommandType {
     GO_TO_TOP_UP_BALANCE,
     USER_RECOVERY,
     TO_ERROR_PAGE,
+    NEW_USER_DISCOUNT,
+    WRITE_OF_ACCOUNT,
     ADD_TARIFF_PLAN;
 }

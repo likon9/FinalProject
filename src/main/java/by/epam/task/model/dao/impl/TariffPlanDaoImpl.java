@@ -37,8 +37,8 @@ public class TariffPlanDaoImpl implements TariffPlanDao {
 
     //CREATE REGEX
     private static final String CREATE_TARIFF_PLAN = """
-            INSERT INTO tariff_plans (tariff_plan_id, name_tariff_plan, price, internet_connection_speed)
-            VALUES (?, ?, ?, ?)""";
+            INSERT INTO tariff_plans (name_tariff_plan, price, internet_connection_speed)
+            VALUES (?, ?, ?)""";
     //FIND REGEX
     private static final String FIND_BY_ID_TARIFF_PLAN = """
             SELECT tariff_plan_id, name_tariff_plan, price,   internet_connection_speed
@@ -64,7 +64,23 @@ public class TariffPlanDaoImpl implements TariffPlanDao {
     private static final String UPDATE_PRICE = "UPDATE tariff_plans SET price=? WHERE tariff_plan_id=?";
     private static final String UPDATE_INTERNET_CONNECTION_SPEED = "UPDATE tariff_plans SET internet_connection_speed=? WHERE tariff_plan_id=?";
 
-    public boolean updateNameTariffPlan(Map<String, String> parameters, Long tariffPlanId) throws DaoException { boolean result = false;
+    public boolean addTariffPlan(Map<String, String> parameters) throws DaoException {
+        boolean result = false;
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(CREATE_TARIFF_PLAN)) {
+            statement.setString(1, parameters.get(NAME_TARIFF_PLAN));
+            statement.setBigDecimal(2, BigDecimal.valueOf(Double.parseDouble(parameters.get(PRICE))));
+            statement.setInt(3, Integer.parseInt(parameters.get(INTERNET_CONNECTION_SPEED)));
+            result = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            logger.error("Error during adding tariff plan.", e);
+            throw new DaoException("Error during adding tariff plan.", e);
+        }
+        return result;
+    }
+
+    public boolean updateNameTariffPlan(Map<String, String> parameters, Long tariffPlanId) throws DaoException {
+        boolean result = false;
         try(Connection connection = ConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(UPDATE_NAME_TARIFF_PLAN)){
 
@@ -103,23 +119,6 @@ public class TariffPlanDaoImpl implements TariffPlanDao {
         } catch (SQLException e){
             logger.error("Error during updating internet speed of tariff plan with id = " + tariffPlanId, e);
             throw new DaoException("Error during updating internet speed of tariff plan with id = " + tariffPlanId, e);
-        }
-        return result;
-    }
-
-    public boolean addTariffPlan(Map<String, String> parameters) throws DaoException {
-        boolean result = false;
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(CREATE_TARIFF_PLAN)) {
-
-            statement.setLong(1, Long.parseLong(parameters.get(TARIFF_PLAN_ID)));
-            statement.setString(2, parameters.get(NAME_TARIFF_PLAN));
-            statement.setBigDecimal(3, BigDecimal.valueOf(Double.parseDouble(parameters.get(PRICE))));
-            statement.setInt(4, Integer.parseInt(parameters.get(INTERNET_CONNECTION_SPEED)));
-            result = statement.executeUpdate() > 0;
-        } catch (SQLException e) {
-            logger.error("Error during adding tariff plan.", e);
-            throw new DaoException("Error during adding tariff plan.", e);
         }
         return result;
     }

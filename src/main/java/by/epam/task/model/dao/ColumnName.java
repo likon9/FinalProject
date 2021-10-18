@@ -13,6 +13,7 @@ public final class ColumnName {
     public static final String REGISTRATION_DATE = "registration_date";
     public static final String USER_STATUS = "status";
     public static final String USER_ROLE = "role";
+    public static final String DISCOUNT = "discount";
 
     public static final String USER_ROLE_ID = "user_role_id";
     public static final String ROLE = "role";
@@ -30,13 +31,6 @@ public final class ColumnName {
     public static final String CONTRACT_USER_ID = "users_user_id";
     public static final String CONTRACT_TARIFF_PLAN_ID = "tariff_plans_tariff_plan_id";
     public static final String CONTRACT_STATUS = "contract_status";
-
-    public static final String REQUEST_ID = "request_id";
-    public static final String REQUEST_MESSAGE = "request_message";
-    public static final String REQUEST_ANSWER = "request_answer";
-
-    public static final String REQUEST_USER_ID = "users_user_id";
-    public static final String REQUEST_REQUEST_ID = "requests_request_id";
 
 
 

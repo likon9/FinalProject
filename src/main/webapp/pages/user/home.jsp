@@ -85,12 +85,13 @@
             <fmt:message key="home.name"/><br>
             <fmt:message key="home.surname"/><br>
             <fmt:message key="home.phone"/><br>
-            <fmt:message key="home.balance"/>
+            <fmt:message key="home.balance"/><br>
+            <fmt:message key="home.discount"/><br>
         </p>
-        <p >${login}<br> ${email}<br>${name}<br>${surname}<br>+375-${phone}<br>${balance}BYN
+        <p >${login}<br> ${email}<br>${name}<br>${surname}<br>+375 ${phone}<br>${balance}BYN<br>${100*discount}%
             <form  action="controller" method="get">
                 <input type="hidden" name="command" value="GO_TO_TOP_UP_BALANCE"/>
-                <input class="btn btn-outline-success" type="submit" value=" <fmt:message key="home.balance.up"/>"/>
+                <input class="btn btn-outline-success" type="submit" value="<fmt:message key="home.balance.up"/>"/>
             </form>
             </p>
         </text>
@@ -98,10 +99,23 @@
     <br>
     <br>
     <br>
-    <center class="fs-5">${message}</center>
+    <center class="fs-5">
+        <c:if test="${resUpdateUserTrue}">
+            <fmt:message key="message.user.update"/>
+        </c:if>
+        <c:if test="${resUpdateUserFalse}">
+            <fmt:message key="message.user.update.fail"/>
+        </c:if>
+        <c:if test="${resConnectTariff}">
+            <fmt:message key="message.user.connect.tariff"/>
+        </c:if>
+        <c:if test="${resDisconnectTariff}">
+            <fmt:message key="message.user.disconnect.tariff"/>
+        </c:if>
+        <c:if test="${resTopUpBalance}">
+            <fmt:message key="message.user.balance.top.up"/>
+        </c:if>
+    </center>
 </div>
-
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>
 </html>

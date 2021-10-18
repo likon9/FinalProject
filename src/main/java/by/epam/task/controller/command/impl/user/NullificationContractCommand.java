@@ -26,27 +26,26 @@ public class NullificationContractCommand implements Command {
         Router router = null;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.ADMIN))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.ADMIN)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         Map<String, String> parameters = new HashMap<>();
         parameters.put(ColumnName.CONTRACT_STATUS, String.valueOf(2));
         ContractServiceImpl contractService = new ContractServiceImpl();
         try {
             contractService.updateStatusContract(parameters, Long.valueOf(request.getParameter(ParameterName.CONTRACT_ID)));
-            request.setAttribute(ParameterName.MESSAGE,"Contract successfully disconnected");
             request.setAttribute(ParameterName.LOGIN, user.getLogin());
             request.setAttribute(ParameterName.EMAIL, user.getEmail());
             request.setAttribute(ParameterName.NAME, user.getName());
             request.setAttribute(ParameterName.SURNAME, user.getSurname());
             request.setAttribute(ParameterName.PHONE, user.getPhone());
+            request.setAttribute(ParameterName.BALANCE, user.getBalance());
+            request.setAttribute(ParameterName.DISCOUNT, user.getDiscount());
+            request.setAttribute(ParameterName.RES_DISCONNECT_TARIFF, true);
             session.setAttribute(SessionAttribute.SESSION_USER,user);
             logger.info("Contract disconnected successfully");
             router = new Router(HOME);
         } catch (ServiceException e) {
-            logger.error("Contract disconnected error");
+            logger.error("Contract disconnected error" + e);
             router = new Router(ERROR_500);
         }
 

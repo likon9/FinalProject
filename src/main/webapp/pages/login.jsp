@@ -33,15 +33,33 @@
         <input type="hidden" name="command" value="LOGIN"/>
         <center>
         <input class="input_text" type="text" name="login"
-               placeholder="<fmt:message key="login.login"/>" minlength="6" required pattern="[0-9A-Za-z]{6,24}" /><br>
+               placeholder="<fmt:message key="login.login"/>" minlength="6" maxlength="64" required pattern="[a-zA-Z0-9]{6,24}" /><br>
         <input class="input_text" type="password" name="password"
-               placeholder="<fmt:message key="login.password"/>" minlength="6" required pattern="[0-9A-Za-z]{6,24}"/><br>
+               placeholder="<fmt:message key="login.password"/>" minlength="6" maxlength="64" required pattern="[0-9A-Za-z0-9]{6,24}"/><br>
     </center>
         <input class="button" type="submit" value="<fmt:message key="login.singIn"/>"/>
     </form>
 
-    <h2>${res}</h2>
-    <h3>${fail}</h3>
+    <h2>
+        <c:if test="${res}">
+            <fmt:message key="message.login.reg"/>
+        </c:if>
+        <c:if test="${resUserDelete}">
+            <fmt:message key="message.user.delete"/>
+        </c:if>
+        <c:if test="${resRecoveryUser}">
+            <fmt:message key="message.user.recovery"/>
+        </c:if>
+    </h2>
+    <h3>
+        <c:if test="${resUserBlock}">
+            <fmt:message key="message.login.block.user"/>
+        </c:if>
+        <c:if test="${resUserNotFound}">
+            <fmt:message key="message.login.fail"/>
+        </c:if>
+
+    </h3>
     <form action="controller" method="get">
         <input type="hidden" name="command" value="GO_TO_REGISTRATION"/>
         <h2><fmt:message key="login.firstTime"/>

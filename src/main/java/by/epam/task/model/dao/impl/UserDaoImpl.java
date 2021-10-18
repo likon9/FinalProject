@@ -38,69 +38,69 @@ public class UserDaoImpl implements UserDao{
     }
     //CREATE REGEX
     private static final String CREATE_USER = """
-            INSERT INTO users (user_id, email, login, password, name, surname,
-            phone, balance, registration_date, status_id, role_id)
+            INSERT INTO users (email, login, password, name, surname,
+            phone, balance, registration_date, discount, status_id, role_id)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
     //FIND REGEX
     private static final String FIND_USER = """
             SELECT user_id, email, login, password, name, surname, 
-            phone, balance, registration_date, user_statuses.status, user_roles.role
+            phone, balance, registration_date, discount, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id   = user_statuses.user_status_id
             JOIN user_roles ON users.role_id = user_roles.user_role_id
             WHERE login=? and password=?""";
     private static final String FIND_BY_ID = """
             SELECT user_id, email, login, password, name, surname, 
-            phone, balance, registration_date, user_statuses.status, user_roles.role
+            phone, balance, registration_date, discount, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id   = user_statuses.user_status_id
             JOIN user_roles ON users.role_id = user_roles.user_role_id
             WHERE user_id=?""";
     private static final String FIND_BY_EMAIL = """
             SELECT user_id, email, login, password, name, surname, 
-            phone, balance, registration_date, user_statuses.status, user_roles.role
+            phone, balance, registration_date, discount, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id   = user_statuses.user_status_id
             JOIN user_roles ON users.role_id = user_roles.user_role_id
             WHERE email=?""";
     private static final String FIND_BY_LOGIN = """
             SELECT user_id, email, login, password, name, surname, 
-            phone, balance, registration_date, user_statuses.status, user_roles.role
+            phone, balance, registration_date, discount, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id   = user_statuses.user_status_id
             JOIN user_roles ON users.role_id = user_roles.user_role_id
             WHERE login=?""";
     private static final String FIND_BY_NAME = """
             SELECT user_id, email, login, password, name, surname, 
-            phone, balance, registration_date, user_statuses.status, user_roles.role
+            phone, balance, registration_date, discount, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id   = user_statuses.user_status_id
             JOIN user_roles ON users.role_id = user_roles.user_role_id
             WHERE name=?""";
     private static final String FIND_BY_SURNAME = """
             SELECT user_id, email, login, password, name, surname, 
-            phone, balance, registration_date, user_statuses.status, user_roles.role
+            phone, balance, registration_date, discount, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id   = user_statuses.user_status_id
             JOIN user_roles ON users.role_id = user_roles.user_role_id
             WHERE surname=?""";
     private static final String FIND_BY_PHONE= """
             SELECT user_id, email, login, password, name, surname, 
-            phone, balance, registration_date, user_statuses.status, user_roles.role
+            phone, balance, registration_date, discount, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id   = user_statuses.user_status_id
             JOIN user_roles ON users.role_id = user_roles.user_role_id
             WHERE phone=?""";
     private static final String FIND_BY_STATUS= """
             SELECT user_id, email, login, password, name, surname, 
-            phone, balance, registration_date, user_statuses.status, user_roles.role
+            phone, balance, registration_date, discount, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id   = user_statuses.user_status_id
             JOIN user_roles ON users.role_id = user_roles.user_role_id
             WHERE user_statuses.status=? AND user_roles.role=? """;
     private static final String FIND_ALL_USERS = """
             SELECT user_id, email, login, password, name, surname, 
-            phone, balance, registration_date, user_statuses.status, user_roles.role
+            phone, balance, registration_date, discount, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id   = user_statuses.user_status_id
             JOIN user_roles ON users.role_id = user_roles.user_role_id
@@ -108,26 +108,26 @@ public class UserDaoImpl implements UserDao{
 
     //UPDATE REGEX
     private static final String UPDATE_EMAIL = "UPDATE users SET email=? WHERE user_id=?";
-   // private static final String UPDATE_PASSWORD = "UPDATE users SET password=? WHERE user_id=?";
     private static final String UPDATE_NAME = "UPDATE users SET name=? WHERE user_id=?";
     private static final String UPDATE_SURNAME = "UPDATE users SET surname=? WHERE user_id=?";
     private static final String UPDATE_PHONE = "UPDATE users SET phone=? WHERE user_id=?";
     private static final String UPDATE_BALANCE = "UPDATE users SET balance=? WHERE user_id=?";
+    private static final String UPDATE_DISCOUNT = "UPDATE users SET discount=? WHERE user_id=?";
     private static final String UPDATE_STATUS = "UPDATE users SET status_id=? WHERE user_id=?";
 
     public boolean addUser(Map<String, String> parameters) throws DaoException {
         boolean result = false;
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_USER)) {
-            statement.setLong(1, Long.parseLong(parameters.get(USER_ID)));
-            statement.setString(2, parameters.get(EMAIL));
-            statement.setString(3, parameters.get(LOGIN));
-            statement.setString(4, parameters.get(PASSWORD));
-            statement.setString(5, parameters.get(NAME));
-            statement.setString(6, parameters.get(SURNAME));
-            statement.setString(7, (parameters.get(PHONE)));
-            statement.setBigDecimal(8, BigDecimal.valueOf(0.0));
-            statement.setTimestamp(9, Timestamp.valueOf(parameters.get(REGISTRATION_DATE)));
+            statement.setString(1, parameters.get(EMAIL));
+            statement.setString(2, parameters.get(LOGIN));
+            statement.setString(3, parameters.get(PASSWORD));
+            statement.setString(4, parameters.get(NAME));
+            statement.setString(5, parameters.get(SURNAME));
+            statement.setString(6, (parameters.get(PHONE)));
+            statement.setBigDecimal(7, BigDecimal.valueOf(0.0));
+            statement.setTimestamp(8, Timestamp.valueOf(parameters.get(REGISTRATION_DATE)));
+            statement.setDouble(9, 0);
             statement.setLong(10, 1);
             statement.setLong(11, 1);
             result = statement.executeUpdate() > 0;
@@ -151,20 +151,6 @@ public class UserDaoImpl implements UserDao{
         }
         return result;
     }
-
-  /*  public boolean updatePassword(Map<String, String> parameters, Long userId) throws DaoException {
-        boolean result = false;
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(UPDATE_PASSWORD)){
-            statement.setString(1, parameters.get(PASSWORD));
-            statement.setString(2, password);
-            result = statement.executeUpdate()>0;
-        } catch (SQLException e){
-            logger.error("Error during updating password of user with id = " + password, e);
-            throw new DaoException("Error during updating password of user with id = " + password, e);
-        }
-        return result;
-    }*/
 
     public boolean updateName(Map<String, String> parameters, Long userId) throws DaoException {
         boolean result = false;
@@ -222,6 +208,21 @@ public class UserDaoImpl implements UserDao{
         return result;
     }
 
+    @Override
+    public boolean updateDiscount(Map<String, String> parameters, Long userId) throws DaoException {
+        boolean result = false;
+        try(Connection connection = ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(UPDATE_DISCOUNT)){
+            statement.setDouble(1, Double.parseDouble(parameters.get(DISCOUNT)));
+            statement.setLong(2, userId);
+            result = statement.executeUpdate()>0;
+        } catch (SQLException e){
+            logger.error("Error during updating discount of user with id = " + userId, e);
+            throw new DaoException("Error during updating discount of user with id = " + userId, e);
+        }
+        return result;
+    }
+
     public boolean updateStatus(Map<String, String> parameters, Long userId) throws DaoException {
         boolean result = false;
         try(Connection connection = ConnectionPool.getInstance().getConnection();
@@ -254,6 +255,7 @@ public class UserDaoImpl implements UserDao{
                     userBuilder.setPhone(resultSet.getString(PHONE));
                     userBuilder.setBalance(resultSet.getBigDecimal(BALANCE));
                     userBuilder.setRegistrationDate(LocalDate.parse(resultSet.getString(REGISTRATION_DATE)));
+                    userBuilder.setDiscount(resultSet.getBigDecimal(DISCOUNT));
                     userBuilder.setUserStatus(UserStatus.valueOf(resultSet.getString(USER_STATUS)));
                     userBuilder.setUserRole(UserRole.valueOf(resultSet.getString(USER_ROLE)));
                     resultUser = Optional.of(userBuilder.build());
@@ -283,6 +285,7 @@ public class UserDaoImpl implements UserDao{
                     userBuilder.setPhone(resultSet.getString(PHONE));
                     userBuilder.setBalance(resultSet.getBigDecimal(BALANCE));
                     userBuilder.setRegistrationDate(LocalDate.parse(resultSet.getString(REGISTRATION_DATE)));
+                    userBuilder.setDiscount(resultSet.getBigDecimal(DISCOUNT));
                     userBuilder.setUserStatus(UserStatus.valueOf(resultSet.getString(USER_STATUS)));
                     userBuilder.setUserRole(UserRole.valueOf(resultSet.getString(USER_ROLE)));
                     resultUser = Optional.of(userBuilder.build());
@@ -311,6 +314,7 @@ public class UserDaoImpl implements UserDao{
                     userBuilder.setPhone(resultSet.getString(PHONE));
                     userBuilder.setBalance(resultSet.getBigDecimal(BALANCE));
                     userBuilder.setRegistrationDate(LocalDate.parse(resultSet.getString(REGISTRATION_DATE)));
+                    userBuilder.setDiscount(resultSet.getBigDecimal(DISCOUNT));
                     userBuilder.setUserStatus(UserStatus.valueOf(resultSet.getString(USER_STATUS)));
                     userBuilder.setUserRole(UserRole.valueOf(resultSet.getString(USER_ROLE)));
                     resultUser = Optional.of(userBuilder.build());
@@ -415,6 +419,7 @@ public class UserDaoImpl implements UserDao{
             userBuilder.setPhone(resultSet.getString(PHONE));
             userBuilder.setBalance(resultSet.getBigDecimal(BALANCE));
             userBuilder.setRegistrationDate(LocalDate.parse(resultSet.getString(REGISTRATION_DATE)));
+            userBuilder.setDiscount(resultSet.getBigDecimal(DISCOUNT));
             userBuilder.setUserStatus(UserStatus.valueOf(resultSet.getString(USER_STATUS)));
             userBuilder.setUserRole(UserRole.valueOf(resultSet.getString(USER_ROLE)));
          userList.add(userBuilder.build());

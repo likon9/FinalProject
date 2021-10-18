@@ -94,12 +94,12 @@
             </form>
             <form  style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="SELECT_BY_PRICE"/>
-                <input type="text" name="price" required pattern="[0-9]{1-10}"/>
+                <input type="text" name="price" required pattern="[0-9]{1,5}"/>
                 <input  class="btn btn-primary" type="submit" value="<fmt:message key="tariff.manager.select.price"/>"/>
             </form>
             <form  style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="SELECT_BY_INTERNET_CONNECTION_SPEED"/>
-                <input type="text" name="internetConnectionSpeed" required pattern="[0-9]{1-10}"/>
+                <input type="text" name="internetConnectionSpeed" required pattern="[0-9]{1,4}"/>
                 <input  class="btn btn-primary" type="submit" value="<fmt:message key="tariff.manager.select.speed"/>"/>
             </form>
         </div>
@@ -107,18 +107,23 @@
             <form class="row g-1" action="controller" method="get">
                 <div class="col-auto">
                     <input type="hidden" name="command" value="UPDATE_TARIFF_PLAN"/>
-                    <input type="text" name="tariffPlanId"  required pattern="[0-9]{19}" placeholder="<fmt:message key="tariff.manager.select.id"/>" />
+                    <input type="text" name="tariffPlanId"   required pattern="[0-9]{1,19}" placeholder="<fmt:message key="tariff.manager.select.id"/>" />
                     <select name="select">
                         <option value="nameTariffPlan"><fmt:message key="tariff.manager.update.name"/></option>
                         <option value="price"><fmt:message key="tariff.manager.update.price"/></option>
                         <option value="internetConnectionSpeed"><fmt:message key="tariff.manager.update.speed"/></option>
                     </select>
-                    <input type="text" name="attribute"  minlength="2" required pattern="[0-9A-Za-z]{2-50}"/>
+                    <input type="text" name="attribute"  minlength="2" required pattern="[0-9A-Za-z]{3-24}"/>
                     <input type="submit" class="btn btn-success"  value="<fmt:message key="tariff.manager.update"/>"/>
                 </div>
             </form>
         </div>
-    ${res}
+        <c:if test="${resTariffUpdateTrue}">
+            <fmt:message key="message.admin.tariff.update"/>
+        </c:if>
+        <c:if test="${resTariffUpdateFalse}">
+            <fmt:message key="message.admin.tariff.update.false"/>
+        </c:if>
     </center>
 </div>
 

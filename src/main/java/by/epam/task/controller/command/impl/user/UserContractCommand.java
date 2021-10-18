@@ -27,10 +27,7 @@ public class UserContractCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.ADMIN))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.ADMIN)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         ContractServiceImpl contractService = new ContractServiceImpl();
         try {
@@ -39,7 +36,7 @@ public class UserContractCommand implements Command {
             logger.info("Successfully in viewing contracts");
             router = new Router(PageName.USER_CONTRACT);
         } catch (ServiceException e) {
-            logger.error("Error in viewing contracts");
+            logger.error("Error in viewing contracts" + e);
             router = new Router(ERROR_500);
         }
         return router;

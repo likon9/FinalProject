@@ -9,14 +9,13 @@ import by.epam.task.model.entity.TariffPlan;
 import by.epam.task.model.entity.User;
 import by.epam.task.model.entity.UserRole;
 import by.epam.task.model.service.impl.TariffPlanServiceImpl;
-import com.google.protobuf.ServiceException;
+import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static by.epam.task.controller.command.PageName.CONNECT_TARIFF;
-import static by.epam.task.controller.command.PageName.ERROR_404;
+import static by.epam.task.controller.command.PageName.*;
 
 public class NewContractCommand implements Command {
 
@@ -27,15 +26,12 @@ public class NewContractCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.ADMIN))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.ADMIN)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         TariffPlanServiceImpl tariffPlanService = new TariffPlanServiceImpl();
         TariffPlan tariffPlan = null;
         try {
-           tariffPlan = tariffPlanService.findByIdTariffPlan(Long.parseLong(request.getParameter(ParameterName.TARIFF_PLAN_ID))).get();
+            tariffPlan = tariffPlanService.findByIdTariffPlan(Long.parseLong(request.getParameter(ParameterName.TARIFF_PLAN_ID))).get();
             request.setAttribute(ParameterName.LOGIN, user.getLogin());
             request.setAttribute(ParameterName.EMAIL, user.getEmail());
             request.setAttribute(ParameterName.NAME, user.getName());
@@ -48,8 +44,8 @@ public class NewContractCommand implements Command {
             logger.info("The contract data has been successfully completed.");
             router = new Router(CONNECT_TARIFF);
         } catch (ServiceException e) {
-            logger.error("The contract data hasn't been successfully completed.");
-            router = new Router(ERROR_404);
+            logger.error("The contract data hasn't been successfully completed." + e);
+            router = new Router(ERROR_500);
         }
         return router;
     }

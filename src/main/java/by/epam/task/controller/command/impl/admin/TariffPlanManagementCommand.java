@@ -7,8 +7,9 @@ import by.epam.task.controller.command.Router;
 import by.epam.task.controller.command.SessionAttribute;
 import by.epam.task.model.entity.TariffPlan;
 import by.epam.task.model.entity.User;
+import by.epam.task.model.entity.UserRole;
 import by.epam.task.model.service.impl.TariffPlanServiceImpl;
-import com.google.protobuf.ServiceException;
+import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -28,6 +29,7 @@ public class TariffPlanManagementCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
         session.setAttribute(SessionAttribute.SESSION_USER,user);
+        if(user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
         TariffPlanServiceImpl tariffPlanService = new TariffPlanServiceImpl();
         List<TariffPlan> tariffPlanList = null;
         try{
@@ -36,7 +38,7 @@ public class TariffPlanManagementCommand implements Command {
             logger.info("Successfully in viewing tariff plans");
             router = new Router(TARIFF_PLAN_MANAGEMENT);
         } catch (ServiceException e) {
-            logger.error("Error in viewing tariff plans");
+            logger.error("Error in viewing tariff plans" + e);
             router = new Router(ERROR_500);
         }
         return router;

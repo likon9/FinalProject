@@ -3,6 +3,7 @@ package by.epam.task.model.entity;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Contract {
     private Long contractId;
@@ -110,5 +111,34 @@ public class Contract {
                 ", tariffPlanSpeed=" + tariffPlanSpeed +
                 ", contractStatus=" + contractStatus +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Contract)) return false;
+        Contract contract = (Contract) o;
+        return getTariffPlanSpeed() == contract.getTariffPlanSpeed()
+                && Objects.equals(getContractId(), contract.getContractId())
+                && Objects.equals(getConnectionDate(), contract.getConnectionDate())
+                && Objects.equals(getUserId(), contract.getUserId())
+                && Objects.equals(getTariffPlanId(), contract.getTariffPlanId())
+                && Objects.equals(getTariffPlanName(), contract.getTariffPlanName())
+                && Objects.equals(getTariffPlanPrice(), contract.getTariffPlanPrice())
+                && Objects.equals(getTariffPlanSpeed(), contract.getTariffPlanSpeed())
+                && getContractStatus() == contract.getContractStatus();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result += 37 * result + Long.hashCode(getContractId());
+        result += 37 * result + getConnectionDate().hashCode();
+        result += 37 * result + Long.hashCode(getUserId());
+        result += 37 * result + Long.hashCode(getTariffPlanId());
+        result += 37 * result + getTariffPlanName().hashCode();
+        result += 37 * result + getTariffPlanPrice().hashCode();
+        result += 37 * result + Integer.hashCode(getTariffPlanSpeed());
+        return result;
     }
 }

@@ -6,7 +6,7 @@ public class TariffPlanValidator {
 
     private static final TariffPlanValidator instance = new TariffPlanValidator();
 
-    private static final String NAME_REGEX = "[a-zA-Z1-9А-Яа-я].{3,64}";
+    private static final String NAME_REGEX = "[a-zA-Z1-9А-Яа-я].{3,24}";
 
     private TariffPlanValidator() {
     }
@@ -15,12 +15,8 @@ public class TariffPlanValidator {
         return instance;
     }
 
-
     public boolean isNameValid(String name) {
-        if (name == null || name.isBlank()) {
-            return false;
-        }
-        return name.matches(NAME_REGEX);
+        return !(name == null || name.isBlank()) && name.matches(NAME_REGEX);
     }
 
 }

@@ -96,25 +96,28 @@
         <input class="btn btn-primary" type="submit" value="<fmt:message key="contract.manager.select.select"/>"/>
     </form>
     <center>
-    <div class="c1">
-        <form  style="display:inline;" action="controller" method="get">
-            <input type="hidden" name="command" value="FIND_CONTRACTS_FROM_PARAMETER"/>
-            <input type="hidden" name="field" value="contractId" />
-            <input type="text" name="parameter" placeholder="<fmt:message key="contract.manager.select.contract.id"/>" minlength="19" required pattern="[0-9]{19}"/>
-            <input class="btn btn-primary" type="submit" value="<fmt:message key="contract.manager.select.select.contract.id"/>"/>
-        </form>
+        <div class="c1">
+            <form  style="display:inline;" action="controller" method="get">
+              <input type="hidden" name="command" value="FIND_CONTRACTS_FROM_PARAMETER"/>
+              <input type="hidden" name="field" value="contractId" />
+             <input type="text" name="parameter" placeholder="<fmt:message key="contract.manager.select.contract.id"/>"
+                       required pattern="[0-9]{1,19}"/>
+             <input class="btn btn-primary" type="submit" value="<fmt:message key="contract.manager.select.select.contract.id"/>"/>
+         </form>
 
             <form  style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="FIND_CONTRACTS_FROM_PARAMETER"/>
                 <input type="hidden" name="field" value="tariffPlanId" />
-                <input type="text" name="parameter" placeholder="<fmt:message key="contract.manager.select.tariff.id"/>" minlength="19" required pattern="[0-9]{19}"/>
+                <input type="text" name="parameter" placeholder="<fmt:message key="contract.manager.select.tariff.id"/>"
+                       required pattern="[0-9]{1,19}"/>
                 <input class="btn btn-primary" type="submit" value="<fmt:message key="contract.manager.select.select.tariff.id"/>"/>
             </form>
 
             <form  style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="FIND_CONTRACTS_FROM_PARAMETER"/>
                 <input type="hidden" name="field" value="userId" />
-                <input type="text" name="parameter" placeholder="<fmt:message key="contract.manager.select.user.id"/>" minlength="19" required pattern="[0-9]{19}"/>
+                <input type="text" name="parameter" placeholder="<fmt:message key="contract.manager.select.user.id"/>"
+                       required pattern="[0-9]{1,19}"/>
                 <input class="btn btn-primary" type="submit" value="<fmt:message key="contract.manager.select.select.user.id"/>"/>
             </form>
     </div>

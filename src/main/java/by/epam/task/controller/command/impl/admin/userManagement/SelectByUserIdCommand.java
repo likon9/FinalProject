@@ -4,9 +4,11 @@ import by.epam.task.controller.command.*;
 import by.epam.task.exception.CommandException;
 import by.epam.task.model.entity.User;
 import by.epam.task.model.service.impl.UserServiceImpl;
-import com.google.protobuf.ServiceException;
+import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +17,9 @@ import java.util.Optional;
 import static by.epam.task.controller.command.PageName.*;
 
 public class SelectByUserIdCommand implements Command {
+
+    private static final Logger logger = LogManager.getLogger();
+
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router router;
@@ -25,13 +30,14 @@ public class SelectByUserIdCommand implements Command {
         Optional<User> userOptional= null;
         try {
             userOptional = userService.findById(Long.valueOf(request.getParameter(ParameterName.USER_ID)));
-            List<User> user1= userOptional.isPresent()
+            List<User> userList= userOptional.isPresent()
                     ? Collections.singletonList(userOptional.get())
                     : Collections.emptyList();;
-            request.setAttribute(ParameterName.LIST, user1);
+            request.setAttribute(ParameterName.LIST, userList);
+            logger.info("Successfully select user by user id");
             router = new Router(USER_LIST);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.error("Error select user by surname" + e);
             router = new Router(ERROR_500);
         }
         return router;

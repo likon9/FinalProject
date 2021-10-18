@@ -20,10 +20,7 @@ public class GoToContractManagementCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.USER))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         ContractServiceImpl contractService = new ContractServiceImpl();
         List<Contract> contractList = null;
@@ -32,9 +29,7 @@ public class GoToContractManagementCommand implements Command {
             request.setAttribute(ParameterName.LIST,contractList);
             router = new Router(CONTRACT_MANAGEMENT);
         } catch (ServiceException e) {
-            e.printStackTrace();
             router = new Router(ERROR_500);
-
         }
         return router;
     }

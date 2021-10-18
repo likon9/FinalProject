@@ -27,13 +27,11 @@ public class SelectByStatusContractCommand implements Command {
         Router router = null;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.USER))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         List<Contract> contractList = null;
         ContractServiceImpl contractService = new ContractServiceImpl();
+        System.out.println(request.getParameter(ParameterName.SELECT));
         switch (request.getParameter(ParameterName.SELECT)){
             case ALL_CONTRACTS:
                 try {
@@ -42,7 +40,7 @@ public class SelectByStatusContractCommand implements Command {
                     logger.info("Successfully in viewing all contracts");
                     router = new Router(CONTRACT_MANAGEMENT);
                 } catch (ServiceException e) {
-                    logger.error("Error in viewing all contracts");
+                    logger.error("Error in viewing all contracts" + e);
                     router = new Router(ERROR_500);
                 }
                 break;
@@ -53,7 +51,7 @@ public class SelectByStatusContractCommand implements Command {
                     logger.info("Successfully in viewing connected contracts");
                     router = new Router(CONTRACT_MANAGEMENT);
                 } catch (ServiceException e) {
-                    logger.error("Error in viewing connected contracts");
+                    logger.error("Error in viewing connected contracts" + e);
                     router = new Router(ERROR_500);
                 }
                 break;
@@ -62,8 +60,9 @@ public class SelectByStatusContractCommand implements Command {
                     contractList = contractService.findByStatus(String.valueOf(ContractStatus.DISCONNECTED));
                     request.setAttribute(LIST, contractList);
                     logger.info("Successfully in viewing disconnected contracts");
+                    router = new Router(CONTRACT_MANAGEMENT);
                 } catch (by.epam.task.exception.ServiceException e) {
-                    logger.error("Error in viewing disconnected contracts");
+                    logger.error("Error in viewing disconnected contracts" + e);
                     router = new Router(ERROR_500);
                 }
                 break;

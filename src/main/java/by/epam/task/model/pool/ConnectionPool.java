@@ -1,6 +1,5 @@
 package by.epam.task.model.pool;
 
-import by.epam.task.exception.ConnectionException;
 import by.epam.task.util.PropertyReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.util.concurrent.*;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
@@ -42,11 +41,9 @@ public class ConnectionPool {
             for (int i = 0; i < CONNECTION_POOL_SIZE; i++) {
                 freeConnections.add(new ProxyConnection(DriverManager.getConnection(url, properties)));
             }
-        } catch (SQLException | ClassNotFoundException | ConnectionException e) {
+        } catch (Exception e) {
             logger.error("Error during connection pool creation.", e);
             throw new RuntimeException("Error during connection pool creation.",e);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

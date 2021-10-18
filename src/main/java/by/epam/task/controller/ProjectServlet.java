@@ -42,22 +42,18 @@ public class ProjectServlet extends HttpServlet {
             Router router = null;
             try {
                 router = command.execute(request);
-            } catch (CommandException e) {
-                e.printStackTrace();
-            }
-            switch (router.getType()) {
-                case REDIRECT -> response.sendRedirect(router.getPagePath());
-                case FORWARD -> request.getRequestDispatcher(router.getPagePath()).forward(request, response);
-                default -> {
-                    logger.log(Level.ERROR, "unknown router type: {}", router.getType());
-                    response.sendRedirect(ERROR_404);
+                switch (router.getType()) {
+                    case REDIRECT -> response.sendRedirect(router.getPagePath());
+                    case FORWARD -> request.getRequestDispatcher(router.getPagePath()).forward(request, response);
+                    default -> {
+                        logger.log(Level.ERROR, "unknown router type: {}", router.getType());
+                        response.sendRedirect(ERROR_404);
+                    }
                 }
+            } catch (CommandException e) {
+                logger.log(Level.ERROR, "unknown router type: {}", router.getType());
+                response.sendRedirect(ERROR_404);
             }
         }
-
-    @Override
-    public void destroy() {
-        ConnectionPool.getInstance().destroyPool();
-    }
 
 }

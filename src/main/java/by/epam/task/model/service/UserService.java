@@ -1,7 +1,9 @@
 package by.epam.task.model.service;
 
+
+import by.epam.task.exception.ServiceException;
 import by.epam.task.model.entity.User;
-import com.google.protobuf.ServiceException;
+
 
 import java.util.List;
 import java.util.Map;
@@ -12,8 +14,6 @@ public interface UserService {
 
     boolean updateEmail(Map<String, String> parameters, Long userId) throws ServiceException;
 
-    boolean updatePassword(Map<String, String> parameters, Long userId) throws ServiceException;
-
     boolean updateName(Map<String, String> parameters, Long userId) throws ServiceException;
 
     boolean updateSurname(Map<String, String> parameters, Long userId) throws ServiceException;
@@ -21,6 +21,8 @@ public interface UserService {
     boolean updatePhone(Map<String, String> parameters, Long userId) throws ServiceException;
 
     boolean updateBalance(Map<String, String> parameters, Long userId) throws ServiceException;
+
+    boolean updateDiscount(Map<String, String> parameters, Long userId) throws ServiceException;
 
     boolean updateStatus(Map<String, String> parameters, Long userId) throws ServiceException;
 

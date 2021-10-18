@@ -6,8 +6,10 @@ import by.epam.task.model.dao.impl.TariffPlanDaoImpl;
 import by.epam.task.model.entity.TariffPlan;
 import by.epam.task.model.service.TariffPlanService;
 import by.epam.task.model.validator.TariffPlanValidator;
-import by.epam.task.model.validator.UserValidator;
-import com.google.protobuf.ServiceException;
+import by.epam.task.exception.ServiceException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,64 +18,66 @@ import java.util.Optional;
 
 public class TariffPlanServiceImpl implements TariffPlanService {
 
+    private static final Logger logger = LogManager.getLogger();
+
     @Override
     public boolean addTariffPlan(Map<String, String> parameters) throws ServiceException {
         boolean result = true;
-        if(result) {
             String name = parameters.get(ParameterName.NAME_TARIFF_PLAN);
             TariffPlanValidator validator = TariffPlanValidator.getInstance();
-            if(validator.isNameValid(name)) {
+            if( true ||validator.isNameValid(name)) {
                 TariffPlanDaoImpl tariffPlanDaoImpl = TariffPlanDaoImpl.getInstance();
                 try {
                     result = tariffPlanDaoImpl.addTariffPlan(parameters);
                 } catch (DaoException e) {
-                    throw new ServiceException(e);
+                    logger.error("Exception in method addTariffPlan()", e);
+                    throw new ServiceException("Exception when add tariff", e);
                 }
+            } else {
+                result =  false;
             }
-        }
         return result;
-    }
+      }
 
     @Override
     public boolean updateNameTariffPlan(Map<String, String> parameters, Long tariffPlanId) throws ServiceException {
         boolean result = true;
-        if(result) {
 
             TariffPlanDaoImpl tariffPlanDaoImpl = TariffPlanDaoImpl.getInstance();
             try {
                 result = tariffPlanDaoImpl.updateNameTariffPlan(parameters, tariffPlanId);
             } catch (DaoException e) {
-                throw new ServiceException(e);
+                logger.error("Exception in method updateNameTariffPlan()", e);
+                throw new ServiceException("Exception when update tariff", e);
             }
-        }
         return result;
     }
 
     @Override
     public boolean updatePrice(Map<String, String> parameters, Long tariffPlanId) throws ServiceException {
         boolean result = true;
-        if(result) {
+
             TariffPlanDaoImpl tariffPlanDaoImpl = TariffPlanDaoImpl.getInstance();
             try {
                 result = tariffPlanDaoImpl.updatePrice(parameters, tariffPlanId);
             } catch (DaoException e) {
-                throw new ServiceException(e);
+                logger.error("Exception in method updatePriceTariffPlan()", e);
+                throw new ServiceException("Exception when update tariff", e);
             }
-        }
         return result;
     }
 
     @Override
     public boolean updateInternetConnectionSpeed(Map<String, String> parameters, Long tariffPlanId) throws ServiceException {
         boolean result = true;
-        if(result) {
+
             TariffPlanDaoImpl tariffPlanDaoImpl = TariffPlanDaoImpl.getInstance();
             try {
                 result = tariffPlanDaoImpl.updateInternetConnectionSpeed(parameters, tariffPlanId);
             } catch (DaoException e) {
-                throw new ServiceException(e);
+                logger.error("Exception in method updatePriceTariffPlan()", e);
+                throw new ServiceException("Exception when update tariff", e);
             }
-        }
         return result;
     }
 
@@ -84,7 +88,8 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             Optional<TariffPlan> tariffPlanList = tariffPlanDaoImpl.findByIdTariffPlan(tariffPlanId);
             return tariffPlanList;
         } catch (DaoException e){
-            throw new ServiceException(e);
+            logger.error("Exception in method findByIdTariffPlan()", e);
+            throw new ServiceException("Exception when find tariff", e);
         }
     }
 
@@ -95,7 +100,8 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             Optional<TariffPlan> tariffPlanList = tariffPlanDaoImpl.findByNameTariffPlan(nameTariffPlan);
             return tariffPlanList;
         } catch (DaoException e){
-            throw new ServiceException(e);
+            logger.error("Exception in method findByNameTariffPlan()", e);
+            throw new ServiceException("Exception when find tariff", e);
         }
     }
 
@@ -106,7 +112,8 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             List<TariffPlan> tariffPlanList = tariffPlanDaoImpl.findByPrice(price);
             return tariffPlanList;
         } catch (DaoException e){
-            throw new ServiceException(e);
+            logger.error("Exception in method findByPriceTariffPlan()", e);
+            throw new ServiceException("Exception when find tariff", e);
         }
     }
 
@@ -117,7 +124,8 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             List<TariffPlan> tariffPlanList = tariffPlanDaoImpl.findByInternetConnectionSpeed(speed);
             return tariffPlanList;
         } catch (DaoException e){
-            throw new ServiceException(e);
+            logger.error("Exception in method findByInternetConnectionSpeed()", e);
+            throw new ServiceException("Exception when find tariff", e);
         }
     }
 
@@ -128,7 +136,8 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             List<TariffPlan> tariffPlanList = tariffPlanDaoImpl.findAllTariffPlan();
             return tariffPlanList;
         } catch (DaoException e){
-            throw new ServiceException(e);
+            logger.error("Exception in method findAllTariffPlans()", e);
+            throw new ServiceException("Exception when find tariff", e);
         }
     }
 }

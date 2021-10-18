@@ -1,6 +1,6 @@
 package by.epam.task.controller.command;
 
-public class PageName {
+public final class PageName {
 
     public static final String INDEX = ("pages/index.jsp");
     public static final String LOGIN = ("pages/login.jsp");
@@ -14,20 +14,19 @@ public class PageName {
     public static final String CONNECT_TARIFF =  ("pages/user/connect_tariff.jsp");
     public static final String DISCONNECT_TARIFF = ("pages/user/disconnect_tariff.jsp");
     public static final String TOP_UP_BALANCE = ("pages/user/top_up_balance.jsp");
-
     public static final String DELETE_USER = ("pages/user/delete_user.jsp");
+
     public static final String HOME_ADMIN = ("pages/admin/home_admin.jsp");
     public static final String USER_LIST = ("pages/admin/user_list.jsp");
-    public static final String BLOCK_USER = ("pages/admin/block_user.jsp");
-    public static final String SELECT_BY_PARAMETER = ("pages/admin/select_by_parameter.jsp");
     public static final String ADD_TARIFF_PLAN = ("pages/admin/add_tariff_plan.jsp");
     public static final String CONTRACT_MANAGEMENT = ("pages/admin/contract_management.jsp");
     public static final String TARIFF_PLAN_MANAGEMENT= ("pages/admin/tariff_plan_management.jsp");
-    public static final String UPDATE_SELECT_TARIFF_PLAN = ("pages/admin/update_select_tariff_plan.jsp");
     public static final String ERROR_404 = ("pages/error/error404.jsp");
     public static final String ERROR_500 = ("pages/error/error500.jsp");
 
     private String path;
+
+    private PageName() { }
 
     PageName(String path) {
         this.path = path;

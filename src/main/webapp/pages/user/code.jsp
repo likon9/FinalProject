@@ -32,7 +32,7 @@
         <div class="flex">
             <form style="display:inline;" action="controller" method="get">
                 <input type="hidden" name="command" value="CODE"/>
-                <input class="input_text1" type="text" name="code" width="100px" placeholder="<fmt:message key="code.code"/>" minlength="5" required pattern="[0-9A-Z]{5}"/>
+                <input class="input_text1" type="text" name="code" width="100px" placeholder="<fmt:message key="code.code"/>" required pattern="[0-9A-Z]{5}"/>
                 <input class="but1" type="submit" value="<fmt:message key="code.button.enter"/>"/><br>
             </form>
             <form style="display:inline;" action="controller" method="get">

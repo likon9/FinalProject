@@ -8,7 +8,7 @@ import by.epam.task.controller.command.SessionAttribute;
 import by.epam.task.model.entity.User;
 import by.epam.task.model.entity.UserRole;
 import by.epam.task.model.service.impl.UserServiceImpl;
-import com.google.protobuf.ServiceException;
+import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -27,10 +27,7 @@ public class UserManagementCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.USER))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         UserServiceImpl userService = new UserServiceImpl();
         List<User> userList = null;
@@ -40,7 +37,7 @@ public class UserManagementCommand implements Command {
             logger.info("Successfully in viewing users");
             router = new Router(USER_LIST);
         } catch (ServiceException e) {
-             logger.error("Error in viewing users");
+             logger.error("Error in viewing users" + e);
              router = new Router(ERROR_500);
         }
         return router;

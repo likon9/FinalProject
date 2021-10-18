@@ -7,7 +7,7 @@ import by.epam.task.model.entity.TariffPlan;
 import by.epam.task.model.entity.User;
 import by.epam.task.model.entity.UserRole;
 import by.epam.task.model.service.impl.TariffPlanServiceImpl;
-import com.google.protobuf.ServiceException;
+import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 import static by.epam.task.controller.command.PageName.*;
-import static by.epam.task.controller.command.ParameterName.RES;
+import static by.epam.task.controller.command.ParameterName.*;
 
 public class UpdateTariffPlanCommand implements Command {
 
@@ -29,10 +29,7 @@ public class UpdateTariffPlanCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.USER))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         Long id  = Long.valueOf(request.getParameter(ParameterName.TARIFF_PLAN_ID));
         String select = request.getParameter(ParameterName.SELECT);
@@ -47,39 +44,33 @@ public class UpdateTariffPlanCommand implements Command {
             parameter.put(ColumnName.NAME_TARIFF_PLAN, attribute);
                 try {
                     tariffPlanService.updateNameTariffPlan(parameter,id);
-                    request.setAttribute(RES,"The tariff plan has been successfully changed");
+                    request.setAttribute(RES_TARIFF_UPDATE_TRUE,true);
                     logger.info("Successfully update name tariff plan");
-                    router = new Router(PageName.TARIFF_PLAN_MANAGEMENT);
                 } catch (ServiceException e) {
-                    request.setAttribute(RES,"The tariff plan has not been changed");
-                    logger.error("Error update name tariff plan");
-                    router = new Router(PageName.TARIFF_PLAN_MANAGEMENT);
+                    request.setAttribute(RES_TARIFF_UPDATE_FALSE,true);
+                    logger.error("Error update name tariff plan" + e);
                 }
                 break;
             case ParameterName.PRICE:
                 parameter.put(ColumnName.PRICE, attribute);
                 try {
                     tariffPlanService.updatePrice(parameter,id);
-                    request.setAttribute(RES,"The tariff plan has been successfully changed");
+                    request.setAttribute(RES_TARIFF_UPDATE_TRUE,true);
                     logger.info("Successfully update price tariff plan");
-                    router = new Router(PageName.TARIFF_PLAN_MANAGEMENT);
                 } catch (ServiceException e) {
-                    request.setAttribute(RES,"The tariff plan has not been changed");
-                    logger.error("Error update price tariff plan");
-                    router = new Router(PageName.TARIFF_PLAN_MANAGEMENT);
+                    request.setAttribute(RES_TARIFF_UPDATE_FALSE,true);
+                    logger.error("Error update price tariff plan" + e);
                 }
                 break;
             case ParameterName.INTERNET_CONNECTION_SPEED:
                 parameter.put(ColumnName.INTERNET_CONNECTION_SPEED, attribute);
                 try {
                     tariffPlanService.updateInternetConnectionSpeed(parameter,id);
-                    request.setAttribute(RES,"The tariff plan has been successfully changed");
+                    request.setAttribute(RES_TARIFF_UPDATE_TRUE,true);
                     logger.info("Successfully update internet speed tariff plan");
-                    router = new Router(PageName.TARIFF_PLAN_MANAGEMENT);
                 } catch (ServiceException e) {
-                    request.setAttribute(RES,"The tariff plan has not been changed");
-                    logger.error("Error update internet speed tariff plan");
-                    router = new Router(PageName.TARIFF_PLAN_MANAGEMENT);
+                    request.setAttribute(RES_TARIFF_UPDATE_FALSE,true);
+                    logger.error("Error update internet speed tariff plan" + e);
                 }
                 break;
         }
@@ -89,7 +80,7 @@ public class UpdateTariffPlanCommand implements Command {
             request.setAttribute(ParameterName.LIST, tariffPlanList);
             router = new Router(TARIFF_PLAN_MANAGEMENT);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.error("Error update tariff plan" + e);
             router = new Router(ERROR_500);
         }
         return router;

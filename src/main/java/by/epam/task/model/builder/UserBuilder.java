@@ -21,6 +21,7 @@ public class UserBuilder {
     private String phone;
     private BigDecimal balance;
     private LocalDate registrationDate;
+    private BigDecimal discount;
     private UserStatus userStatus;
     private UserRole userRole;
 
@@ -36,6 +37,7 @@ public class UserBuilder {
                 phone,
                 balance,
                 registrationDate,
+                discount,
                 userStatus,
                 userRole);
 
@@ -48,6 +50,7 @@ public class UserBuilder {
         this.phone = null;
         this.balance = null;
         this.registrationDate = null;
+        this.discount = null;
         this.userStatus = null;
         this.userRole = null;
         return user;
@@ -124,6 +127,10 @@ public class UserBuilder {
     public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
     }
+
+    public BigDecimal getDiscount() { return discount; }
+
+    public void setDiscount(BigDecimal discount) { this.discount = discount; }
 
     public UserStatus getUserStatus() {
         return userStatus;

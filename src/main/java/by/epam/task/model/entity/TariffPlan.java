@@ -1,6 +1,7 @@
 package by.epam.task.model.entity;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class TariffPlan {
     private Long tariffPlanId;
@@ -8,8 +9,7 @@ public class TariffPlan {
     private BigDecimal price;
     private int internetConnectionSpeed;
 
-    public TariffPlan() {
-    }
+    public TariffPlan() {}
 
     public TariffPlan(Long tariffPlanId,
                       String nameTariffPlan,
@@ -49,9 +49,7 @@ public class TariffPlan {
         return internetConnectionSpeed;
     }
 
-    public void setInternetConnectionSpeed(int internetConnectionSpeed) {
-        this.internetConnectionSpeed = internetConnectionSpeed;
-    }
+    public void setInternetConnectionSpeed(int internetConnectionSpeed) { this.internetConnectionSpeed = internetConnectionSpeed; }
 
     @Override
     public String toString() {
@@ -61,5 +59,29 @@ public class TariffPlan {
                 ", price=" + price +
                 ", internetConnectionSpeed=" + internetConnectionSpeed +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TariffPlan)) return false;
+        TariffPlan that = (TariffPlan) o;
+        return getInternetConnectionSpeed() == that.getInternetConnectionSpeed()
+                && Objects.equals(getTariffPlanId(), that.getTariffPlanId())
+                && Objects.equals(getNameTariffPlan(), that.getNameTariffPlan())
+                && Objects.equals(getPrice(), that.getPrice())
+                && Objects.equals(getInternetConnectionSpeed(), that.getInternetConnectionSpeed());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result += 37 * result + Long.hashCode(getTariffPlanId());
+        result += 37 * result + getNameTariffPlan().hashCode();
+        result += 37 * result + getPrice().hashCode();
+        result += 37 * result + Integer.hashCode(getInternetConnectionSpeed());
+
+        return result;
     }
 }

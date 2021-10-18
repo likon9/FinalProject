@@ -1,12 +1,9 @@
 package by.epam.task.controller.command.impl;
 
-import by.epam.task.controller.command.Command;
+import by.epam.task.controller.command.*;
 import by.epam.task.exception.CommandException;
-import by.epam.task.controller.command.ParameterName;
-import by.epam.task.controller.command.Router;
 import by.epam.task.model.service.impl.UserServiceImpl;
-import by.epam.task.util.IdGenerate;
-import com.google.protobuf.ServiceException;
+import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +13,7 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
-import static by.epam.task.controller.command.PageName.*;
+import static by.epam.task.controller.command.PageName.REGISTRATION;
 import static by.epam.task.model.dao.ColumnName.*;
 import static by.epam.task.model.dao.ColumnName.LOGIN;
 
@@ -30,7 +27,6 @@ public class RegistrationCommand implements Command {
         Router router;
         String phone = request.getParameter(ParameterName.SELECT) +request.getParameter(ParameterName.PHONE);
         Map<String, String> newUser = new HashMap<>();
-        newUser.put(USER_ID, String.valueOf(IdGenerate.generateId()));
         newUser.put(EMAIL, request.getParameter(ParameterName.EMAIL));
         newUser.put(LOGIN, request.getParameter(ParameterName.LOGIN));
         newUser.put(PASSWORD, request.getParameter(ParameterName.PASSWORD));
@@ -42,16 +38,16 @@ public class RegistrationCommand implements Command {
 
         try {
             if(userService.addUser(newUser)){
-                request.setAttribute(ParameterName.RES, "The account has been successfully created. Use your login and password to enter the system");
+                request.setAttribute(ParameterName.RES, true);
                 logger.info("The account has been successfully created.");
+                router = new Router(PageName.LOGIN);
+            }else {
+                request.setAttribute(ParameterName.RES, true);
+                logger.error("Incorrect data.");
                 router = new Router(REGISTRATION);
             }
-            request.setAttribute(ParameterName.RES, "Incorrect data.");
-            logger.error("Incorrect data.");
-            router = new Router(REGISTRATION);
-
         } catch (ServiceException e) {
-            request.setAttribute(ParameterName.RES, "The account has not been successfully created.");
+            request.setAttribute(ParameterName.FAIL, true);
             logger.error("Error registration user.", e);
             router = new Router(REGISTRATION);
             e.printStackTrace();

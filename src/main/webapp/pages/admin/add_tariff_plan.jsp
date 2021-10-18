@@ -81,21 +81,29 @@
         <input type="hidden" name="command" value="ADD_TARIFF_PLAN"/>
             <div class="mb-3">
                 <label class="form-label"><fmt:message key="new.tariff.name"/></label>
-                 <input type="text"  class="form-control" name="nameTariffPlan" required pattern="[0-9A-Za-zА-Яа-я]{3-50}"/>
+                 <input type="text"  class="form-control" name="nameTariffPlan"
+                        minlength="3" required pattern="[a-zA-Z1-9А-Яа-я].{3,24}"/>
             </div>
             <div class="mb-3">
                 <label class="form-label"><fmt:message key="new.tariff.price"/></label>
-                <input type="text"  class="form-control" name="price" minlength="1" maxlength="5" required pattern="[0-9]{1-5}"/>
+                <input type="text"  class="form-control" name="price"
+                       required pattern="[0-9]{1,5}"/>
             </div>
-        <div class="mb-3">
-            <label class="form-label"><fmt:message key="new.tariff.speed"/></label>
-            <input type="text" class="form-control" name="internetConnectionSpeed" minlength="1" required pattern="[0-9]{1-5}"/>
-        </div>
+            <div class="mb-3">
+                <label class="form-label"><fmt:message key="new.tariff.speed"/></label>
+                <input type="text" class="form-control" name="internetConnectionSpeed"
+                       required pattern="[0-9]{1,4}"/>
+            </div>
         <input  class="btn btn-primary" class="button" type="submit" value="<fmt:message key="new.tariff.add"/>"/><br>
     </form>
 </div>
    <center>
-       ${res}
+       <c:if test="${resAddTariffTrue}">
+           <fmt:message key="message.admin.add.tariff"/>
+       </c:if>
+       <c:if test="${resAddTariffTrue}">
+           <fmt:message key="message.admin.add.tariff.fail"/>
+       </c:if>
    </center>
 </div>
 

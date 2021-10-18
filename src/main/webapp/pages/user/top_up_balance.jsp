@@ -60,11 +60,12 @@
 </nav>
 <div id="content">
     <center>
-
         <form  class="c1" action="controller" method="get">
-            <fmt:message key="top.up.balance.inscription"/>${balance}BYN<br><br><br>
+            <fmt:message key="top.up.balance.inscription"/>${balance}BYN<br>
+            <fmt:message key="top.up.balance.price"/> ${totalCoast}BYN<br>
+            <fmt:message key="top.up.balance.price.discount"/>${totalCoast- (totalCoast*discount)}BYN<br><br>
             <input type="hidden" name="command" value="TOP_UP_BALANCE"/>
-            <input class="input_text" type="text" name="balance" placeholder="<fmt:message key="top.up.balance"/>" maxlength="3" required pattern="[0-9]{1-3}" />
+            <input type="number" name="balance" placeholder="<fmt:message key="top.up.balance"/>" step="0.01" min="0" max="999" placeholder="0,00" />
             <input class="btn btn-outline-success" type="submit" value="<fmt:message key="top.up.balance.but"/>"/>
         </form>
     </center>

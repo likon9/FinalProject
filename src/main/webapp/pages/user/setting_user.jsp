@@ -80,7 +80,7 @@
                 <form class="form-label" action="controller" method="get">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="email"/>
-                    <input type="email" class="form-control"  name="parameter" required pattern="[A-Za-z]{3-40}"/>
+                    <input type="email" class="form-control"  name="parameter" required />
                     <input type="submit" value="<fmt:message key="setting.email.update"/>"/>
                     <div class="form-text">
                     </div>
@@ -95,7 +95,7 @@
                 <form class="form-label" action="controller" method="get">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="name"/>
-                    <input type="text" class="form-control"  name="parameter" minlength="3"  required pattern="[A-Za-z]{3-40}"/>
+                    <input type="text" class="form-control"  name="parameter" mminlength="3" required pattern="[a-zA-Z]*|[ЁёА-я]*{3,24}"/>
                     <input type="submit" value=" <fmt:message key="setting.name.update"/>"/>
                     <div class="form-text">
                     </div>
@@ -110,7 +110,7 @@
                 <form class="form-label" action="controller" method="get">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="surname"/>
-                    <input type="text" class="form-control"  name="parameter" minlength="3"  required pattern="[A-Za-z]{3-40}"/>
+                    <input type="text" class="form-control"  name="parameter" minlength="3" required pattern="[a-zA-Z]*|[ЁёА-я]*{3,24}"/>
                     <input type="submit" value="<fmt:message key="setting.surname.update"/>"/>
                     <div class="form-text">
                     </div>
@@ -125,7 +125,8 @@
                 <form class="form-label" action="controller" method="get">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="phone"/>
-                    <input type="text" class="form-control"  name="parameter" minlength="9"  required pattern="[0-9]{9-9}"/>
+                    <input type="text" class="form-control"  name="parameter"
+                           maxlength="9"  required pattern="[0-9]{9}"/>
                     <input type="submit" value="<fmt:message key="setting.phone.update"/>"/>
                     <div class="form-text">
                     </div>

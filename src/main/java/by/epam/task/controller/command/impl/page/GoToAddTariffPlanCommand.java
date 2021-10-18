@@ -15,10 +15,7 @@ public class GoToAddTariffPlanCommand implements Command {
         public Router execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.USER))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         Router router;
         router = new Router(ADD_TARIFF_PLAN);

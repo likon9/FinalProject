@@ -9,7 +9,7 @@ import by.epam.task.model.dao.ColumnName;
 import by.epam.task.model.entity.User;
 import by.epam.task.model.entity.UserRole;
 import by.epam.task.model.service.impl.UserServiceImpl;
-import com.google.protobuf.ServiceException;
+import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -29,10 +29,7 @@ public class UpdateUserCommand implements Command {
         Router router = null;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.ADMIN))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.ADMIN)) { return new Router(ERROR_404); }
         UserServiceImpl userService = new UserServiceImpl();
         Map<String, String> parameterUser = new HashMap<>();
         String field = request.getParameter(ParameterName.FIELD);
@@ -41,10 +38,12 @@ public class UpdateUserCommand implements Command {
                 parameterUser.put(ColumnName.EMAIL, request.getParameter(ParameterName.PARAMETER));
                 try {
                     if (userService.updateEmail(parameterUser, user.getUserId())) {
+                        userService.updateEmail(parameterUser, user.getUserId());
                         user.setEmail(request.getParameter(ParameterName.PARAMETER));
+                        request.setAttribute(ParameterName.RES_UPDATE_USER_TRUE, true);
                         logger.info("Successfully updated user email");
-                    }
-                    else {
+                    } else {
+                        request.setAttribute(ParameterName.RES_UPDATE_USER_FALSE, true);
                         logger.error("Incorrect data");
                     }
                     router = new Router(HOME);
@@ -52,22 +51,21 @@ public class UpdateUserCommand implements Command {
                     logger.error("Error updated user email");
                     router = new Router(ERROR_500);
                 }
-
-
                 break;
             case (ParameterName.NAME):
                 parameterUser.put(ColumnName.NAME, request.getParameter(ParameterName.PARAMETER));
                 try {
                     if (userService.updateName(parameterUser, user.getUserId())) {
                     user.setName(request.getParameter(ParameterName.PARAMETER));
+                    request.setAttribute(ParameterName.RES_UPDATE_USER_TRUE, true);
                     logger.info("Successfully updated user name");
-                    }
-                    else {
+                    } else {
+                        request.setAttribute(ParameterName.RES_UPDATE_USER_FALSE, true);
                         logger.error("Incorrect data");
                     }
                     router = new Router(HOME);
                 } catch (ServiceException e) {
-                    logger.error("Error updated user name");
+                    logger.error("Error updated user name" + e);
                     router = new Router(ERROR_500);
                 }
                 break;
@@ -76,14 +74,15 @@ public class UpdateUserCommand implements Command {
                 try {
                     if (userService.updateSurname(parameterUser, user.getUserId())) {
                     user.setSurname(request.getParameter(ParameterName.PARAMETER));
+                        request.setAttribute(ParameterName.RES_UPDATE_USER_TRUE, true);
                     logger.info("Successfully updated user surname");
-                }
-                    else {
-                logger.error("Incorrect data");
+                    } else {
+                        request.setAttribute(ParameterName.RES_UPDATE_USER_FALSE, true);
+                        logger.error("Incorrect data");
                     }
                     router = new Router(HOME);
                 } catch (ServiceException e) {
-                    logger.error("Error updated user surname");
+                    logger.error("Error updated user surname" + e);
                     router = new Router(ERROR_500);
                 }
                 break;
@@ -92,14 +91,15 @@ public class UpdateUserCommand implements Command {
                 try {
                     if (userService.updatePhone(parameterUser, user.getUserId())) {
                     user.setPhone(request.getParameter(ParameterName.PARAMETER));
+                    request.setAttribute(ParameterName.RES_UPDATE_USER_TRUE, true);
                     logger.info("Successfully updated user phone");
-                    }
-                    else {
+                    } else {
+                        request.setAttribute(ParameterName.RES_UPDATE_USER_FALSE, true);
                         logger.error("Incorrect data");
                     }
                     router = new Router(HOME);
                 } catch (ServiceException e) {
-                    logger.error("Error updated user phone");
+                    logger.error("Error updated user phone" + e);
                     router = new Router(ERROR_500);
                 }
                 break;

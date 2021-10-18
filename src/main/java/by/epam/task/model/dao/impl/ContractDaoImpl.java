@@ -32,8 +32,8 @@ public class ContractDaoImpl implements ContractDao {
     }
     //CREATE REGEX
     private static final String CREATE_CONTRACT = """
-            INSERT INTO contracts (contract_id, connection_date, users_user_id, tariff_plans_tariff_plan_id, contract_statusid )
-            VALUES (?, ?, ?, ?,?)""";
+            INSERT INTO contracts (connection_date, users_user_id, tariff_plans_tariff_plan_id, contract_statusid )
+            VALUES (?, ?, ?,?)""";
     //FIND REGEX
     private static final String FIND_BY_CONTRACT_ID = """
             SELECT contract_id, connection_date, users_user_id, tariff_plans_tariff_plan_id,contract_statusid,tariff_plans.name_tariff_plan,
@@ -111,11 +111,10 @@ public class ContractDaoImpl implements ContractDao {
         boolean result = false;
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_CONTRACT)) {
-            statement.setLong(1,  Long.parseLong(parameters.get(CONTRACT_ID)));
-            statement.setTimestamp(2, Timestamp.valueOf((parameters.get(CONNECTION_DATE))));
-            statement.setLong(3, Long.parseLong(parameters.get(CONTRACT_USER_ID)));
-            statement.setLong(4, Long.parseLong(parameters.get(CONTRACT_TARIFF_PLAN_ID)));
-            statement.setLong(5, 1);
+            statement.setTimestamp(1, Timestamp.valueOf((parameters.get(CONNECTION_DATE))));
+            statement.setLong(2, Long.parseLong(parameters.get(CONTRACT_USER_ID)));
+            statement.setLong(3, Long.parseLong(parameters.get(CONTRACT_TARIFF_PLAN_ID)));
+            statement.setLong(4, 1);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             logger.error("Error during adding contract.", e);

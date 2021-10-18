@@ -24,10 +24,7 @@ public class SettingUserCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.ADMIN))
-        {
-            return new Router(ERROR_404);
-        }
+        if(user == null || user.getUserStatus().equals(UserRole.ADMIN)) { return new Router(ERROR_404); }
         request.setAttribute(ParameterName.LOGIN, user.getLogin());
         request.setAttribute(ParameterName.EMAIL, user.getEmail());
         request.setAttribute(ParameterName.NAME, user.getName());

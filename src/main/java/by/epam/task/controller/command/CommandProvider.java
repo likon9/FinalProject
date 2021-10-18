@@ -65,9 +65,9 @@ public class CommandProvider {
         commands.put(CommandType.TOP_UP_BALANCE, new TopUpBalanceCommand());
         commands.put(CommandType.GO_TO_TOP_UP_BALANCE, new GoToTopUpBalanceCommand());
         commands.put(CommandType.USER_RECOVERY, new UserRecoveryCommand());
+        commands.put(CommandType.NEW_USER_DISCOUNT, new NewUserDiscountCommand());
+        commands.put(CommandType.WRITE_OF_ACCOUNT, new WriteOfAccountCommand());
         commands.put(TO_ERROR_PAGE, new GoToErrorPageCommand());
-
-
     }
 
     public static CommandProvider getInstance() {

@@ -4,7 +4,7 @@ import by.epam.task.controller.command.*;
 import by.epam.task.exception.CommandException;
 import by.epam.task.model.entity.User;
 import by.epam.task.model.service.impl.UserServiceImpl;
-import com.google.protobuf.ServiceException;
+import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,7 +30,7 @@ public class UserRecoveryCommand implements Command {
             updateUser.put(USER_STATUS, "1");
             try {
                 userService.updateStatus(updateUser, user.getUserId());
-                request.setAttribute(ParameterName.RES, user.getLogin() + " was restored");
+                request.setAttribute(ParameterName.RES_RECOVERY_USER, true);
                 logger.info("The user was restored successfully.");
                 router = new Router(PageName.LOGIN);
             } catch (ServiceException e) {
@@ -41,7 +41,6 @@ public class UserRecoveryCommand implements Command {
             logger.error("User is not found.");
             router = new Router(PageName.ERROR_404);
         }
-
         return router;
     }
 }

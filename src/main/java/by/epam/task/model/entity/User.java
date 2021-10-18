@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class User {
 
@@ -16,12 +17,11 @@ public class User {
     private String phone;
     private BigDecimal balance;
     private LocalDate registrationDate;
+    private BigDecimal discount;
     private UserStatus userStatus;
     private UserRole userRole;
 
-    public User(){
-
-    }
+    public User(){ }
 
     public User(Long userId,
                 String email,
@@ -32,6 +32,7 @@ public class User {
                 String phone,
                 BigDecimal balance,
                 LocalDate registrationDate,
+                BigDecimal discount,
                 UserStatus userStatus,
                 UserRole userRole
                )
@@ -45,6 +46,7 @@ public class User {
         this.phone = phone;
         this.balance = balance;
         this.registrationDate = registrationDate;
+        this.discount = discount;
         this.userStatus = userStatus;
         this.userRole = userRole;
     }
@@ -121,6 +123,10 @@ public class User {
         this.registrationDate = registrationDate;
     }
 
+    public BigDecimal getDiscount() { return discount; }
+
+    public void setDiscount(BigDecimal discount) { this.discount = discount; }
+
     public UserStatus getUserStatus() {
         return userStatus;
     }
@@ -149,8 +155,46 @@ public class User {
                 ", phone=" + phone +
                 ", balance=" + balance +
                 ", registrationDate=" + registrationDate +
+                ", discount=" + discount +
                 ", userStatus=" + userStatus +
                 ", userRole=" + userRole +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(getUserId(), user.getUserId())
+                && Objects.equals(getEmail(), user.getEmail())
+                && Objects.equals(getLogin(), user.getLogin())
+                && Objects.equals(getPassword(), user.getPassword())
+                && Objects.equals(getName(), user.getName())
+                && Objects.equals(getSurname(), user.getSurname())
+                && Objects.equals(getPhone(), user.getPhone())
+                && Objects.equals(getBalance(), user.getBalance())
+                && Objects.equals(getRegistrationDate(), user.getRegistrationDate())
+                && Objects.equals(getDiscount(), user.getDiscount())
+                && getUserStatus() == user.getUserStatus()
+                && getUserRole() == user.getUserRole();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result += 37 * result + Long.hashCode(getUserId());
+        result += 37 * result + (getEmail().hashCode());
+        result += 37 * result + (getLogin().hashCode());
+        result += 37 * result + (getPassword().hashCode());
+        result += 37 * result + (getName().hashCode());
+        result += 37 * result + (getSurname().hashCode());
+        result += 37 * result + (getPhone().hashCode());
+        result += 37 * result + (getBalance().hashCode());
+        result += 37 * result + (getDiscount().hashCode());
+        result += 37 * result + (getUserStatus().hashCode());
+        result += 37 * result + (getUserRole().hashCode());
+
+        return result;
     }
 }
