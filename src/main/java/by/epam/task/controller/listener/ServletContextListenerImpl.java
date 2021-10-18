@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebListener;
 
 import by.epam.task.model.pool.ConnectionPool;
 
+/**
+ * The type Servlet context listener.
+ */
 @WebListener
 public class ServletContextListenerImpl implements ServletContextListener {
         @Override

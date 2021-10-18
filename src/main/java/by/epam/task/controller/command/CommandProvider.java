@@ -16,6 +16,9 @@ import java.util.EnumMap;
 
 import static by.epam.task.controller.command.CommandType.TO_ERROR_PAGE;
 
+/**
+ * The type Command provider.
+ */
 public class CommandProvider {
 
     private static final Logger logger = LogManager.getLogger();
@@ -67,25 +70,35 @@ public class CommandProvider {
         commands.put(CommandType.USER_RECOVERY, new UserRecoveryCommand());
         commands.put(CommandType.NEW_USER_DISCOUNT, new NewUserDiscountCommand());
         commands.put(CommandType.WRITE_OF_ACCOUNT, new WriteOfAccountCommand());
-        commands.put(TO_ERROR_PAGE, new GoToErrorPageCommand());
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static CommandProvider getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * Gets command.
+     *
+     * @param commandName the command name
+     * @return the command
+     */
     public Command getCommand(String commandName) {
         if (commandName == null) {
-            logger.log(Level.WARN, "command name is null. The command was assigned the default value");
+            logger.warn("command name is null. The command was assigned the default value");
             return commands.get(TO_ERROR_PAGE);
         }
         CommandType commandType;
         try {
             commandType = CommandType.valueOf(commandName.toUpperCase());
-            logger.log(Level.INFO, "command type - {}", commandType);
+            logger.info("command type - {}", commandType);
         } catch (IllegalArgumentException e) {
             commandType = TO_ERROR_PAGE;
-            logger.log(Level.ERROR, "error! The command was assigned the default value. ", e);
+            logger.error( "error! The command was assigned the default value. ", e);
         }
         return commands.get(commandType);
 

@@ -1,16 +1,38 @@
 package by.epam.task.controller.command;
 
+/**
+ * The enum Command type.
+ */
 public enum CommandType {
-
+    /**
+     * Common commands
+     */
     LOGIN,
     GO_TO_LOGIN,
     REGISTRATION,
     GO_TO_REGISTRATION,
+    CHANGE_LANGUAGE_COMMAND,
+    FIRST_PAGE,
+    EXIT_USER,
+    USER_RECOVERY,
+    /**
+     * User commands
+     */
     CODE,
     HOME,
     TARIFF,
     SETTING_USER,
     USER_CONTRACT,
+    CONNECT_TARIFF,
+    DISCONNECT_TARIFF,
+    NULLIFICATION_CONTRACT,
+    GO_TO_DELETE_USER,
+    DELETE_USER,
+    TOP_UP_BALANCE,
+    GO_TO_TOP_UP_BALANCE,
+    /**
+     * admin commands
+     */
     USER_MANAGEMENT,
     USER_SELECT,
     BLOCK_USER,
@@ -26,24 +48,17 @@ public enum CommandType {
     SELECT_BY_NAME_TARIFF_PLAN,
     SELECT_BY_PRICE,
     SELECT_BY_INTERNET_CONNECTION_SPEED,
-    CHANGE_LANGUAGE_COMMAND,
     NEW_CONTRACT,
-    CONNECT_TARIFF,
-    DISCONNECT_TARIFF,
-    NULLIFICATION_CONTRACT,
-    FIRST_PAGE,
-    EXIT_USER,
     UPDATE_USER,
-    GO_TO_DELETE_USER,
-    DELETE_USER,
+
+
+
     GO_TO_CONTRACT_MANAGEMENT,
     CONTRACT_SELECT,
     FIND_CONTRACTS_FROM_PARAMETER,
-    TOP_UP_BALANCE,
-    GO_TO_TOP_UP_BALANCE,
-    USER_RECOVERY,
-    TO_ERROR_PAGE,
+
     NEW_USER_DISCOUNT,
     WRITE_OF_ACCOUNT,
-    ADD_TARIFF_PLAN;
+    ADD_TARIFF_PLAN,
+    TO_ERROR_PAGE
 }

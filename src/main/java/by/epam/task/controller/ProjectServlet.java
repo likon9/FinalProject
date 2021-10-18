@@ -18,6 +18,9 @@ import java.io.IOException;
 import static by.epam.task.controller.command.PageName.ERROR_404;
 import static by.epam.task.controller.command.ParameterName.COMMAND;
 
+/**
+ * The type Project servlet.Controller servlet.
+ */
 @WebServlet("/controller")
 public class ProjectServlet extends HttpServlet {
         private static final Logger logger = LogManager.getLogger();

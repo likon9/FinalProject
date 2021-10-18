@@ -1,5 +1,8 @@
 package by.epam.task.controller.command;
 
+/**
+ * The type Router.
+ */
 public class  Router {
 
     public enum RouterType {
