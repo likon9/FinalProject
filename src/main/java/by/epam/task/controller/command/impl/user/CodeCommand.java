@@ -7,6 +7,7 @@ import by.epam.task.controller.command.SessionAttribute;
 import by.epam.task.exception.CommandException;
 import by.epam.task.model.entity.User;
 import by.epam.task.model.entity.UserRole;
+import by.epam.task.model.entity.UserStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -21,7 +22,7 @@ public class CodeCommand implements Command {
         String code = request.getParameter(ParameterName.CODE);
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.ADMIN)) { return new Router(ERROR_404); }
+        if(user == null || user.getUserRole().equals(UserRole.ADMIN) || !user.getUserStatus().equals(UserStatus.ACTIVE)) { return new Router(ERROR_404); }
        // потом вернуть это проверка кода if(code.equals( (String) session.getAttribute(SessionAttribute.SESSION_CODE))) {
             session.setAttribute(SessionAttribute.SESSION_USER,user);
             request.setAttribute(ParameterName.LOGIN, user.getLogin());

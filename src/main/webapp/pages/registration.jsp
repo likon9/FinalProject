@@ -13,7 +13,7 @@
 <div class="form1">
     <h4><fmt:message key="registration.registration"/></h4>
 
-    <form action="controller" method="get">
+    <form action="controller" method="post">
         <center>
         <input type="hidden" name="command" value="REGISTRATION"/>
             <input class="input_text"type="email" name="email" placeholder="Email" required/><br>

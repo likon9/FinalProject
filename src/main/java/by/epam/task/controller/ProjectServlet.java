@@ -23,40 +23,40 @@ import static by.epam.task.controller.command.ParameterName.COMMAND;
  */
 @WebServlet("/controller")
 public class ProjectServlet extends HttpServlet {
-        private static final Logger logger = LogManager.getLogger();
-        private final CommandProvider provider = CommandProvider.getInstance();
+    private static final Logger logger = LogManager.getLogger();
+    private final CommandProvider provider = CommandProvider.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
-            processRequest(request, response);
-        }
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
-            processRequest(request, response);
-        }
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-        private void processRequest(HttpServletRequest request, HttpServletResponse response)
-                throws IOException, ServletException {
-            logger.log(Level.INFO, "method processRequest()");
-            String commandName = request.getParameter(COMMAND);
-            Command command = provider.getCommand(commandName);
-            Router router = null;
-            try {
-                router = command.execute(request);
-                switch (router.getType()) {
-                    case REDIRECT -> response.sendRedirect(router.getPagePath());
-                    case FORWARD -> request.getRequestDispatcher(router.getPagePath()).forward(request, response);
-                    default -> {
-                        logger.log(Level.ERROR, "unknown router type: {}", router.getType());
-                        response.sendRedirect(ERROR_404);
-                    }
+    private void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        logger.log(Level.INFO, "method processRequest()");
+        String commandName = request.getParameter(COMMAND);
+        Command command = provider.getCommand(commandName);
+        Router router = null;
+        try {
+            router = command.execute(request);
+            switch (router.getType()) {
+                case REDIRECT -> response.sendRedirect(router.getPagePath());
+                case FORWARD -> request.getRequestDispatcher(router.getPagePath()).forward(request, response);
+                default -> {
+                    logger.log(Level.ERROR, "unknown router type: {}", router.getType());
+                    response.sendRedirect(ERROR_404);
                 }
-            } catch (CommandException e) {
-                logger.log(Level.ERROR, "unknown router type: {}", router.getType());
-                response.sendRedirect(ERROR_404);
             }
+        } catch (CommandException e) {
+            logger.log(Level.ERROR, "unknown router type: {}", router.getType());
+            response.sendRedirect(ERROR_404);
         }
+    }
 
 }

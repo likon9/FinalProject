@@ -26,7 +26,7 @@ public class TariffPlanDaoImpl implements TariffPlanDao {
 
     private static TariffPlanDaoImpl instance;
 
-    public TariffPlanDaoImpl(){}
+    private TariffPlanDaoImpl(){}
 
     public static TariffPlanDaoImpl getInstance(){
         if (instance == null) {

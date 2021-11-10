@@ -8,13 +8,12 @@ import by.epam.task.controller.command.impl.admin.*;
 import by.epam.task.controller.command.impl.admin.userManagement.*;
 import by.epam.task.controller.command.impl.page.*;
 import by.epam.task.controller.command.impl.user.*;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.EnumMap;
 
-import static by.epam.task.controller.command.CommandType.TO_ERROR_PAGE;
+import static by.epam.task.controller.command.CommandType.*;
 
 /**
  * The type Command provider.
@@ -27,49 +26,50 @@ public class CommandProvider {
 
     private CommandProvider() {
 
-        commands.put(CommandType.LOGIN, new LoginCommand());
-        commands.put(CommandType.GO_TO_LOGIN, new GoToLoginCommand());
-        commands.put(CommandType.GO_TO_REGISTRATION, new GoToRegistrationCommand());
-        commands.put(CommandType.REGISTRATION, new RegistrationCommand());
-        commands.put(CommandType.CODE, new CodeCommand());
-        commands.put(CommandType.HOME, new HomeCommand());
-        commands.put(CommandType.SETTING_USER, new SettingUserCommand());
-        commands.put(CommandType.TARIFF, new TariffCommand());
-        commands.put(CommandType.USER_CONTRACT, new UserContractCommand());
-        commands.put(CommandType.USER_MANAGEMENT, new UserManagementCommand());
-        commands.put(CommandType.USER_SELECT, new UserSelectCommand());
-        commands.put(CommandType.BLOCK_USER, new BlockUserCommand());
-        commands.put(CommandType.SELECT_BY_ID, new SelectByUserIdCommand());
-        commands.put(CommandType.SELECT_BY_LOGIN, new SelectByUserLoginCommand());
-        commands.put(CommandType.SELECT_BY_EMAIL, new SelectByUserEmailCommand());
-        commands.put(CommandType.SELECT_BY_NAME, new SelectByUserNameCommand());
-        commands.put(CommandType.SELECT_BY_SURNAME, new SelectByUserSurnameCommand());
-        commands.put(CommandType.SELECT_BY_PHONE, new SelectByUserPhoneCommand());
-        commands.put(CommandType.GO_TO_ADD_TARIFF_PLAN, new GoToAddTariffPlanCommand());
-        commands.put(CommandType.TARIFF_PLAN_MANAGEMENT, new TariffPlanManagementCommand());
-        commands.put(CommandType.UPDATE_TARIFF_PLAN, new UpdateTariffPlanCommand());
-        commands.put(CommandType.SELECT_BY_NAME_TARIFF_PLAN, new SelectByNameTariffPlanCommand());
-        commands.put(CommandType.SELECT_BY_PRICE, new SelectByPriceCommand());
-        commands.put(CommandType.SELECT_BY_INTERNET_CONNECTION_SPEED, new SelectByInternetConnectionSpeedCommand());
-        commands.put(CommandType.CHANGE_LANGUAGE_COMMAND, new ChangeLanguageCommand());
-        commands.put(CommandType.NEW_CONTRACT, new NewContractCommand());
-        commands.put(CommandType.CONNECT_TARIFF, new ConnectTariffCommand());
-        commands.put(CommandType.DISCONNECT_TARIFF, new DisconnectTariffCommand());
-        commands.put(CommandType.NULLIFICATION_CONTRACT, new NullificationContractCommand());
-        commands.put(CommandType.FIRST_PAGE, new GoToFirstPage());
-        commands.put(CommandType.EXIT_USER, new ExitUserCommand());
-        commands.put(CommandType.UPDATE_USER, new UpdateUserCommand());
-        commands.put(CommandType.GO_TO_DELETE_USER, new GoToDeleteUserCommand());
-        commands.put(CommandType.DELETE_USER, new DeleteUserCommand());
-        commands.put(CommandType.GO_TO_CONTRACT_MANAGEMENT, new GoToContractManagementCommand());
-        commands.put(CommandType.CONTRACT_SELECT, new SelectByStatusContractCommand());
-        commands.put(CommandType.FIND_CONTRACTS_FROM_PARAMETER, new FindContractsFromParameterCommand());
-        commands.put(CommandType.ADD_TARIFF_PLAN, new AddTariffPlanCommand());
-        commands.put(CommandType.TOP_UP_BALANCE, new TopUpBalanceCommand());
-        commands.put(CommandType.GO_TO_TOP_UP_BALANCE, new GoToTopUpBalanceCommand());
-        commands.put(CommandType.USER_RECOVERY, new UserRecoveryCommand());
-        commands.put(CommandType.NEW_USER_DISCOUNT, new NewUserDiscountCommand());
-        commands.put(CommandType.WRITE_OF_ACCOUNT, new WriteOfAccountCommand());
+        commands.put(LOGIN, new LoginCommand());
+        commands.put(GO_TO_LOGIN, new GoToLoginCommand());
+        commands.put(GO_TO_REGISTRATION, new GoToRegistrationCommand());
+        commands.put(REGISTRATION, new RegistrationCommand());
+        commands.put(CODE, new CodeCommand());
+        commands.put(HOME, new HomeCommand());
+        commands.put(SETTING_USER, new SettingUserCommand());
+        commands.put(TARIFF, new TariffCommand());
+        commands.put(USER_CONTRACT, new UserContractCommand());
+        commands.put(USER_MANAGEMENT, new UserManagementCommand());
+        commands.put(USER_SELECT, new UserSelectCommand());
+        commands.put(BLOCK_USER, new BlockUserCommand());
+        commands.put(SELECT_BY_ID, new SelectByUserIdCommand());
+        commands.put(SELECT_BY_LOGIN, new SelectByUserLoginCommand());
+        commands.put(SELECT_BY_EMAIL, new SelectByUserEmailCommand());
+        commands.put(SELECT_BY_NAME, new SelectByUserNameCommand());
+        commands.put(SELECT_BY_SURNAME, new SelectByUserSurnameCommand());
+        commands.put(SELECT_BY_PHONE, new SelectByUserPhoneCommand());
+        commands.put(GO_TO_ADD_TARIFF_PLAN, new GoToAddTariffPlanCommand());
+        commands.put(TARIFF_PLAN_MANAGEMENT, new TariffPlanManagementCommand());
+        commands.put(UPDATE_TARIFF_PLAN, new UpdateTariffPlanCommand());
+        commands.put(SELECT_BY_NAME_TARIFF_PLAN, new SelectByNameTariffPlanCommand());
+        commands.put(SELECT_BY_PRICE, new SelectByPriceCommand());
+        commands.put(SELECT_BY_INTERNET_CONNECTION_SPEED, new SelectByInternetConnectionSpeedCommand());
+        commands.put(CHANGE_LANGUAGE_COMMAND, new ChangeLanguageCommand());
+        commands.put(NEW_CONTRACT, new NewContractCommand());
+        commands.put(CONNECT_TARIFF, new ConnectTariffCommand());
+        commands.put(DISCONNECT_TARIFF, new DisconnectTariffCommand());
+        commands.put(NULLIFICATION_CONTRACT, new NullificationContractCommand());
+        commands.put(FIRST_PAGE, new GoToFirstPage());
+        commands.put(EXIT_USER, new ExitUserCommand());
+        commands.put(UPDATE_USER, new UpdateUserCommand());
+        commands.put(GO_TO_DELETE_USER, new GoToDeleteUserCommand());
+        commands.put(DELETE_USER, new DeleteUserCommand());
+        commands.put(GO_TO_CONTRACT_MANAGEMENT, new GoToContractManagementCommand());
+        commands.put(CONTRACT_SELECT, new SelectByStatusContractCommand());
+        commands.put(FIND_CONTRACTS_FROM_PARAMETER, new FindContractsFromParameterCommand());
+        commands.put(ADD_TARIFF_PLAN, new AddTariffPlanCommand());
+        commands.put(TOP_UP_BALANCE, new TopUpBalanceCommand());
+        commands.put(GO_TO_TOP_UP_BALANCE, new GoToTopUpBalanceCommand());
+        commands.put(USER_RECOVERY, new UserRecoveryCommand());
+        commands.put(NEW_USER_DISCOUNT, new NewUserDiscountCommand());
+        commands.put(WRITE_OF_ACCOUNT, new WriteOfAccountCommand());
+        commands.put(TO_ERROR_PAGE, new GoToErrorPageCommand());
     }
 
     /**

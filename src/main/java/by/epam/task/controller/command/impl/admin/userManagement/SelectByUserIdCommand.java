@@ -3,6 +3,7 @@ package by.epam.task.controller.command.impl.admin.userManagement;
 import by.epam.task.controller.command.*;
 import by.epam.task.exception.CommandException;
 import by.epam.task.model.entity.User;
+import by.epam.task.model.entity.UserRole;
 import by.epam.task.model.service.impl.UserServiceImpl;
 import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ public class SelectByUserIdCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
         session.setAttribute(SessionAttribute.SESSION_USER,user);
+        if(user == null || user.getUserRole().equals(UserRole.USER)) { return new Router(ERROR_404); }
         UserServiceImpl userService = new UserServiceImpl();
         Optional<User> userOptional= null;
         try {

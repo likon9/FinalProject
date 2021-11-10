@@ -10,13 +10,15 @@ public class UserValidator {
 
 	private static final UserValidator instance = new UserValidator();
 
-	private static final String LOGIN_REGEX = "[a-zA-Z0-9].{5,24}";
+	private static final String LOGIN_REGEX = "[a-zA-Z0-9]{6,24}";
 
-	private static final String PASSWORD_REGEX = ".{6,24}";
+	private static final String PASSWORD_REGEX = "[a-zA-Z0-9]{6,24}";
 
 	private static final String NAME_REGEX = "[a-zA-Z]*|[ЁёА-я]*";
 
 	private static final int MAX_LENGTH_NAME = 24;
+
+	private static final int MIN_LENGTH_NAME = 3;
 
 	private static final int PHONE_LENGTH = 9;
 
@@ -68,7 +70,7 @@ public class UserValidator {
 	 * @param name the name
 	 * @return the boolean
 	 */
-	public boolean isNameValid(String name) { return !(name == null || name.isBlank()) && name.length() <= MAX_LENGTH_NAME && name.matches(NAME_REGEX); }
+	public boolean isNameValid(String name) { return !(name == null || name.isBlank()) && name.length() <= MAX_LENGTH_NAME && name.length() >= MIN_LENGTH_NAME && name.matches(NAME_REGEX); }
 
 	/**
 	 * Is surname valid boolean.
@@ -76,7 +78,7 @@ public class UserValidator {
 	 * @param surname the surname
 	 * @return the boolean
 	 */
-	public boolean isSurnameValid(String surname) { return !(surname == null || surname.isBlank()) && surname.length() <= MAX_LENGTH_NAME && surname.matches(NAME_REGEX); }
+	public boolean isSurnameValid(String surname) { return !(surname == null || surname.isBlank()) && surname.length() <= MAX_LENGTH_NAME && surname.length() >= MIN_LENGTH_NAME && surname.matches(NAME_REGEX); }
 
 	/**
 	 * Is phone number valid boolean.

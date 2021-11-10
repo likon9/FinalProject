@@ -28,6 +28,18 @@
     </style>
 </head>
 <body>
+<script type="text/javascript">
+    function my_onkeydown_handler( event ) {
+        switch (event.keyCode) {
+            case 116 :
+                event.preventDefault();
+                event.keyCode = 0;
+                window.status = "F5 disabled";
+                break;
+        }
+    }
+    document.addEventListener("keydown", my_onkeydown_handler);
+</script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-xl">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -60,10 +72,10 @@
 </nav>
 <div id="content">
     <center>
-        <form  class="c1" action="controller" method="get">
-            <fmt:message key="top.up.balance.inscription"/>${balance}BYN<br>
-            <fmt:message key="top.up.balance.price"/> ${totalCoast}BYN<br>
-            <fmt:message key="top.up.balance.price.discount"/>${totalCoast- (totalCoast*discount)}BYN<br><br>
+        <form  class="c1" action="controller" method="get" >
+            <fmt:message key="top.up.balance.inscription"/> ${balance}BYN<br>
+            <fmt:message key="top.up.balance.q"/> ${totalCoast}BYN<br>
+            <fmt:message key="top.up.balance.a"/>${totalCoast- (totalCoast*discount)}BYN<br><br>
             <input type="hidden" name="command" value="TOP_UP_BALANCE"/>
             <input type="number" name="balance" placeholder="<fmt:message key="top.up.balance"/>" step="0.01" min="0" max="999" placeholder="0,00" />
             <input class="btn btn-outline-success" type="submit" value="<fmt:message key="top.up.balance.but"/>"/>

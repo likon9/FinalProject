@@ -51,7 +51,6 @@ public class LoginCommand implements Command {
                    logger.info("This user is blocked.");
                    router = new Router(LOGIN);
                } else if(String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(DELETED))) {
-                   System.out.println(sessionUser.getLogin());
                    request.setAttribute(ParameterName.LOGIN, sessionUser.getLogin());
                    logger.info("This user is deleted.");
                    router = new Router(USER_RECOVERY);

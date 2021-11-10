@@ -68,8 +68,7 @@ public class UserServiceImpl implements UserService {
                     logger.error("Exception in method updateEmail()", e);
                     throw new ServiceException("Exception when update email", e);
                 }
-            }
-            else {
+            } else {
                 result = false;
             }
         return result;

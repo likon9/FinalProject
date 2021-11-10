@@ -26,7 +26,7 @@ public class SelectByPriceCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
+        if(user == null || user.getUserRole().equals(UserRole.USER)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         Double price = Double.valueOf(request.getParameter(ParameterName.PRICE));
         TariffPlanServiceImpl tariffPlanService = new TariffPlanServiceImpl();

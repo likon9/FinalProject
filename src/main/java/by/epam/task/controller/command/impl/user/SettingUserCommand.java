@@ -7,6 +7,7 @@ import by.epam.task.controller.command.SessionAttribute;
 import by.epam.task.exception.CommandException;
 import by.epam.task.model.entity.User;
 import by.epam.task.model.entity.UserRole;
+import by.epam.task.model.entity.UserStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -24,7 +25,7 @@ public class SettingUserCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.ADMIN)) { return new Router(ERROR_404); }
+        if(user == null || user.getUserRole().equals(UserRole.ADMIN) || !user.getUserStatus().equals(UserStatus.ACTIVE)) { return new Router(ERROR_404); }
         request.setAttribute(ParameterName.LOGIN, user.getLogin());
         request.setAttribute(ParameterName.EMAIL, user.getEmail());
         request.setAttribute(ParameterName.NAME, user.getName());

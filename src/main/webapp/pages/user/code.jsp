@@ -30,7 +30,7 @@
     <h3>${fail}</h3>
     <center>
         <div class="flex">
-            <form style="display:inline;" action="controller" method="get">
+            <form style="display:inline;" action="controller" method="post">
                 <input type="hidden" name="command" value="CODE"/>
                 <input class="input_text1" type="text" name="code" width="100px" placeholder="<fmt:message key="code.code"/>" required pattern="[0-9A-Z]{5}"/>
                 <input class="but1" type="submit" value="<fmt:message key="code.button.enter"/>"/><br>

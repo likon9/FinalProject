@@ -69,6 +69,7 @@
     <table class="table">
         <thead>
         <tr>
+            <th> id</th>
             <th scope="col"><fmt:message key="my.contract.name"/></th>
             <th scope="col"><fmt:message key="my.contract.price"/></th>
             <th scope="col"><fmt:message key="my.contract.speed"/></th>
@@ -79,7 +80,9 @@
         </thead>
         <tbody>
         <c:forEach items="${list}" var="contract" varStatus="count">
-            <tr> <td>${contract.tariffPlanName}</td>
+            <tr>
+                <td>${contract.contractId}</td>
+                <td>${contract.tariffPlanName}</td>
                 <td>${contract.tariffPlanPrice}</td>
                 <td>${contract.tariffPlanSpeed}</td>
                 <td>${contract.connectionDate}</td>

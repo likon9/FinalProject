@@ -26,7 +26,7 @@ public class FindContractsFromParameterCommand implements Command {
         Router router = null;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.USER))
+        if(user == null || user.getUserRole().equals(UserRole.USER)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         ContractServiceImpl contractService = new ContractServiceImpl();
         List<Contract> contractList = null;

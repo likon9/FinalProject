@@ -29,7 +29,7 @@ public class TariffPlanManagementCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
         session.setAttribute(SessionAttribute.SESSION_USER,user);
-        if(user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
+        if(user == null || user.getUserRole().equals(UserRole.USER)) { return new Router(ERROR_404); }
         TariffPlanServiceImpl tariffPlanService = new TariffPlanServiceImpl();
         List<TariffPlan> tariffPlanList = null;
         try{

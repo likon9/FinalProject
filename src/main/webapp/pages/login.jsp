@@ -29,14 +29,14 @@
 
     <h1><fmt:message key="login.log"/></h1>
 
-    <form  action="controller" method="get">
+    <form  action="controller" method="post">
         <input type="hidden" name="command" value="LOGIN"/>
         <center>
-        <input class="input_text" type="text" name="login"
-               placeholder="<fmt:message key="login.login"/>" minlength="6" maxlength="64" required pattern="[a-zA-Z0-9]{6,24}" /><br>
-        <input class="input_text" type="password" name="password"
-               placeholder="<fmt:message key="login.password"/>" minlength="6" maxlength="64" required pattern="[0-9A-Za-z0-9]{6,24}"/><br>
-    </center>
+            <input class="input_text" type="text" name="login"
+                   placeholder="<fmt:message key="login.login"/>" minlength="6" maxlength="64" required pattern="[a-zA-Z0-9]{6,24}" /><br>
+            <input class="input_text" type="password" name="password"
+                   placeholder="<fmt:message key="login.password"/>" minlength="6" maxlength="64" required pattern="[0-9A-Za-z0-9]{6,24}"/><br>
+        </center>
         <input class="button" type="submit" value="<fmt:message key="login.singIn"/>"/>
     </form>
 
@@ -58,15 +58,13 @@
         <c:if test="${resUserNotFound}">
             <fmt:message key="message.login.fail"/>
         </c:if>
-
     </h3>
     <form action="controller" method="get">
         <input type="hidden" name="command" value="GO_TO_REGISTRATION"/>
         <h2><fmt:message key="login.firstTime"/>
             <input class="button1" type="submit" value="<fmt:message key="login.registration"/>"/><br></h2>
     </form>
-
 </div>
-
 </body>
 </html>
+

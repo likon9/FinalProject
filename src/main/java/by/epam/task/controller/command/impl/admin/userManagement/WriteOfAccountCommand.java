@@ -34,7 +34,7 @@ public class WriteOfAccountCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if (user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
+        if(user == null || user.getUserRole().equals(UserRole.USER)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER, user);
         String id = request.getParameter(ParameterName.USER_ID);
         UserServiceImpl userService = new UserServiceImpl();
@@ -50,9 +50,10 @@ public class WriteOfAccountCommand implements Command {
         ContractServiceImpl contractService = new ContractServiceImpl();
         try {
             List<Contract> contractList = contractService.findAllContractByUserId(Long.valueOf(id));
+            System.out.println(contractList);
             for (int i = 0; i < contractList.size(); i++) {
                 if (contractList.get(i).getContractStatus().equals(ContractStatus.CONNECTED)) {
-                    totalCost =+ Double.valueOf(String.valueOf(contractList.get(i).getTariffPlanPrice()));
+                    totalCost = totalCost + Double.valueOf(String.valueOf(contractList.get(i).getTariffPlanPrice()));
                 }
             }
             balance = balance - (totalCost-totalCost*discount);

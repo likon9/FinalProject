@@ -38,6 +38,18 @@
     </style>
 </head>
 <body>
+<script type="text/javascript">
+    function my_onkeydown_handler( event ) {
+        switch (event.keyCode) {
+            case 116 :
+                event.preventDefault();
+                event.keyCode = 0;
+                window.status = "F5 disabled";
+                break;
+        }
+    }
+    document.addEventListener("keydown", my_onkeydown_handler);
+</script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-xl">
@@ -117,5 +129,6 @@
         </c:if>
     </center>
 </div>
+
 </body>
 </html>

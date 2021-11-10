@@ -53,35 +53,41 @@ public class TariffPlan {
 
     @Override
     public String toString() {
-        return "TariffPlan{" +
-                "tariffPlanId=" + tariffPlanId +
-                ", nameTariffPlan='" + nameTariffPlan + '\'' +
-                ", price=" + price +
-                ", internetConnectionSpeed=" + internetConnectionSpeed +
-                '}';
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(tariffPlanId);
+        builder.append(" ");
+        builder.append(nameTariffPlan);
+        builder.append(" ");
+        builder.append(price);
+        builder.append(" ");
+        builder.append(internetConnectionSpeed);
+
+        return builder.toString();
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TariffPlan)) return false;
-        TariffPlan that = (TariffPlan) o;
-        return getInternetConnectionSpeed() == that.getInternetConnectionSpeed()
-                && Objects.equals(getTariffPlanId(), that.getTariffPlanId())
-                && Objects.equals(getNameTariffPlan(), that.getNameTariffPlan())
-                && Objects.equals(getPrice(), that.getPrice())
-                && Objects.equals(getInternetConnectionSpeed(), that.getInternetConnectionSpeed());
 
+        TariffPlan that = (TariffPlan) o;
+
+        if (getInternetConnectionSpeed() != that.getInternetConnectionSpeed()) return false;
+        if (getTariffPlanId() != null ? !getTariffPlanId().equals(that.getTariffPlanId()) : that.getTariffPlanId() != null)
+            return false;
+        if (getNameTariffPlan() != null ? !getNameTariffPlan().equals(that.getNameTariffPlan()) : that.getNameTariffPlan() != null)
+            return false;
+        return getPrice() != null ? getPrice().equals(that.getPrice()) : that.getPrice() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result += 37 * result + Long.hashCode(getTariffPlanId());
-        result += 37 * result + getNameTariffPlan().hashCode();
-        result += 37 * result + getPrice().hashCode();
-        result += 37 * result + Integer.hashCode(getInternetConnectionSpeed());
-
+        int result = getTariffPlanId() != null ? getTariffPlanId().hashCode() : 0;
+        result = 31 * result + (getNameTariffPlan() != null ? getNameTariffPlan().hashCode() : 0);
+        result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
+        result = 31 * result + getInternetConnectionSpeed();
         return result;
     }
 }

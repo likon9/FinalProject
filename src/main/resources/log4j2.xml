@@ -10,7 +10,7 @@
     <Console name="Console" target="SYSTEM_OUT">
         <PatternLayout pattern = "${pattern_console}"/>
     </Console>
-    <RollingFile name="File1" fileName="logs/log_roll.txt"
+    <RollingFile name="File" fileName="logs/log_roll.txt"
                  filePattern = "logs/${date:yyyy-MM-dd}/%d{yyyy-MM-dd}_%i.txt">
         <PatternLayout pattern ="${pattern_file}"/>
         <Policies>
@@ -22,7 +22,7 @@
 </Appenders>
 <Loggers>
     <Root level="debug" >
-        <AppenderRef ref="File1"/>
+        <AppenderRef ref="File"/>
         <AppenderRef ref="Console" level = "trace"/>
     </Root>
 </Loggers>

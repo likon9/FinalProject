@@ -22,7 +22,7 @@ public class ContractDaoImpl implements ContractDao {
     private static final Logger logger = LogManager.getLogger();
 
     private static ContractDaoImpl instance;
-    public ContractDaoImpl(){}
+    private ContractDaoImpl(){}
 
     public static ContractDaoImpl getInstance(){
         if (instance == null) {

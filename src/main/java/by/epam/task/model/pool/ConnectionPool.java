@@ -4,6 +4,8 @@ import by.epam.task.util.PropertyReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -33,9 +35,10 @@ public class ConnectionPool {
 
     private ConnectionPool() {
         try{
-            PropertyReader reader = new PropertyReader();
-            Properties properties = null;
-            properties = reader.read(DATABASE_PROPERTY_PATH);
+            Properties properties = new Properties();
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream inputStream = loader.getResourceAsStream(DATABASE_PROPERTY_PATH);
+            properties.load(inputStream);
             String url = properties.getProperty(DATABASE_URL);
             String driver = properties.getProperty(DATABASE_DRIVER);
             Class.forName(driver);
@@ -44,7 +47,7 @@ public class ConnectionPool {
             for (int i = 0; i < CONNECTION_POOL_SIZE; i++) {
                 freeConnections.add(new ProxyConnection(DriverManager.getConnection(url, properties)));
             }
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException | SQLException e) {
             logger.error("Error during connection pool creation.", e);
             throw new RuntimeException("Error during connection pool creation.",e);
         }

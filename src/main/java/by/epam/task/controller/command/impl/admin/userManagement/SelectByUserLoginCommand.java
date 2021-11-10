@@ -24,11 +24,10 @@ public class SelectByUserLoginCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router router;
-
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
         session.setAttribute(SessionAttribute.SESSION_USER, user);
-        if(user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
+        if(user == null || user.getUserRole().equals(UserRole.USER)) { return new Router(ERROR_404); }
         UserServiceImpl userService = new UserServiceImpl();
         Optional<User> userOptional = null;
         try {

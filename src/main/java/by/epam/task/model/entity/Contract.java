@@ -101,16 +101,25 @@ public class Contract {
 
     @Override
     public String toString() {
-        return "Contract{" +
-                "contractId=" + contractId +
-                ", connectionDate=" + connectionDate +
-                ", userId=" + userId +
-                ", tariffPlanId=" + tariffPlanId +
-                ", tariffPlanName='" + tariffPlanName + '\'' +
-                ", tariffPlanPrice=" + tariffPlanPrice +
-                ", tariffPlanSpeed=" + tariffPlanSpeed +
-                ", contractStatus=" + contractStatus +
-                '}';
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(contractId);
+        builder.append(" ");
+        builder.append(connectionDate);
+        builder.append(" ");
+        builder.append(userId);
+        builder.append(" ");
+        builder.append(tariffPlanId);
+        builder.append(" ");
+        builder.append(tariffPlanName);
+        builder.append(" ");
+        builder.append(tariffPlanPrice);
+        builder.append(" ");
+        builder.append(tariffPlanSpeed);
+        builder.append(" ");
+        builder.append(contractStatus);
+
+        return builder.toString();
     }
 
     @Override
@@ -118,27 +127,32 @@ public class Contract {
         if (this == o) return true;
         if (!(o instanceof Contract)) return false;
         Contract contract = (Contract) o;
-        return getTariffPlanSpeed() == contract.getTariffPlanSpeed()
-                && Objects.equals(getContractId(), contract.getContractId())
-                && Objects.equals(getConnectionDate(), contract.getConnectionDate())
-                && Objects.equals(getUserId(), contract.getUserId())
-                && Objects.equals(getTariffPlanId(), contract.getTariffPlanId())
-                && Objects.equals(getTariffPlanName(), contract.getTariffPlanName())
-                && Objects.equals(getTariffPlanPrice(), contract.getTariffPlanPrice())
-                && Objects.equals(getTariffPlanSpeed(), contract.getTariffPlanSpeed())
-                && getContractStatus() == contract.getContractStatus();
+        if (getTariffPlanSpeed() != contract.getTariffPlanSpeed()) return false;
+        if (getContractId() != null ? !getContractId().equals(contract.getContractId()) : contract.getContractId() != null)
+            return false;
+        if (getConnectionDate() != null ? !getConnectionDate().equals(contract.getConnectionDate()) : contract.getConnectionDate() != null)
+            return false;
+        if (getUserId() != null ? !getUserId().equals(contract.getUserId()) : contract.getUserId() != null)
+            return false;
+        if (getTariffPlanId() != null ? !getTariffPlanId().equals(contract.getTariffPlanId()) : contract.getTariffPlanId() != null)
+            return false;
+        if (getTariffPlanName() != null ? !getTariffPlanName().equals(contract.getTariffPlanName()) : contract.getTariffPlanName() != null)
+            return false;
+        if (getTariffPlanPrice() != null ? !getTariffPlanPrice().equals(contract.getTariffPlanPrice()) : contract.getTariffPlanPrice() != null)
+            return false;
+        return getContractStatus() == contract.getContractStatus();
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result += 37 * result + Long.hashCode(getContractId());
-        result += 37 * result + getConnectionDate().hashCode();
-        result += 37 * result + Long.hashCode(getUserId());
-        result += 37 * result + Long.hashCode(getTariffPlanId());
-        result += 37 * result + getTariffPlanName().hashCode();
-        result += 37 * result + getTariffPlanPrice().hashCode();
-        result += 37 * result + Integer.hashCode(getTariffPlanSpeed());
+        int result = getContractId() != null ? getContractId().hashCode() : 0;
+        result = 31 * result + (getConnectionDate() != null ? getConnectionDate().hashCode() : 0);
+        result = 31 * result + (getUserId() != null ? getUserId().hashCode() : 0);
+        result = 31 * result + (getTariffPlanId() != null ? getTariffPlanId().hashCode() : 0);
+        result = 31 * result + (getTariffPlanName() != null ? getTariffPlanName().hashCode() : 0);
+        result = 31 * result + (getTariffPlanPrice() != null ? getTariffPlanPrice().hashCode() : 0);
+        result = 31 * result + getTariffPlanSpeed();
+        result = 31 * result + (getContractStatus() != null ? getContractStatus().hashCode() : 0);
         return result;
     }
 }

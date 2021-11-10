@@ -30,7 +30,7 @@ public class AddTariffPlanCommand implements Command {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.USER)) { return new Router(ERROR_404); }
+        if(user == null || user.getUserRole().equals(UserRole.USER)) { return new Router(ERROR_404); }
         Map<String, String> newTariffPlan = new HashMap<>();
         newTariffPlan.put(NAME_TARIFF_PLAN, request.getParameter(ParameterName.NAME_TARIFF_PLAN));
         newTariffPlan.put(PRICE, request.getParameter(ParameterName.PRICE));

@@ -8,6 +8,7 @@ import by.epam.task.exception.CommandException;
 import by.epam.task.model.entity.TariffPlan;
 import by.epam.task.model.entity.User;
 import by.epam.task.model.entity.UserRole;
+import by.epam.task.model.entity.UserStatus;
 import by.epam.task.model.service.impl.TariffPlanServiceImpl;
 import by.epam.task.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ public class NewContractCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
-        if(user == null || user.getUserStatus().equals(UserRole.ADMIN)) { return new Router(ERROR_404); }
+        if(user == null || user.getUserRole().equals(UserRole.ADMIN) || !user.getUserStatus().equals(UserStatus.ACTIVE)) { return new Router(ERROR_404); }
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         TariffPlanServiceImpl tariffPlanService = new TariffPlanServiceImpl();
         TariffPlan tariffPlan = null;

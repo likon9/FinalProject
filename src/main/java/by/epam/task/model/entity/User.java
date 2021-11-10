@@ -145,56 +145,73 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", email='" + email + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phone=" + phone +
-                ", balance=" + balance +
-                ", registrationDate=" + registrationDate +
-                ", discount=" + discount +
-                ", userStatus=" + userStatus +
-                ", userRole=" + userRole +
-                '}';
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(userId);
+        builder.append(" ");
+        builder.append(email);
+        builder.append(" ");
+        builder.append(login);
+        builder.append(" ");
+        builder.append(password);
+        builder.append(" ");
+        builder.append(name);
+        builder.append(" ");
+        builder.append(surname);
+        builder.append(" ");
+        builder.append(phone);
+        builder.append(" ");
+        builder.append(balance);
+        builder.append(" ");
+        builder.append(registrationDate);
+        builder.append(" ");
+        builder.append(discount);
+        builder.append(" ");
+        builder.append(userStatus);
+        builder.append(" ");
+        builder.append(userRole);
+
+        return builder.toString();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
+
         User user = (User) o;
-        return Objects.equals(getUserId(), user.getUserId())
-                && Objects.equals(getEmail(), user.getEmail())
-                && Objects.equals(getLogin(), user.getLogin())
-                && Objects.equals(getPassword(), user.getPassword())
-                && Objects.equals(getName(), user.getName())
-                && Objects.equals(getSurname(), user.getSurname())
-                && Objects.equals(getPhone(), user.getPhone())
-                && Objects.equals(getBalance(), user.getBalance())
-                && Objects.equals(getRegistrationDate(), user.getRegistrationDate())
-                && Objects.equals(getDiscount(), user.getDiscount())
-                && getUserStatus() == user.getUserStatus()
-                && getUserRole() == user.getUserRole();
+
+        if (getUserId() != null ? !getUserId().equals(user.getUserId()) : user.getUserId() != null) return false;
+        if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
+        if (getLogin() != null ? !getLogin().equals(user.getLogin()) : user.getLogin() != null) return false;
+        if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
+            return false;
+        if (getName() != null ? !getName().equals(user.getName()) : user.getName() != null) return false;
+        if (getSurname() != null ? !getSurname().equals(user.getSurname()) : user.getSurname() != null) return false;
+        if (getPhone() != null ? !getPhone().equals(user.getPhone()) : user.getPhone() != null) return false;
+        if (getBalance() != null ? !getBalance().equals(user.getBalance()) : user.getBalance() != null) return false;
+        if (getRegistrationDate() != null ? !getRegistrationDate().equals(user.getRegistrationDate()) : user.getRegistrationDate() != null)
+            return false;
+        if (getDiscount() != null ? !getDiscount().equals(user.getDiscount()) : user.getDiscount() != null)
+            return false;
+        if (getUserStatus() != user.getUserStatus()) return false;
+        return getUserRole() == user.getUserRole();
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result += 37 * result + Long.hashCode(getUserId());
-        result += 37 * result + (getEmail().hashCode());
-        result += 37 * result + (getLogin().hashCode());
-        result += 37 * result + (getPassword().hashCode());
-        result += 37 * result + (getName().hashCode());
-        result += 37 * result + (getSurname().hashCode());
-        result += 37 * result + (getPhone().hashCode());
-        result += 37 * result + (getBalance().hashCode());
-        result += 37 * result + (getDiscount().hashCode());
-        result += 37 * result + (getUserStatus().hashCode());
-        result += 37 * result + (getUserRole().hashCode());
-
+        int result = getUserId() != null ? getUserId().hashCode() : 0;
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getLogin() != null ? getLogin().hashCode() : 0);
+        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getSurname() != null ? getSurname().hashCode() : 0);
+        result = 31 * result + (getPhone() != null ? getPhone().hashCode() : 0);
+        result = 31 * result + (getBalance() != null ? getBalance().hashCode() : 0);
+        result = 31 * result + (getRegistrationDate() != null ? getRegistrationDate().hashCode() : 0);
+        result = 31 * result + (getDiscount() != null ? getDiscount().hashCode() : 0);
+        result = 31 * result + (getUserStatus() != null ? getUserStatus().hashCode() : 0);
+        result = 31 * result + (getUserRole() != null ? getUserRole().hashCode() : 0);
         return result;
     }
 }

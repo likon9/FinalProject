@@ -50,7 +50,6 @@ public class RegistrationCommand implements Command {
             request.setAttribute(ParameterName.FAIL, true);
             logger.error("Error registration user.", e);
             router = new Router(REGISTRATION);
-            e.printStackTrace();
         }
         return router;
     }
