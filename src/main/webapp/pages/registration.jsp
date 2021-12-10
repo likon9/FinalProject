@@ -8,10 +8,23 @@
 <head>
     <title><fmt:message key="registration.title"/></title>
     <link rel="stylesheet" href="styles/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <style>
+        body{
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            opacity: 0.8;
+        }
+    </style>
 </head>
-<body>
-<div class="form1">
-    <h4><fmt:message key="registration.registration"/></h4>
+<body background="img/background1.jpg" background-size=cover >
+<div class="form1"><br><br><br><br>
+    <h1><fmt:message key="registration.registration"/></h1>
 
     <form action="controller" method="post">
         <center>
@@ -32,11 +45,13 @@
             <option value="33">33</option>
             <option value="44">44</option>
         </select>
-        <input class="input_text2"style="display:inline;" class="input_text"type="text" name="phone" placeholder="<fmt:message key="registration.phone"/>"
-               maxlength="7" required pattern="[0-9]{7}"/><br>
+            <input class="input_text2"style="display:inline;" class="input_text"type="text" name="phone" placeholder="<fmt:message key="registration.phone"/>"
+                   maxlength="7" required pattern="[0-9]{7}"/><br>
         </div>
-            </center>
-        <input class="button" type="submit" value="<fmt:message key="registration.registration"/>"/><br>
+        </center>
+<input class="button" type="submit" value="<fmt:message key="registration.registration"/>"/><br>
+
+
     </form>
     <h3>
         <c:if test="${res}">
@@ -49,8 +64,8 @@
 
     <form action="controller" method="get">
         <input type="hidden" name="command" value="GO_TO_LOGIN"/>
-        <h2><fmt:message key="registration.message"/>
-            <input class="button1" type="submit" value="<fmt:message key="registration.back"/>"/><br></h2>
+        <h4><fmt:message key="registration.message"/>
+            <input class="button1" type="submit" value="<fmt:message key="registration.back"/>"/><br></h4>
     </form>
 </div>
 </body>

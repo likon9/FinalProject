@@ -75,7 +75,7 @@ public class UpdateUserCommand implements Command {
                 try {
                     if (userService.updateSurname(parameterUser, user.getUserId())) {
                     user.setSurname(request.getParameter(ParameterName.PARAMETER));
-                        request.setAttribute(ParameterName.RES_UPDATE_USER_TRUE, true);
+                    request.setAttribute(ParameterName.RES_UPDATE_USER_TRUE, true);
                     logger.info("Successfully updated user surname");
                     } else {
                         request.setAttribute(ParameterName.RES_UPDATE_USER_FALSE, true);

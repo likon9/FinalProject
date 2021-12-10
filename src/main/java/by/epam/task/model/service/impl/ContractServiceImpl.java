@@ -18,7 +18,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public boolean addContract(Map<String, String> parameters) throws ServiceException {
-        boolean result = true;
+        boolean result;
 
             ContractDaoImpl contractDaoImpl = ContractDaoImpl.getInstance();
             try {
@@ -32,10 +32,9 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public boolean updateStatusContract(Map<String, String> parameters, Long contractId) throws ServiceException {
-        boolean result = true;
+        boolean result;
 
             ContractDaoImpl contractDaoImpl = ContractDaoImpl.getInstance();
-
             try {
                 result = contractDaoImpl.updateStatusContract(parameters, contractId);
             } catch (DaoException e) {

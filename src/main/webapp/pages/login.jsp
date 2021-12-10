@@ -9,15 +9,28 @@
 <head>
     <title><fmt:message key="login.title"/></title>
     <link rel="stylesheet" href="styles/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <style>
+        body{
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            opacity: 0.8;
+        }
+    </style>
 </head>
-<body>
+<body background="img/background1.jpg" background-size=cover >
 
 <div class="form1">
     <c:set var="localeRu">ru</c:set>
     <c:set var="localeEn">en</c:set>
     <form method="post" action="controller">
         <input type="hidden" name="command" value="CHANGE_LANGUAGE_COMMAND"/>
-        <button class="language-button" type="submit">
+        <button class="btn btn-primary btn-sm" type="submit">
             <c:if test="${language == localeRu}">
                 <fmt:message key="header.language.ru"/>
             </c:if>
@@ -26,10 +39,10 @@
             </c:if>
         </button>
     </form>
-
+    <br><br><br><br>
     <h1><fmt:message key="login.log"/></h1>
 
-    <form  action="controller" method="post">
+    <form class="form2" action="controller" method="post">
         <input type="hidden" name="command" value="LOGIN"/>
         <center>
             <input class="input_text" type="text" name="login"
@@ -37,7 +50,7 @@
             <input class="input_text" type="password" name="password"
                    placeholder="<fmt:message key="login.password"/>" minlength="6" maxlength="64" required pattern="[0-9A-Za-z0-9]{6,24}"/><br>
         </center>
-        <input class="button" type="submit" value="<fmt:message key="login.singIn"/>"/>
+            <input class="button" type="submit" value="<fmt:message key="login.singIn"/>"/>
     </form>
 
     <h2>
@@ -61,8 +74,8 @@
     </h3>
     <form action="controller" method="get">
         <input type="hidden" name="command" value="GO_TO_REGISTRATION"/>
-        <h2><fmt:message key="login.firstTime"/>
-            <input class="button1" type="submit" value="<fmt:message key="login.registration"/>"/><br></h2>
+        <h4><fmt:message key="login.firstTime"/>
+            <input class="button1" type="submit" value="<fmt:message key="login.registration"/>"/><br></h4>
     </form>
 </div>
 </body>

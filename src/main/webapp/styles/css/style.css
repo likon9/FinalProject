@@ -1,6 +1,3 @@
-body {
-    background: whitesmoke;
-}
 
 select
 {
@@ -22,7 +19,13 @@ select
     color: white;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 10px;
+}
+.form2 {
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+
 }
 
 
@@ -62,7 +65,7 @@ select
 
 .button{
     margin-top: 20px;
-    background: #203da2;
+    background: blue;
     border: none;
     color: white;
     padding: 5px 32px;
@@ -72,6 +75,34 @@ select
     font-size: 16px;
     border-radius: 10px;
     margin-left: 225px;
+}
+.button1{
+
+    background-color: rgba(255, 255, 255, 0.0);
+    border: none;
+    color: #203da2;
+    padding: 1px 1px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    font-style: revert;
+    font-family: Calibri;
+    text-align: center;
+}
+.button2{
+    margin-top: 20px;
+    background: blue;
+    border: none;
+    color: white;
+    padding: 5px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 h1{
@@ -107,10 +138,8 @@ h3{
     border-radius: 7px;
 }
 
-
-
 h4{
-    margin-top: 50px;
+
     align-items: center;
     font-style: revert;
     font-family: Calibri;
@@ -143,32 +172,7 @@ h6{
     margin-right: 100px;
 
 }
-.button1{
 
-    background-color: rgba(255, 255, 255, 0.0);
-    border: none;
-    color: #203da2;
-    padding: 1px 1px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    font-style: revert;
-    font-family: Calibri;
-    text-align: center;
-}
-.button2{
-    margin-top: 20px;
-    background: #203da2;
-    border: none;
-    color: white;
-    padding: 5px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 10px;
-}
 table{
     margin-left: 15%;
     margin-right: 15%;

@@ -21,9 +21,8 @@
             width: 600px;
             margin-left: 370px;
         }
-        body {
-            margin: 20px;
-            background: whitesmoke}
+
+
         #sidebar, #content { position: absolute; }
         #sidebar, #content { overflow: auto; padding: 10px; }
         #content {
@@ -34,9 +33,20 @@
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
         }
+        body{
+            margin: 20px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            opacity: 0.8;
+        }
     </style>
 </head>
-<body>
+<body background="img/background1.jpg" background-size=cover >
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Contract {
+public class Contract extends AbstractEntity {
     private Long contractId;
     private LocalDate connectionDate;
     private Long userId;
@@ -14,8 +14,8 @@ public class Contract {
     private BigDecimal tariffPlanPrice;
     private int tariffPlanSpeed;
     private ContractStatus contractStatus;
-    public Contract() {
-    }
+
+    public Contract() { }
 
     public Contract(Long contractId,
                     LocalDate connectionDate,

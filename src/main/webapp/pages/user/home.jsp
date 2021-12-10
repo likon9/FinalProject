@@ -23,8 +23,7 @@
             -moz-column-rule: 1px solid #ccc;
             column-rule: 1px solid #ccc;
         }
-            body { margin: 20px;
-            background: whitesmoke}
+
         #sidebar, #content { position: absolute; }
         #sidebar, #content { overflow: auto; padding: 10px; }
         #content {
@@ -35,9 +34,20 @@
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
         }
+        body{
+            margin: 20px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            opacity: 0.8;
+        }
     </style>
 </head>
-<body>
+<body background="img/background1.jpg" background-size=cover >
 <script type="text/javascript">
     function my_onkeydown_handler( event ) {
         switch (event.keyCode) {
@@ -84,7 +94,7 @@
 <div id="content">
     <form action="controller" method="get" >
         <input type="hidden" name="command" value="SETTING_USER"/>
-        <input class="rounded float-end" type="image" width="30px" src="picture/pngwing.png" name="submit">
+        <input class="rounded float-end" type="image" width="30px" src="img/pngwing.png" name="submit">
     </form>
     <text class="fs-4" >
     <p class="fst-italic" > <fmt:message key="home.inscription"/></p>

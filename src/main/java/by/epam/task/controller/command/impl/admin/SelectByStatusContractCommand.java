@@ -31,7 +31,6 @@ public class SelectByStatusContractCommand implements Command {
         session.setAttribute(SessionAttribute.SESSION_USER,user);
         List<Contract> contractList = null;
         ContractServiceImpl contractService = new ContractServiceImpl();
-        System.out.println(request.getParameter(ParameterName.SELECT));
         switch (request.getParameter(ParameterName.SELECT)){
             case ALL_CONTRACTS:
                 try {

@@ -12,11 +12,11 @@ import by.epam.task.model.pool.ConnectionPool;
 @WebListener
 public class ServletContextListenerImpl implements ServletContextListener {
         @Override
-        public void contextInitialized(ServletContextEvent sce)  {
-            ConnectionPool.getInstance();
+        public void contextInitialized(ServletContextEvent sce)  { ConnectionPool.getInstance().getConnection();
         }
         @Override
         public void contextDestroyed(ServletContextEvent sce)  {
             ConnectionPool.getInstance().destroyPool();
         }
+
 }

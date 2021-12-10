@@ -25,7 +25,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addUser(Map<String, String> parameters) throws ServiceException {
-        boolean result = true;
+        boolean result;
+
             UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
             HashGenerator hashGenerator = HashGenerator.getInstance();
             String login = parameters.get(LOGIN);
@@ -51,13 +52,15 @@ public class UserServiceImpl implements UserService {
                     throw new ServiceException("Exception when registration user", e);
                 }
             }
-            else { result = false; }
+            else {
+                result = false;
+            }
         return result;
     }
 
     @Override
     public boolean updateEmail(Map<String, String> parameters, Long userId) throws ServiceException {
-        boolean result = true;
+        boolean result;
             UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
             String email = parameters.get(EMAIL);
             UserValidator validator = UserValidator.getInstance();
@@ -68,7 +71,8 @@ public class UserServiceImpl implements UserService {
                     logger.error("Exception in method updateEmail()", e);
                     throw new ServiceException("Exception when update email", e);
                 }
-            } else {
+            }
+            else {
                 result = false;
             }
         return result;
@@ -76,7 +80,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateName(Map<String, String> parameters, Long userId) throws ServiceException {
-        boolean result = true;
+        boolean result;
 
             UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
             String name = parameters.get(NAME);
@@ -97,7 +101,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateSurname(Map<String, String> parameters, Long userId) throws ServiceException {
-        boolean result = true;
+        boolean result;
 
             UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
             String surname = parameters.get(SURNAME);
@@ -118,7 +122,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updatePhone(Map<String, String> parameters, Long userId) throws ServiceException {
-        boolean result = true;
+        boolean result;
 
             UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
             String phone = parameters.get(PHONE);
@@ -139,7 +143,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateBalance(Map<String, String> parameters, Long userId) throws ServiceException {
-        boolean result = true;
+        boolean result;
 
             UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
             String balance = parameters.get(BALANCE);
@@ -155,7 +159,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateDiscount(Map<String, String> parameters, Long userId) throws ServiceException {
-        boolean result = true;
+        boolean result;
 
         UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
         String balance = parameters.get(DISCOUNT);
@@ -171,23 +175,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateStatus(Map<String, String> parameters, Long userId) throws ServiceException {
-        boolean result = true;
+        boolean result;
 
-            UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
-            String balance = parameters.get(BALANCE);
-            UserValidator validator = UserValidator.getInstance();
-            try {
-                result = userDaoImpl.updateStatus(parameters, userId);
-            } catch (DaoException e) {
-                logger.error("Exception in method updateStatus()", e);
-                throw new ServiceException("Exception when update status", e);
-            }
+        UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
+        String balance = parameters.get(BALANCE);
+        UserValidator validator = UserValidator.getInstance();
+        try {
+            result = userDaoImpl.updateStatus(parameters, userId);
+        } catch (DaoException e) {
+            logger.error("Exception in method updateStatus()", e);
+            throw new ServiceException("Exception when update status", e);
+        }
         return result;
     }
 
     @Override
     public boolean findUser(String login, String password) throws ServiceException {
-        boolean result = true;
+        boolean result;
         UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
         HashGenerator hashGenerator = HashGenerator.getInstance();
         UserValidator validator = UserValidator.getInstance();
@@ -200,10 +204,9 @@ public class UserServiceImpl implements UserService {
                 throw new ServiceException("Exception when find user", e);
             }
         }
-             else {
-                 result = false;
-             }
-             return result;
+        else { result = false;
+        }
+        return result;
     }
 
     @Override

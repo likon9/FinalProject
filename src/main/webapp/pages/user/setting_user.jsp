@@ -21,8 +21,6 @@
         {
             width: 300px;
         }
-        body { margin: 20px;
-            background: whitesmoke}
         #sidebar, #content { position: absolute; }
         #sidebar, #content { overflow: auto; padding: 10px; }
         #content {
@@ -33,9 +31,20 @@
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
         }
+        body{
+            margin: 20px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            opacity: 0.8;
+        }
     </style>
 </head>
-<body>
+<body background="img/background1.jpg" background-size=cover >
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-xl">
@@ -77,11 +86,11 @@
                 <fmt:message key="setting.email.now"/>: ${email}
             </td>
             <td>
-                <form class="form-label" action="controller" method="get">
+                <form class="form-label" action="controller" method="post">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="email"/>
                     <input type="email" class="form-control"  name="parameter" required />
-                    <input type="submit" value="<fmt:message key="setting.email.update"/>"/>
+                    <input type="submit" class="btn btn-primary" value="<fmt:message key="setting.email.update"/>"/>
                     <div class="form-text">
                     </div>
                 </form>
@@ -92,11 +101,11 @@
                 <fmt:message key="setting.name.now"/>: ${name}
             </td>
             <td>
-                <form class="form-label" action="controller" method="get">
+                <form class="form-label" action="controller" method="post">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="name"/>
                     <input type="text" class="form-control"  name="parameter" mminlength="3" required pattern="[a-zA-Z]*|[ЁёА-я]*{3,24}"/>
-                    <input type="submit" value=" <fmt:message key="setting.name.update"/>"/>
+                    <input type="submit" class="btn btn-primary" value="<fmt:message key="setting.name.update"/>"/>
                     <div class="form-text">
                     </div>
                 </form>
@@ -107,11 +116,11 @@
                 <fmt:message key="setting.surname.now"/>: ${surname}
             </td>
             <td>
-                <form class="form-label" action="controller" method="get">
+                <form class="form-label" action="controller" method="post">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="surname"/>
                     <input type="text" class="form-control"  name="parameter" minlength="3" required pattern="[a-zA-Z]*|[ЁёА-я]*{3,24}"/>
-                    <input type="submit" value="<fmt:message key="setting.surname.update"/>"/>
+                    <input type="submit" class="btn btn-primary" value="<fmt:message key="setting.surname.update"/>"/>
                     <div class="form-text">
                     </div>
                 </form>
@@ -122,12 +131,12 @@
                 <fmt:message key="setting.phone.now"/>: +375${phone}
             </td>
             <td>
-                <form class="form-label" action="controller" method="get">
+                <form class="form-label" action="controller" method="post">
                     <input type="hidden" name="command" value="UPDATE_USER"/>
                     <input type="hidden" name="field" value="phone"/>
                     <input type="text" class="form-control"  name="parameter"
                            maxlength="9"  required pattern="[0-9]{9}"/>
-                    <input type="submit" value="<fmt:message key="setting.phone.update"/>"/>
+                    <input type="submit" class="btn btn-primary" value="<fmt:message key="setting.phone.update"/>"/>
                     <div class="form-text">
                     </div>
                 </form>
@@ -138,7 +147,7 @@
 
     <form  action="controller" method="get">
         <input type="hidden" name="command" value="GO_TO_DELETE_USER"/>
-        <input type="submit" value="<fmt:message key="setting.delete"/>"/>
+        <input type="submit" class="btn btn-outline-danger" value="<fmt:message key="setting.delete"/>"/>
     </form>
 </div>
 

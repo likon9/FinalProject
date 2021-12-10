@@ -35,30 +35,39 @@ public class LoginCommand implements Command {
            if(userService.findUser(login, password)) {
                Optional<User> user = userService.findByLogin(login);
                User sessionUser = user.get();
-               if(String.valueOf(sessionUser.getUserRole()).equals(String.valueOf(ADMIN))) {
-                   logger.info("Successful admin authorization..");
-                   router = new Router(HOME_ADMIN);
-               } else if (String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(ACTIVE))) {
-                   String email = sessionUser.getEmail();
-                   CodeGenerator gen = new CodeGenerator(ThreadLocalRandom.current());
-                   String code = gen.nextString();
-                   MailSender.sendMail(email,code);
-                   session.setAttribute(SessionAttribute.SESSION_CODE, code);
-                   logger.info("Successful user authorization..");
-                   router = new Router(CODE);
-               } else if(String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(BLOCKED))) {
-                   request.setAttribute(ParameterName.RES_USER_BLOCK, true);
-                   logger.info("This user is blocked.");
-                   router = new Router(LOGIN);
-               } else if(String.valueOf(sessionUser.getUserStatus()).equals(String.valueOf(DELETED))) {
-                   request.setAttribute(ParameterName.LOGIN, sessionUser.getLogin());
-                   logger.info("This user is deleted.");
-                   router = new Router(USER_RECOVERY);
+               switch (sessionUser.getUserRole()){
+                   case ADMIN ->  {
+                       logger.info("Successful admin authorization..");
+                       router = new Router(HOME_ADMIN);
+                   }
+                   case USER -> {
+                       switch (sessionUser.getUserStatus()){
+                           case ACTIVE -> {
+                               String email = sessionUser.getEmail();
+                               CodeGenerator gen = new CodeGenerator(ThreadLocalRandom.current());
+                               String code = gen.nextString();
+                               MailSender.sendMail(email,code);
+                               session.setAttribute(SessionAttribute.SESSION_CODE, code);
+                               logger.info("Successful user authorization..");
+                               router = new Router(CODE);
+                           }
+                           case BLOCKED -> {
+                               request.setAttribute(ParameterName.RES_USER_BLOCK, true);
+                               logger.info("This user is blocked.");
+                               router = new Router(LOGIN);
+                           }
+                           case DELETED -> {
+                               request.setAttribute(ParameterName.LOGIN, sessionUser.getLogin());
+                               logger.info("This user is deleted.");
+                               router = new Router(USER_RECOVERY);
+                           }
+                       }
+                   }
                }
                session.setAttribute(SessionAttribute.SESSION_USER, sessionUser);
            } else {
-               logger.error("User with this login and password was not found.");
                request.setAttribute(ParameterName.RES_USER_NOT_FOUND, true);
+               logger.error("User with this login and password was not found.");
                router = new Router(LOGIN);
            }
         } catch (ServiceException e) {

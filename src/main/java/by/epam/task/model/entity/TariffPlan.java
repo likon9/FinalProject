@@ -3,7 +3,7 @@ package by.epam.task.model.entity;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class TariffPlan {
+public class TariffPlan extends AbstractEntity {
     private Long tariffPlanId;
     private String nameTariffPlan;
     private BigDecimal price;

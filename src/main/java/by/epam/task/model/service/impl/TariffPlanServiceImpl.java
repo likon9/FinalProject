@@ -22,26 +22,27 @@ public class TariffPlanServiceImpl implements TariffPlanService {
 
     @Override
     public boolean addTariffPlan(Map<String, String> parameters) throws ServiceException {
-        boolean result = true;
-            String name = parameters.get(ParameterName.NAME_TARIFF_PLAN);
-            TariffPlanValidator validator = TariffPlanValidator.getInstance();
-            if( true ||validator.isNameValid(name)) {
-                TariffPlanDaoImpl tariffPlanDaoImpl = TariffPlanDaoImpl.getInstance();
-                try {
-                    result = tariffPlanDaoImpl.addTariffPlan(parameters);
-                } catch (DaoException e) {
-                    logger.error("Exception in method addTariffPlan()", e);
-                    throw new ServiceException("Exception when add tariff", e);
-                }
-            } else {
-                result =  false;
+        boolean result ;
+        String name = parameters.get(ParameterName.NAME_TARIFF_PLAN);
+        TariffPlanValidator validator = TariffPlanValidator.getInstance();
+        if(true == true) {
+            TariffPlanDaoImpl tariffPlanDaoImpl = TariffPlanDaoImpl.getInstance();
+            try {
+                result = tariffPlanDaoImpl.addTariffPlan(parameters);
+            } catch (DaoException e) {
+                logger.error("Exception in method addTariffPlan()", e);
+                throw new ServiceException("Exception when add tariff", e);
             }
+           } else {
+            result =  false;
+        }
+        System.out.println(result);
         return result;
       }
 
     @Override
     public boolean updateNameTariffPlan(Map<String, String> parameters, Long tariffPlanId) throws ServiceException {
-        boolean result = true;
+        boolean result;
 
             TariffPlanDaoImpl tariffPlanDaoImpl = TariffPlanDaoImpl.getInstance();
             try {
@@ -55,7 +56,7 @@ public class TariffPlanServiceImpl implements TariffPlanService {
 
     @Override
     public boolean updatePrice(Map<String, String> parameters, Long tariffPlanId) throws ServiceException {
-        boolean result = true;
+        boolean result;
 
             TariffPlanDaoImpl tariffPlanDaoImpl = TariffPlanDaoImpl.getInstance();
             try {
@@ -69,7 +70,7 @@ public class TariffPlanServiceImpl implements TariffPlanService {
 
     @Override
     public boolean updateInternetConnectionSpeed(Map<String, String> parameters, Long tariffPlanId) throws ServiceException {
-        boolean result = true;
+        boolean result;
 
             TariffPlanDaoImpl tariffPlanDaoImpl = TariffPlanDaoImpl.getInstance();
             try {

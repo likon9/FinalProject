@@ -7,7 +7,7 @@ public class TariffPlanValidator {
 
     private static final TariffPlanValidator instance = new TariffPlanValidator();
 
-    private static final String NAME_REGEX = "[a-zA-Z1-9А-Яа-я].{3,24}";
+    private static final String NAME_REGEX = "[a-zA-ZА-Яа-я].{3,24}";
 
     private TariffPlanValidator() { }
 

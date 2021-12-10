@@ -29,7 +29,6 @@ public class HomeCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
         if(user == null || user.getUserRole().equals(UserRole.ADMIN) || !user.getUserStatus().equals(UserStatus.ACTIVE)) { return new Router(ERROR_404); }
-        System.out.println(user);
         request.setAttribute(ParameterName.LOGIN, user.getLogin());
         request.setAttribute(ParameterName.EMAIL, user.getEmail());
         request.setAttribute(ParameterName.NAME, user.getName());

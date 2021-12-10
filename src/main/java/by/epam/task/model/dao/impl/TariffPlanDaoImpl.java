@@ -98,7 +98,6 @@ public class TariffPlanDaoImpl implements TariffPlanDao {
         boolean result = false;
         try(Connection connection = ConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(UPDATE_PRICE)){
-            System.out.println(parameters.get(PRICE));
             statement.setString(1, parameters.get(PRICE));
             statement.setLong(2, tariffPlanId);
             result = statement.executeUpdate()>0;

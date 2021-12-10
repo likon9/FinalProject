@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class User {
+public class User extends AbstractEntity{
 
     private Long userId;
     private String email;
@@ -34,9 +34,7 @@ public class User {
                 LocalDate registrationDate,
                 BigDecimal discount,
                 UserStatus userStatus,
-                UserRole userRole
-               )
-                {
+                UserRole userRole) {
         this.userId = userId;
         this.email = email;
         this.login = login;

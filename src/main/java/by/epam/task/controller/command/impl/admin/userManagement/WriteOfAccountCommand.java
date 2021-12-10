@@ -46,11 +46,10 @@ public class WriteOfAccountCommand implements Command {
         }
         Double balance = Double.valueOf(String.valueOf(userOptional.get().getBalance()));
         Double discount = Double.valueOf(String.valueOf(userOptional.get().getDiscount()));
-        Double totalCost = 0d;
+        Double totalCost = 0.0;
         ContractServiceImpl contractService = new ContractServiceImpl();
         try {
             List<Contract> contractList = contractService.findAllContractByUserId(Long.valueOf(id));
-            System.out.println(contractList);
             for (int i = 0; i < contractList.size(); i++) {
                 if (contractList.get(i).getContractStatus().equals(ContractStatus.CONNECTED)) {
                     totalCost = totalCost + Double.valueOf(String.valueOf(contractList.get(i).getTariffPlanPrice()));
@@ -60,8 +59,7 @@ public class WriteOfAccountCommand implements Command {
             Map<String, String> userParameter = new HashMap<>();
             userParameter.put(ColumnName.BALANCE, String.valueOf(balance));
             userService.updateBalance(userParameter, Long.valueOf(id));
-            List<User> userList = null;
-            userList = userService.findAll();
+            List<User> userList = userService.findAll();
             request.setAttribute(ParameterName.LIST, userList);
             request.setAttribute(ParameterName.RES_WRITE_TRUE, true);
             logger.info("Successfully write of account");

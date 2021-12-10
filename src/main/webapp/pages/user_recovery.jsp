@@ -21,9 +21,19 @@
             font-size: 16px;
             border-radius: 10px;
         }
+         body{
+             background-repeat: no-repeat;
+             background-position: center center;
+             background-attachment: fixed;
+             -webkit-background-size: cover;
+             -moz-background-size: cover;
+             -o-background-size: cover;
+             background-size: cover;
+             opacity: 0.8;
+         }
     </style>
 </head>
-<body>
+<body background="img/background1.jpg" background-size=cover >
 
 <div class="form1">
     <h6><fmt:message key="user.recovery.massage1"/> ${login} <fmt:message key="user.recovery.massage2"/></h6>

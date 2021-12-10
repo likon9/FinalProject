@@ -16,11 +16,13 @@ public class UserValidator {
 
 	private static final String NAME_REGEX = "[a-zA-Z]*|[ЁёА-я]*";
 
+	private static final String PHONE_REGEX = "[0-9]{9}";
+
 	private static final int MAX_LENGTH_NAME = 24;
 
 	private static final int MIN_LENGTH_NAME = 3;
 
-	private static final int PHONE_LENGTH = 9;
+
 
 
 	private UserValidator() { }
@@ -86,5 +88,5 @@ public class UserValidator {
 	 * @param phone the phone
 	 * @return the boolean
 	 */
-	public boolean isPhoneNumberValid(String phone) { return !(phone == null || phone.isBlank()) && phone.length() == PHONE_LENGTH; }
+	public boolean isPhoneNumberValid(String phone) { return !(phone == null || phone.isBlank()) && phone.matches(PHONE_REGEX); }
 }

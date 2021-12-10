@@ -1,2 +1,8 @@
-# Project exclude paths
+
+/out/
+/logs/
+.idea
 /target/
+/lib/
+/META-INF/
+/finalProject.iml
