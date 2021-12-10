@@ -11,8 +11,7 @@ import by.epam.task.model.entity.UserStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import static by.epam.task.controller.command.PageName.ERROR_404;
-import static by.epam.task.controller.command.PageName.HOME;
+import static by.epam.task.controller.command.PageName.*;
 
 public class CodeCommand implements Command {
 
@@ -23,7 +22,7 @@ public class CodeCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.SESSION_USER);
         if(user == null || user.getUserRole().equals(UserRole.ADMIN) || !user.getUserStatus().equals(UserStatus.ACTIVE)) { return new Router(ERROR_404); }
-       // потом вернуть это проверка кода if(code.equals( (String) session.getAttribute(SessionAttribute.SESSION_CODE))) {
+        if(code.equals( (String) session.getAttribute(SessionAttribute.SESSION_CODE))) {
             session.setAttribute(SessionAttribute.SESSION_USER,user);
             request.setAttribute(ParameterName.LOGIN, user.getLogin());
             request.setAttribute(ParameterName.EMAIL, user.getEmail());
@@ -34,11 +33,11 @@ public class CodeCommand implements Command {
             request.setAttribute(ParameterName.DISCOUNT, user.getDiscount());
 
         router = new Router(HOME);
-      //  }
-       // else {
-         //   request.setAttribute("fail", "Incorrect code. try again.");
-           // router = new Router(CODE);
-        //}
+        }
+        else {
+            request.setAttribute("fail", "Incorrect code. try again.");
+            router = new Router(CODE);
+        }
 
         return router;
     }
