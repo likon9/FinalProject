@@ -6,3 +6,5 @@
 /lib/
 /META-INF/
 /finalProject.iml
+.logs
+.lib
