@@ -49,6 +49,13 @@
 
     <h3><span>Error Status: 404</span></h3>
     <h3><span>PAGE NOT FOUND</span></h3>
+    Request from ${pageContext.errorData.requestURI} is failed <br/>
+    Servlet name: ${pageContext.errorData.servletName} <br/>
+    Status code: ${pageContext.errorData.statusCode} <br/>
+    <hr/>
+    Exception: ${pageContext.exception} <br/>
+    <hr/>
+    Message from exception: ${pageContext.exception.message}
 </div>
 </body>
 </html>

@@ -36,13 +36,14 @@ public class UserServiceImpl implements UserService {
             String surname = parameters.get(SURNAME);
             String phone = parameters.get(PHONE);
             UserValidator validator = UserValidator.getInstance();
-
             if ( validator.isLoginValid(login)
                     && validator.isEmailValid(email)
                     && validator.isPasswordValid(password)
                     && validator.isNameValid(name)
                     && validator.isSurnameValid(surname)
-                    && validator.isPhoneNumberValid(phone)) {
+                    && validator.isPhoneNumberValid(phone)
+        )
+        {
                 try {
                     String hashPassword = hashGenerator.hashPassword(parameters.get(ColumnName.PASSWORD));
                     parameters.computeIfPresent(ColumnName.PASSWORD, (key, value) -> value = hashPassword);

@@ -35,9 +35,9 @@
         <input class="input_text"type="password" name="password" placeholder="<fmt:message key="registration.password"/>"
                minlength="6" required pattern="[a-zA-Z0-9]{6,24}"/><br>
         <input class="input_text"type="text" name="name" placeholder="<fmt:message key="registration.name"/>"
-               minlength="3" required pattern="[a-zA-Z]*|[ЁёА-я]*{3,24}"/><br>
+               minlength="3" required pattern="[a-zA-Z]*|[ЁёА-я]{3,24}"/><br>
         <input class="input_text"type="text" name="surname" placeholder="<fmt:message key="registration.surname"/>"
-               minlength="3" required pattern="[a-zA-Z]*|[ЁёА-я]*{3,24}"/><br>
+               minlength="3" required pattern="[a-zA-Z]*|[ЁёА-я]{3,24}"/><br>
         <div class="c2">
         <select name="select">
             <option value="25">25</option>

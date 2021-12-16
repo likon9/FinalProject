@@ -45,7 +45,7 @@ public class UserValidatorTest {
 
     @Test(groups = "validator" , priority = 6)
     public void rusLettersNameValidatorTest() throws ValidationException{
-        String name = "Никита";
+        String name = "Алекс";
         boolean result = UserValidator.getInstance().isNameValid(name);
         assertTrue(result);
     }

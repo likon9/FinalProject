@@ -11,4 +11,7 @@
 		<error-code>500</error-code>
 		<location>/pages/error/error500.jsp</location>
 	</error-page>
+	<listener>
+		<listener-class>by.epam.task.controller.listener.ServletContextListenerImpl</listener-class>
+	</listener>
 </web-app>

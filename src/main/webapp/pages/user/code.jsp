@@ -31,12 +31,12 @@
     <h>${fail}</h>
     <center>
         <div class="flex">
-            <form style="display:inline;" action="controller" method="post">
+            <form style="display:inline" action="controller" method="post">
                 <input type="hidden" name="command" value="CODE"/>
                 <input class="input_text1" type="text" name="code" width="100px" placeholder="<fmt:message key="code.code"/>" required pattern="[0-9A-Z]{5}"/><br>
                 <input class="button2" type="submit" value="<fmt:message key="code.button.enter"/>"/>
             </form>
-            <form style="display:inline;" aclass="button1"ction="controller" method="get">
+            <form style="display:inline" class="button1" action="controller" method="get">
                 <input type="hidden" name="command" value="GO_TO_LOGIN"/>
                 <input class="button2" type="submit" value="<fmt:message key="code.button.back"/>"/><br>
             </form>

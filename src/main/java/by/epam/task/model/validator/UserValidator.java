@@ -23,8 +23,6 @@ public class UserValidator {
 	private static final int MIN_LENGTH_NAME = 3;
 
 
-
-
 	private UserValidator() { }
 
 	/**
@@ -72,7 +70,8 @@ public class UserValidator {
 	 * @param name the name
 	 * @return the boolean
 	 */
-	public boolean isNameValid(String name) { return !(name == null || name.isBlank()) && name.length() <= MAX_LENGTH_NAME && name.length() >= MIN_LENGTH_NAME && name.matches(NAME_REGEX); }
+	public boolean isNameValid(String name) { return !(name == null ||
+			name.isBlank()) && name.length() <= MAX_LENGTH_NAME && name.length() >= MIN_LENGTH_NAME && name.matches(NAME_REGEX); }
 
 	/**
 	 * Is surname valid boolean.
@@ -80,8 +79,7 @@ public class UserValidator {
 	 * @param surname the surname
 	 * @return the boolean
 	 */
-	public boolean isSurnameValid(String surname) { return !(surname == null || surname.isBlank()) && surname.length() <= MAX_LENGTH_NAME && surname.length() >= MIN_LENGTH_NAME && surname.matches(NAME_REGEX); }
-
+	public boolean isSurnameValid(String surname) {return !(surname == null || surname.isBlank()) && surname.length() <= MAX_LENGTH_NAME && surname.length() >= MIN_LENGTH_NAME && surname.matches(NAME_REGEX); }
 	/**
 	 * Is phone number valid boolean.
 	 *
