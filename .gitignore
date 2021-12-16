@@ -5,6 +5,9 @@
 /target/
 /lib/
 /META-INF/
-/finalProject.iml
+/FinalProject.iml
 .logs
 .lib
+./img.png
+./testng.xml
+./gitignore

@@ -36,5 +36,8 @@ Also, the system records all actions performed under the user agreement and fina
 - View contracts
 - Find and sort contracts by parameters(contract id, tariff id, user id)
 - Sign out
+
+
+# Database structure
 ![img.png](img.png)
 
