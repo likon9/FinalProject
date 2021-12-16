@@ -68,5 +68,6 @@
             <input class="button1" type="submit" value="<fmt:message key="registration.back"/>"/><br></h4>
     </form>
 </div>
+<script src="<c:url value="/js/unReboot.js"/>"></script>
 </body>
 </html>

@@ -155,9 +155,6 @@
                 <c:if test="${resNewDiscountTrue}">
                     user:  ${userId} <fmt:message key="message.admin.new.discount"/>
                 </c:if>
-                <c:if test="${resNewDiscounFalse}">
-                    user:  ${userId} <fmt:message key="message.admin.new.discount.false"/>
-                </c:if>
                 <c:if test="${resWriteTrue}">
                     user: ${userId} <fmt:message key="message.admin.write.of.account"/>
                 </c:if>
@@ -223,6 +220,7 @@
             </c:forEach>
         </table>
     </div>
+<script src="<c:url value="/js/unReboot.js"/>"></script>
 </body>
 </html>
 

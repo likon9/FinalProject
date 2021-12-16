@@ -79,6 +79,19 @@
     </form>
 
 </div>
+<script language="JavaScript">
+    $('p').append(Math.random());
+
+    $(window).bind({
+        beforeunload: function(ev) {
+            ev.preventDefault();
+        },
+        unload: function(ev) {
+            ev.preventDefault();
+        }
+    });
+</script>
+<script src="<c:url value="/js/unReboot.js"/>"></script>
 </body>
 </html>
 
