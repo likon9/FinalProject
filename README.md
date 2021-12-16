@@ -21,6 +21,7 @@ The system allows you to keep track of customers, user balance, list of tariffs,
 - Top up balance
 - Change information about user(email, name, surname, phone)
 - Delete profile
+- Restore profile
 - Sign out
 ### Admin role
 - Add tariff
