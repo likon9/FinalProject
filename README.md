@@ -32,7 +32,7 @@ The system allows you to keep track of customers, user balance, list of tariffs,
 - Find and sort users by parameters(status, id, login, name, surname, email, phone)
 - Update user discount
 - Block users
-- Write off money
+- take out money
 - View contracts
 - Find and sort contracts by parameters(contract id, tariff id, user id)
 - Sign out
