@@ -4,8 +4,7 @@ Final project in Java EPAM course in Minsk, Belarus.
 
 # Internet Service provider
 
-#### The system allows you to keep track of customers, user balance, list of tariffs, manage users and tariffs.
-Also, the system records all actions performed under the user agreement and financial transactions. There are 2 types of roles in the system: User, Administrator.
+The system allows you to keep track of customers, user balance, list of tariffs, manage users and tariffs.Also, the system records all actions performed under the user agreement and financial transactions. There are 2 types of roles in the system: User, Administrator.
 
 ### Unauthorized user
 - Authenticate with a login and password
@@ -22,6 +21,7 @@ Also, the system records all actions performed under the user agreement and fina
 - Top up balance
 - Change information about user(email, name, surname, phone)
 - Delete profile
+- Restore profile
 - Sign out
 ### Admin role
 - Add tariff
@@ -32,12 +32,12 @@ Also, the system records all actions performed under the user agreement and fina
 - Find and sort users by parameters(status, id, login, name, surname, email, phone)
 - Update user discount
 - Block users
-- Write off money
+- take out money
 - View contracts
 - Find and sort contracts by parameters(contract id, tariff id, user id)
 - Sign out
 
 
-# Database structure
+## Database structure
 ![img.png](img.png)
 
