@@ -4,7 +4,7 @@ Final project in Java EPAM course in Minsk, Belarus.
 
 # Internet Service provider
 
-## The system allows you to keep track of customers, user balance, list of tariffs, manage users and tariffs.Also, the system records all actions performed under the user agreement and financial transactions. There are 2 types of roles in the system: User, Administrator.
+The system allows you to keep track of customers, user balance, list of tariffs, manage users and tariffs.Also, the system records all actions performed under the user agreement and financial transactions. There are 2 types of roles in the system: User, Administrator.
 
 ### Unauthorized user
 - Authenticate with a login and password
